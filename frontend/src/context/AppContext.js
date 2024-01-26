@@ -20,10 +20,18 @@ const AppContext = ({ children }) => {
   const [postalCode, setPostalCode] = useState("")
 
 
+  // for bags
+
+  const [bagName, setBagName] = useState("")
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [numberOfStocks, setNumberOfStocks] = useState("")
+
+
 
 
   return (
-    <allData.Provider value={{ password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode}}>
+    <allData.Provider value={{ password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks}}>
       {children}
     </allData.Provider>
   )

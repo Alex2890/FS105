@@ -43,7 +43,9 @@ const upload = multer({
 app.post('/upload', upload.single('file'), async(req, res) => {
     console.log(req.file)
 
-    const item = await itemInfo.create({image:req.file.filename})
+    const {bagName, price, description, numberOfStocks} = req.body
+
+    const item = await itemInfo.create({image:req.file.filename, bagName, price, description, numberOfStocks})
     console.log(item)
 })
 // --------------------------------------------------------------------------------------------------------
