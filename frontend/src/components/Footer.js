@@ -2,8 +2,8 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div className='inset-x-0 bottom-0 container mt-5'>
-            <div className="container px-4 py-2 bg-slate-300">
+        <div className='inset-x-0 bottom-0 mt-5'>
+            <div className="px-4 py-2 bg-slate-300">
                 <div className="flex flex-wrap items-center justify-content md:justify-between">
                     <div className="w-full md:w-4/12 px-4">
                         <div className="text-sm text-black font-semibold py-1 text-center">
