@@ -1,4 +1,5 @@
 import './App.css';
+import './style.css';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -6,6 +7,10 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Upload from './pages/Upload';
+import AboutUs from './pages/AboutUs';
+import Contact from './pages/Contact';
+import Products from './pages/Products';
+import Error from './pages/Error';
 
 function App() {
   return (
@@ -16,7 +21,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="upload" element={<Upload />} />
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/products" element={<Products />} />
+        <Route path='*' element={<Error />} />
+
       </Routes>
       <Footer />
     </Router>
