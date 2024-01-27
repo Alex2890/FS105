@@ -1,8 +1,4 @@
-import React, { useState, useContext } from 'react'
-import axios from 'axios';
-import { allData } from "../context/AppContext";
-
-
+import React, { useState } from 'react'
 
 
 const Upload = () => {
