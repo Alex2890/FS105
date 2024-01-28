@@ -2,8 +2,6 @@ import React, { useState, useContext } from 'react'
 import { allData } from "../context/AppContext";
 
 
-
-
 const Upload = () => {
 
     const { setBagName, setPrice, setDescription, setNumberOfStocks, bagName, price, description, numberOfStocks } = useContext(allData)

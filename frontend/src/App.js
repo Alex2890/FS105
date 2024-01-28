@@ -1,4 +1,5 @@
 import './App.css';
+import './style.css';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -28,7 +29,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products" element={<Products />} />
-        <Route path='*' element={<Error />} /> 
+        <Route path='*' element={<Error />} />
       </Routes>
       <Footer />
     </Router>
