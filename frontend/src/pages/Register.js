@@ -4,30 +4,32 @@ import { AppContext, allData } from '../context/AppContext.js'
 
 const Register = () => {
 
+    const [error, setError] = useState('')
 
     const { firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, email, setEmail, password, setPassword, password1, setPassword1 } = useContext(allData)
 
     // console.log(firstName, lastName, address, city, province, postalCode, email, password, password1)
 
-    const registerButton = async(e) => {
+    const registerButton = async (e) => {
         e.preventDefault()
 
         console.log("it is working")
 
-        const response = await fetch('/api/users/register',{
-            method:"POST",
-            headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({firstName, lastName, address, city, province, postalCode, email, password, password1})
+        const response = await fetch('/api/users/register', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ firstName, lastName, address, city, province, postalCode, email, password, password1 })
         })
 
         const json = await response.json()
         console.log(json)
 
-        if(!response.ok){
+        if (!response.ok) {
             console.log(json.error)
+            setError(json.error)
         }
 
-        if(response.ok){
+        if (response.ok) {
             console.log("it is working fine")
         }
 
@@ -240,7 +242,7 @@ const Register = () => {
 
                 </div>
 
-                <div className='flex items-center justify-center mt-5'>
+                <div className='flex items-center justify-center flex-col mt-5'>
                     <button
 
                         onClick={registerButton}
@@ -248,6 +250,11 @@ const Register = () => {
                     >
                         Register
                     </button>
+
+                    <div className='mt-2 text-red-600'>
+                        {error && error}
+                    </div>
+
                 </div>
 
 

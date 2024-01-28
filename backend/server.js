@@ -6,6 +6,7 @@ import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
 import itemInfo from './models/itemModels.js';
+import messagesRouter from './routes/messageRoutes.js'
 
 dotenv.config()
 
@@ -22,17 +23,24 @@ app.use(express.json())
 
 app.use(cors())
 
-app.use('/api/users', userRouter )
+
+// all the magic happen below
+// ----------------------------------------------------------------------------------------------------
+app.use('/api/users', userRouter)
+app.use('/api/messages', messagesRouter)
+
+// ----------------------------------------------------------------------------------------------------
+
 
 //upload image------------------------------------------------------------------------------------------
 
 const storage = multer.diskStorage({
-    destination:(req, file, cb) => {
+    destination: (req, file, cb) => {
         cb(null, 'public/Images')
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
-    } 
+    }
 })
 
 const upload = multer({
@@ -40,12 +48,12 @@ const upload = multer({
 })
 
 
-app.post('/upload', upload.single('file'), async(req, res) => {
+app.post('/upload', upload.single('file'), async (req, res) => {
     console.log(req.file)
 
-    const {bagName, price, description, numberOfStocks} = req.body
+    const { bagName, price, description, numberOfStocks } = req.body
 
-    const item = await itemInfo.create({image:req.file.filename, bagName, price, description, numberOfStocks})
+    const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
     console.log(item)
 })
 // --------------------------------------------------------------------------------------------------------

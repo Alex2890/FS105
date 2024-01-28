@@ -1,6 +1,38 @@
 import React from 'react'
+import { useState, useContext } from 'react'
+import { allData } from '../context/AppContext.js'
 
 const Contact = () => {
+
+  const { enquirerName, setEnquirerName, enquirerEmail, setEnquirerEmail, subject, setSubject, message, setMessage } = useContext(allData)
+
+  const submitHandler = async (e) => {
+    e.preventDefault()
+    console.log("it is working")
+
+    const response = await fetch('/api/messages/submitmessage', {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ enquirerEmail, enquirerName, subject, message })
+    })
+
+    const json = await response.json()
+
+    if(!response.ok){
+      console.log(json.error)
+    }
+
+    if(response.ok){
+      console.log("it is in the database")
+    }
+
+    setEnquirerEmail("")
+    setEnquirerName("")
+    setSubject("")
+    setMessage("")
+
+  }
+
   return (
     <>
       <div className=''>
@@ -40,12 +72,12 @@ const Contact = () => {
               </div>
 
               <div className="p-10 lg:p-14 shadow mt-14 lg:mt-0">
-                <form id="contact-form" method="get" action="#">
-                  <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" type="text" name="name" placeholder="Name" />
-                  <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" type="email" placeholder="Email" name="email" />
-                  <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" type="text" placeholder="subject" name="subject" />
-                  <textarea className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 text-dark h-32 focus:outline-none text-base resize-none" name="massage"></textarea>
-                  <button className="w-full leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange" type="submit" aria-label="button">Send Message</button>
+                <form id="contact-form">
+                  <input onChange={(e)=>setEnquirerName(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" type="text" name="name" placeholder="Name" />
+                  <input onChange={(e)=>setEnquirerEmail(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" type="email" placeholder="Email" name="email" />
+                  <input onChange={(e)=>setSubject(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" type="text" placeholder="Subject" name="subject" />
+                  <textarea onChange={(e)=>setMessage(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 text-dark h-32 focus:outline-none text-base resize-none" name="massage"></textarea>
+                  <button onClick={submitHandler} className="w-full leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange" type="submit" aria-label="button">Send Message</button>
                 </form>
                 <p className="form-messege"></p>
               </div>
