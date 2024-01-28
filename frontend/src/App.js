@@ -8,6 +8,10 @@ import Home from './pages/Home';
 import Upload from './pages/Upload';
 import ForgotPassword from './pages/ForgetPassword';
 import ResetPassword from './pages/ResetPassword';
+import AboutUs from './pages/AboutUs';
+import Contact from './pages/Contact';
+import Products from './pages/Products';
+import Error from './pages/Error';
 
 function App() {
   return (
@@ -19,7 +23,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="upload" element={<Upload />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} /> 
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/products" element={<Products />} />
+        <Route path='*' element={<Error />} /> 
       </Routes>
       <Footer />
     </Router>
