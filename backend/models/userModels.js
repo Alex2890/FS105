@@ -49,7 +49,17 @@ const userSchema = new Schema({
     postalCode: {
         type:Number,
         required:true
+    },
+    
+    resetPasswordToken: {
+        type: String,
+        required: false,
+    },
+    resetPasswordExpires: {
+        type: Date,
+        required: false,
     }
+  
 })
 
 const userAccount = mongoose.model('userAccount', userSchema)

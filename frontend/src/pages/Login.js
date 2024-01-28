@@ -3,7 +3,8 @@ import Navbar from "../components/Navbar";
 import { useContext, useState } from "react";
 import { allData } from "../context/AppContext";
 import Footer from "../components/Footer";
-import registerBgImage from '../assets/img/register_bg_2.png'
+import registerBgImage from "../assets/img/register_bg_2.png";
+import { Link } from "react-router-dom";
 
 export default function Login() {
 
@@ -159,23 +160,19 @@ export default function Login() {
                     </form>
                     <div className="flex flex-wrap">
                       <div className="w-1/2">
-                        <a
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          className="text-black"
-                        >
-                          <h3 className="">Forgot password?</h3>
-                        </a>
+                        <Link to="/forgot-password" className="text-black">
+                          <h3>Forgot password?</h3>
+                        </Link>
                       </div>
-                      <div className="w-1/2 text-right">
-                        <a
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          className="text-black"
-                        >
-                          <small>Create new account</small>
-                        </a>
-                      </div>
+                        <div className="w-1/2 text-right">
+                          <a
+                            href="#pablo"
+                            onClick={e => e.preventDefault()}
+                            className="text-black"
+                          >
+                            <small>Create new account</small>
+                          </a>
+                        </div>
                     </div>
                   </div>
 
