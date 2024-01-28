@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Upload from './pages/Upload';
+import ForgotPassword from './pages/ForgetPassword';
+import ResetPassword from './pages/ResetPassword';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import Products from './pages/Products';
@@ -17,16 +19,17 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-
         <Route path='/' element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="upload" element={<Upload />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products" element={<Products />} />
         <Route path='*' element={<Error />} />
-
       </Routes>
       <Footer />
     </Router>
