@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import Products from './pages/Products';
 import Error from './pages/Error';
 import Faqs from './pages/Faqs';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -31,7 +32,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/products" element={<Products />} />
         <Route path='*' element={<Error />} />
-        <Route path='/Faqs' element={<Faqs />} />
+        <Route path='/faqs' element={<Faqs />} />
+        <Route path='/cart' element={<Cart />} />
+
+
       </Routes>
       <Footer />
     </Router>
