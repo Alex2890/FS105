@@ -16,7 +16,7 @@ const Faqs = () => {
             <div>
                 {FAQsArray.map(item => {
                     return (
-                        <div className="collapse collapse-arrow bg-base-200 my-5">
+                        <div key={item.question} className="collapse collapse-arrow bg-base-200 my-5">
                             <input type="radio" name="my-accordion-2" />
                             <div className="collapse-title text-lg font-medium">
                                 {item.question}
