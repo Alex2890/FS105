@@ -158,7 +158,7 @@ function Navbar() {
     //   </nav>
     // </>
 
-    <div className="navbar bg-slate-200">
+    <div className="navbar bg-slate-200 py-3">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -213,10 +213,13 @@ function Navbar() {
           <li>
             <Link to='/products'>Products</Link>
           </li>
+          <li>
+            <Link to='/faqs'>FAQs</Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-neutral">Login</button>
+        <Link to='/login'><button className="btn btn-neutral">Login</button></Link>
       </div>
     </div>
   );

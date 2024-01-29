@@ -13,6 +13,7 @@ import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import Products from './pages/Products';
 import Error from './pages/Error';
+import Faqs from './pages/Faqs';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/products" element={<Products />} />
         <Route path='*' element={<Error />} />
+        <Route path='/Faqs' element={<Faqs />} />
       </Routes>
       <Footer />
     </Router>
