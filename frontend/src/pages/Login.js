@@ -17,31 +17,33 @@ export default function Login() {
     e.preventDefault()
     console.log(email, password)
 
-    const response = await fetch('/api/users/login', {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    })
+    // const response = await fetch('/api/users/login', {
+    //   method: "POST",
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ email, password })
+    // })
 
-    const json = await response.json()
+    // const json = await response.json()
 
-    console.log(json)
+    // console.log(json)
 
-    if (!response.ok) {
-      console.log(json.error)
-    }
+    // if (!response.ok) {
+    //   console.log(json.error)
+    // }
 
-    if (response.ok) {
-      console.log(json.message)
-    }
+    // if (response.ok) {
+    //   console.log(json.message)
+    // }
+
+    console.log("it is working")
 
   }
 
-  const styles = {
-    backgroundImage: `url(${registerBgImage})`,
-    backgroundSize: '100%',
-    backgroundRepeat: 'no-repeat',
-  };
+  // const styles = {
+  //   backgroundImage: `url(${registerBgImage})`,
+  //   backgroundSize: '100%',
+  //   backgroundRepeat: 'no-repeat',
+  // };
 
   return (
     <>
@@ -61,7 +63,6 @@ export default function Login() {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
                   onChange={(e) => setEmail(e.currentTarget.value)} />
               </div>
               <div className="form-control">
@@ -72,13 +73,12 @@ export default function Login() {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  required
-                  onChange={(e) => setEmail(e.currentTarget.value)} />
+                  onChange={(e) => setPassword(e.currentTarget.value)} />
               </div>
 
               <div className="flex justify-between items-center">
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                  {/* <a href="#" className="label-text-alt link link-hover">Forgot password?</a> */}
                 </label>
 
                 <label className="label">
@@ -87,7 +87,7 @@ export default function Login() {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button onChange={submitHandler} className="btn btn-primary">Login</button>
               </div>
             </form>
           </div>

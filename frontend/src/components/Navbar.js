@@ -29,6 +29,9 @@ function Navbar() {
             <li>
               <Link to='/upload'>Upload Admin</Link>
             </li>
+            <li>
+              <Link to='/cart'>Cart</Link>
+            </li>
 
           </ul>
         </div>
@@ -52,8 +55,11 @@ function Navbar() {
             <Link to='/faqs'>FAQs</Link>
           </li>
           <li>
-              <Link to='/upload'>Upload Admin(will remove)</Link>
-            </li>
+            <Link to='/upload'>Upload Admin(will remove)</Link>
+          </li>
+          <li>
+            <Link to='/cart'>Cart</Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">

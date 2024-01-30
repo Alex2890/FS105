@@ -171,6 +171,7 @@ const createUser = async (req, res) => {
       city,
       province,
       postalCode,
+      role: "user",
     });
     res.status(200).json({ message: "registered successfully", user });
   } catch (error) {
@@ -197,7 +198,7 @@ const loginUser = async (req, res) => {
     }
 
     //password is plain text, user.password is based passsword in the database
-    const match = await bcrypt.compareSync(password, user.password);
+    const match = bcrypt.compareSync(password, user.password);
 
     if (!match) {
       // res.status(400).json({message:"inccorecet passowrd ooo"})

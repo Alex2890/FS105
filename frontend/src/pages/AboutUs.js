@@ -1,6 +1,7 @@
 import React from 'react'
 import ridwan from '../images/ridwan.png';
 import alex from '../images/alex.png';
+import julia from '../images/julia.jpg';
 
 
 const AboutUs = () => {
@@ -89,7 +90,7 @@ const AboutUs = () => {
 
 
                     <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={ridwan} alt="julia" /></figure>
+                        <figure><img src={julia} alt="julia" /></figure>
                         <div className="card-body h-40">
                             <h3 className="card-title mx-auto font-light">Julia</h3>
                             <h2 className="card-title mx-auto">Frontend Lead , Designer</h2>
