@@ -78,54 +78,45 @@ const AboutUs = () => {
             <div className='container mb-10'>
                 <h2 className="font-playfair font-bold text-orange text-3xl sm:text-4xl xl:text-5xl mb-5 text-center">Team Members</h2>
 
-                <div className="carousel w-full">
-
-                    <div id="item1" className="carousel-item w-full flex flex-col justify-center items-center mb-10">
-                        <div className="card w-96 bg-base-100 shadow-xl">
-                            <figure><img src={ridwan} alt="ridwan" /></figure>
-                            <div className="card-body">
-                                <h3 className="card-title mx-auto font-light">Ridwan</h3>
-                                <h2 className="card-title mx-auto">Full Stack Developer</h2>
-                            </div>
+                <div className='flex justify-between items-center gap-x-10 text-center'>
+                    <div className="card w-96 bg-base-100 shadow-xl">
+                        <figure><img src={ridwan} alt="ridwan" /></figure>
+                        <div className="card-body h-40">
+                            <h3 className="card-title mx-auto font-light">Ridwan</h3>
+                            <h2 className="card-title mx-auto">Full Stack Developer</h2>
                         </div>
                     </div>
 
-                    <div id="item2" className="carousel-item w-full flex flex-col justify-center items-center mb-10">
-                        <div className="card w-96 bg-base-100 shadow-xl">
-                            <figure><img src={ridwan} alt="julia" /></figure>
-                            <div className="card-body">
-                                <h3 className="card-title mx-auto font-light">Julia</h3>
-                                <h2 className="card-title mx-auto">Frontend Lead , Designer</h2>
-                            </div>
+
+                    <div className="card w-96 bg-base-100 shadow-xl">
+                        <figure><img src={ridwan} alt="julia" /></figure>
+                        <div className="card-body h-40">
+                            <h3 className="card-title mx-auto font-light">Julia</h3>
+                            <h2 className="card-title mx-auto">Frontend Lead , Designer</h2>
                         </div>
                     </div>
 
-                    <div id="item3" className="carousel-item w-full flex flex-col justify-center items-center mb-10">
-                        <div className="card w-96 bg-base-100 shadow-xl">
-                            <figure><img src={alex} alt="alex" /></figure>
-                            <div className="card-body">
-                                <h3 className="card-title mx-auto font-light">Alex</h3>
-                                <h2 className="card-title mx-auto">Backend Lead</h2>
-                            </div>
+                    <div className="card w-96 bg-base-100 shadow-xl">
+                        <figure><img src={alex} alt="alex" /></figure>
+                        <div className="card-body h-40">
+                            <h3 className="card-title mx-auto font-light">Alex</h3>
+                            <h2 className="card-title mx-auto">Backend Lead</h2>
                         </div>
                     </div>
 
-                    <div id="item4" className="carousel-item w-full flex flex-col justify-center items-center mb-10">
-                        <div className="card w-96 bg-base-100 shadow-xl">
-                            <figure><img src={ridwan} alt="vishal" /></figure>
-                            <div className="card-body">
-                                <h3 className="card-title mx-auto font-light">Vishal</h3>
-                                <h2 className="card-title mx-auto">Backend Lead, Designer</h2>
-                            </div>
+
+                    <div className="card w-96 bg-base-100 shadow-xl">
+                        <figure><img src={ridwan} alt="vishal" /></figure>
+                        <div className="card-body h-40">
+                            <h3 className="card-title mx-auto font-light">Vishal</h3>
+                            <h2 className="card-title mx-auto">Backend Lead, Designer</h2>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center w-full py-2 gap-2">
-                    <a href="#item1" className="btn btn-xs">Ridwan</a>
-                    <a href="#item2" className="btn btn-xs">Julia</a>
-                    <a href="#item3" className="btn btn-xs">Alex</a>
-                    <a href="#item4" className="btn btn-xs">Vishal</a>
-                </div>
+
+
+
+
             </div>
 
 

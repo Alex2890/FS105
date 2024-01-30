@@ -27,21 +27,40 @@ const Register = () => {
         if (!response.ok) {
             console.log(json.error)
             setError(json.error)
+            setFirstName(firstName)
+            setLastName(lastName)
+            setAddress(address)
+            setCity(city)
+            setProvince(province)
+            setPostalCode(postalCode)
+            setEmail(email)
+            setPassword(password)
+            setPassword1(password1)
         }
 
         if (response.ok) {
             console.log("it is working fine")
+
+            setFirstName("")
+            setLastName("")
+            setAddress("")
+            setCity("")
+            setProvince("")
+            setPostalCode("")
+            setEmail("")
+            setPassword("")
+            setPassword1("")
         }
 
-        setFirstName("")
-        setLastName("")
-        setAddress("")
-        setCity("")
-        setProvince("")
-        setPostalCode("")
-        setEmail("")
-        setPassword("")
-        setPassword1("")
+        // setFirstName("")
+        // setLastName("")
+        // setAddress("")
+        // setCity("")
+        // setProvince("")
+        // setPostalCode("")
+        // setEmail("")
+        // setPassword("")
+        // setPassword1("")
     }
 
     return (
