@@ -23,6 +23,12 @@ function Navbar() {
             <li>
               <Link to='/products'>Products</Link>
             </li>
+            <li>
+              <Link to='/faqs'>FAQs</Link>
+            </li>
+            <li>
+              <Link to='/upload'>Upload Admin</Link>
+            </li>
 
           </ul>
         </div>
@@ -45,6 +51,9 @@ function Navbar() {
           <li>
             <Link to='/faqs'>FAQs</Link>
           </li>
+          <li>
+              <Link to='/upload'>Upload Admin(will remove)</Link>
+            </li>
         </ul>
       </div>
       <div className="navbar-end">
