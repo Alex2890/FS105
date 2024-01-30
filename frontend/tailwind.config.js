@@ -5,6 +5,9 @@ const tailwindConfig = {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: ["pastel"],
+  },
   plugins: [require('daisyui')],
 };
 
