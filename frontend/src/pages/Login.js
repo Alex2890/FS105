@@ -13,29 +13,31 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const submitHandler = async (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault()
     console.log(email, password)
 
-    // const response = await fetch('/api/users/login', {
-    //   method: "POST",
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password })
-    // })
 
-    // const json = await response.json()
+    const response = await fetch('/api/users/login', {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    })
 
-    // console.log(json)
+    const json = await response.json()
 
-    // if (!response.ok) {
-    //   console.log(json.error)
-    // }
+    console.log(json)
 
-    // if (response.ok) {
-    //   console.log(json.message)
-    // }
+    if (!response.ok) {
+      console.log(json.error)
+    }
 
-    console.log("it is working")
+    if (response.ok) {
+      console.log(json.role)
+      //save user to local storage
+      localStorage.setItem('user', JSON.stringify(json))
+    }
+
 
   }
 
@@ -61,7 +63,7 @@ export default function Login() {
                 </label>
                 <input
                   type="email"
-                  placeholder="email"
+                  placeholder=""
                   className="input input-bordered"
                   onChange={(e) => setEmail(e.currentTarget.value)} />
               </div>
@@ -71,14 +73,14 @@ export default function Login() {
                 </label>
                 <input
                   type="password"
-                  placeholder="password"
+                  placeholder=""
                   className="input input-bordered"
                   onChange={(e) => setPassword(e.currentTarget.value)} />
               </div>
 
               <div className="flex justify-between items-center">
                 <label className="label">
-                  {/* <a href="#" className="label-text-alt link link-hover">Forgot password?</a> */}
+                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                 </label>
 
                 <label className="label">
@@ -87,7 +89,7 @@ export default function Login() {
               </div>
 
               <div className="form-control mt-6">
-                <button onChange={submitHandler} className="btn btn-primary">Login</button>
+                <button onClick={submitHandler} className="btn btn-primary">Login</button>
               </div>
             </form>
           </div>

@@ -7,6 +7,7 @@ import multer from 'multer';
 import path from 'path';
 import itemInfo from './models/itemModels.js';
 import messagesRouter from './routes/messageRoutes.js'
+import productsRouter from './routes/productRoutes.js'
 
 dotenv.config()
 
@@ -28,9 +29,11 @@ app.use(cors())
 // ----------------------------------------------------------------------------------------------------
 app.use('/api/users', userRouter)
 app.use('/api/messages', messagesRouter)
-
+app.use('/api/products', productsRouter)
 // ----------------------------------------------------------------------------------------------------
 
+//for images on the product page front end
+app.use(express.static('public'))
 
 //upload image------------------------------------------------------------------------------------------
 
