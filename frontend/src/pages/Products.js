@@ -30,24 +30,8 @@ const Products = () => {
       </div>
 
 
-      {/* <div className='container flex flex-wrap'>
-        {handbags && handbags.map((item) => {
-          return <div key={item.bagName}>
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <figure><img src={`http://localhost:5000/Images/${item.image}`} alt={item.bagName} /></figure>
-              <div className="card-body">
-                <h2 className="card-title">{item.bagName}</h2>
-                <p>{item.description}</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Details</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        })}
-      </div> */}
 
-      <div className='container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 my-5'>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-5">
         {handbags && handbags.map((item) => (
           <div key={item.bagName} className="card bg-base-100 shadow-xl hover:bg-slate-200 hover:shadow-2xl">
             <figure>
@@ -63,6 +47,17 @@ const Products = () => {
           </div>
         ))}
       </div>
+
+
+   
+
+
+
+
+
+
+
+
 
 
       {/* {handbags.map((item) => (

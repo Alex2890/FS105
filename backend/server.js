@@ -56,8 +56,16 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
     const { bagName, price, description, numberOfStocks } = req.body
 
-    const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
-    console.log(item)
+    try {
+        const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
+        console.log(item)
+        res.status(200).json({ message: "registered item successfully", item });
+
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+
 })
 // --------------------------------------------------------------------------------------------------------
 
