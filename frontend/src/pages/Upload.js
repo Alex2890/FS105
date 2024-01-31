@@ -46,7 +46,7 @@ const Upload = () => {
 
         const response = await fetch('/upload', {
             method: "POST",
-            body: newFormData,
+            body: FormData,
 
 
 
