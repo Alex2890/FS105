@@ -15,24 +15,33 @@ const Upload = () => {
         console.log(e.target.files)
     }
 
-    const handleUpload = async (e) => {
+    const handleUpload = async () => {
+        // const formData = new FormData();
+        // formData.append('image', selectedFile);
 
-        e.preventDefault()
+        // try {
+        //     const response = await axios.post('http://localhost:5000/upload', formData, {
+        //         headers: {
+        //             'Content-Type': 'multipart/form-data',
+        //         },
+        //     });
 
+        //     console.log(response.data);
+        // } catch (error) {
+        //     console.error('Error uploading image:', error.message);
+        // }
 
         console.log(selectedFile)
+        const formData = new FormData();
+        formData.append('file', selectedFile)
+        formData.append('bagName', bagName);
+        formData.append('price', price);
+        formData.append('description', description);
+        formData.append('numberOfStocks', numberOfStocks);
 
-        if(!bagName || !price || !description || !numberOfStocks || !selectedFile){
-            throw Error("All fields should be filled in")
-        }
-
-
-        const newFormData = new FormData();
-        newFormData.append('file', selectedFile)
-        newFormData.append('bagName', bagName);
-        newFormData.append('price', price);
-        newFormData.append('description', description);
-        newFormData.append('numberOfStocks', numberOfStocks);
+        // axios.post('/upload', formData)
+        // .then(res => console.log(res))
+        // .catch(err => console.log(err))
 
 
         const response = await fetch('/upload', {
@@ -45,32 +54,13 @@ const Upload = () => {
 
         const json = await response.json()
 
-        if (!response.ok) {
-            console.log(json.error)
-            setBagName(bagName)
-            setPrice(price)
-            setDescription(description)
-            setNumberOfStocks(numberOfStocks)
-            setSelectedFile(selectedFile)
+        console.log(json)
 
-        }
-
-
-        if (response.ok) {
-            console.log(json)
-
-            setSelectedFile('')
-            setBagName('')
-            setDescription('')
-            setNumberOfStocks('')
-            setPrice('')
-
-            document.getElementById('file').value = '';
-
-        }
-
-
-
+        setBagName("")
+        setDescription("")
+        setNumberOfStocks("")
+        setSelectedFile("")
+        setPrice("")
 
     };
 
