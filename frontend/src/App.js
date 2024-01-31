@@ -15,6 +15,7 @@ import Products from './pages/Products';
 import Error from './pages/Error';
 import Faqs from './pages/Faqs';
 import Cart from './pages/Cart';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
         <Route path='*' element={<Error />} />
         <Route path='/faqs' element={<Faqs />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/admin' element={<Admin />} />
+
 
 
       </Routes>
