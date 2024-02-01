@@ -9,7 +9,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
+  const context = useContext(allData);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const submitHandler = async (e) => {
+
     e.preventDefault();
     console.log(email, password);
 
@@ -83,7 +90,7 @@ export default function Login() {
                 <button className="btn btn-primary">Login</button>
               <div className="flex justify-between items-center">
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                  <Link to={'/forget-password'} className="label-text-alt link link-hover">Forgot password?</Link>
                 </label>
 
                 <label className="label">
