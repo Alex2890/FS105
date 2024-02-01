@@ -1,6 +1,9 @@
 import React from 'react'
 import ridwan from '../images/ridwan.png';
 import alex from '../images/alex.png';
+import julia from '../images/julia.jpg';
+import vishal from '../images/vishal.jpeg';
+
 
 
 const AboutUs = () => {
@@ -78,9 +81,13 @@ const AboutUs = () => {
             <div className='container mb-10'>
                 <h2 className="font-playfair font-bold text-orange text-3xl sm:text-4xl xl:text-5xl mb-5 text-center">Team Members</h2>
 
-                <div className='flex justify-between items-center gap-x-10 text-center'>
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={ridwan} alt="ridwan" /></figure>
+
+
+                {/* flex justify-center items-center flex-wrap gap-x-10 text-center */}
+                <div className='mx-auto grid grid-cols-1 gap-x-3 lg:grid-cols-4 lg:gap-x-0 md:grid-cols-3 md:gap-x-20 sm:grid-cols-2 place-items-center text-center'>
+
+                    <div className="card w-64 bg-base-100 shadow-xl">
+                        <figure><img className='w-64 h-64' src={ridwan} alt="ridwan" /></figure>
                         <div className="card-body h-40">
                             <h3 className="card-title mx-auto font-light">Ridwan</h3>
                             <h2 className="card-title mx-auto">Full Stack Developer</h2>
@@ -88,25 +95,23 @@ const AboutUs = () => {
                     </div>
 
 
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={ridwan} alt="julia" /></figure>
+                    <div className="card w-64 bg-base-100 shadow-xl">
+                        <figure><img className='w-64 h-64' src={julia} alt="julia" /></figure>
                         <div className="card-body h-40">
                             <h3 className="card-title mx-auto font-light">Julia</h3>
                             <h2 className="card-title mx-auto">Frontend Lead , Designer</h2>
                         </div>
                     </div>
 
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={alex} alt="alex" /></figure>
+                    <div className="card w-64 bg-base-100 shadow-xl">
+                        <figure><img className='w-64 h-64' src={alex} alt="alex" /></figure>
                         <div className="card-body h-40">
                             <h3 className="card-title mx-auto font-light">Alex</h3>
                             <h2 className="card-title mx-auto">Backend Lead</h2>
                         </div>
                     </div>
-
-
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src={ridwan} alt="vishal" /></figure>
+                    <div className="card w-64 bg-base-100 shadow-xl">
+                        <figure><img className='w-64 h-64' src={vishal} alt="vishal" /></figure>
                         <div className="card-body h-40">
                             <h3 className="card-title mx-auto font-light">Vishal</h3>
                             <h2 className="card-title mx-auto">Backend Lead, Designer</h2>

@@ -22,10 +22,19 @@ function Navbar() {
             <li>
               <Link to='/products'>Products</Link>
             </li>
+            <li>
+              <Link to='/faqs'>FAQs</Link>
+            </li>
+            <li>
+              <Link to='/upload'>Upload Admin</Link>
+            </li>
+            <li>
+              <Link to='/cart'>Cart</Link>
+            </li>
 
           </ul>
         </div>
-        <Link to='/'><a className="btn btn-ghost text-lg text-gray-500">LuxuriaLoom</a></Link>
+        <Link to='/'><p className="btn btn-ghost text-lg">LuxuriaLoom</p></Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-gray-500">
@@ -43,6 +52,12 @@ function Navbar() {
           </li>
           <li>
             <Link to='/faqs'>FAQs</Link>
+          </li>
+          <li>
+            <Link to='/upload'>Upload Admin(will remove)</Link>
+          </li>
+          <li>
+            <Link to='/cart'>Cart</Link>
           </li>
         </ul>
       </div>

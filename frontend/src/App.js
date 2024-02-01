@@ -1,5 +1,6 @@
 import './App.css';
 import './style.css';
+import './index.css';
 import Login from './pages/Login';
 import Register from './pages/Register'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -15,6 +16,7 @@ import Products from './pages/Products';
 import Error from './pages/Error';
 import Faqs from './pages/Faqs';
 import Cart from './pages/Cart';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Route path='*' element={<Error />} />
         <Route path='/faqs' element={<Faqs />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/admin' element={<Admin />} />
+
 
 
       </Routes>

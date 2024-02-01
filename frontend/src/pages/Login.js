@@ -20,24 +20,20 @@ export default function Login() {
       body: JSON.stringify({ email, password }),
     });
 
-    const json = await response.json();
-
     console.log(json);
 
     if (!response.ok) {
-      console.log(json.error);
+      console.log(json.error)
     }
 
     if (response.ok) {
-      console.log(json.message);
+      console.log(json.role)
+      //save user to local storage
+      localStorage.setItem('user', JSON.stringify(json))
     }
-  };
 
-  const styles = {
-    backgroundImage: `url(${registerBgImage})`,
-    backgroundSize: "100%",
-    backgroundRepeat: "no-repeat",
-  };
+
+  }
 
   return (
     <>
@@ -84,6 +80,15 @@ export default function Login() {
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
+              <div className="flex justify-between items-center">
+                <label className="label">
+                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                </label>
+
+                <label className="label">
+                  <Link to='/register'><p className="label-text-alt link link-hover">New user? <span className="text-blue-600 font-medium">Sign up</span></p></Link>
+                </label>
+              </div>
               </div>
             </form>
           </div>
