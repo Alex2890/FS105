@@ -2,59 +2,7 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        // <div className='inset-x-0 bottom-0 mt-5'>
-        //     <div className="px-4 py-2 bg-slate-300">
-        //         <div className="flex flex-wrap items-center justify-content md:justify-between">
-        //             <div className="w-full md:w-4/12 px-4">
-        //                 <div className="text-sm text-black font-semibold py-1 text-center">
-        //                     Copyright © {new Date().getFullYear()}{" "}
-        //                     <a
-        //                         href="https://www.creative-tim.com"
-        //                         className="text-black hover:text-gray-400 text-sm font-semibold py-1"
-        //                     >
-        //                         Creative Tim
-        //                     </a>
-        //                 </div>
-        //             </div>
-        //             <div className="w-full md:w-8/12 px-4">
-        //                 <ul className="flex flex-wrap list-none md:justify-end  justify-center">
-        //                     <li>
-        //                         <a
-        //                             href="https://www.creative-tim.com"
-        //                             className="text-black hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-        //                         >
-        //                             Creative Tim
-        //                         </a>
-        //                     </li>
-        //                     <li>
-        //                         <a
-        //                             href="https://www.creative-tim.com/presentation"
-        //                             className="text-black hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-        //                         >
-        //                             About Us
-        //                         </a>
-        //                     </li>
-        //                     <li>
-        //                         <a
-        //                             href="http://blog.creative-tim.com"
-        //                             className="text-black hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-        //                         >
-        //                             Blog
-        //                         </a>
-        //                     </li>
-        //                     <li>
-        //                         <a
-        //                             href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
-        //                             className="text-black hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-        //                         >
-        //                             MIT License
-        //                         </a>
-        //                     </li>
-        //                 </ul>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
+    
 
         <footer className="footer items-center p-4 bg-neutral text-neutral-content">
             <aside className="items-center grid-flow-col">
@@ -67,7 +15,63 @@ const Footer = () => {
                 <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
                 <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
             </nav>
+
+            <div className="news-letter-section bg-gray-100 pt-24 pb-24">
+          <div className="container">
+            <div className="max-w-[600px] mx-auto">
+              <div className="text-center">
+                <a href="#" className="inline-block mb-11">
+                  <img src="assets/images/logo/logo.webp" alt="brand logo" loading="lazy" width="125" height="45" />
+                </a>
+
+                <p className="mb-10">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliqua. Ut enim ad minim. Lorem ipsum dolor sit amet.
+                </p>
+
+                <form id="mc-form" className="relative text-center md:max-w-xl mx-auto mb-10">
+                  <input
+                    id="mc-email"
+                    type="email"
+                    name="email"
+                    placeholder="email@example.com"
+                    className="border border-solid border-primary w-full h-14 sm:h-16 rounded-full bg-transparent placeholder-primary placeholder-opacity-50 text-sm sm:text-base focus:outline-none py-1 pl-8 pr-14 sm:pr-36"
+                  />
+                  <button
+                    id="mc-submit"
+                    type="submit"
+                    className="bg-dark transition-all hover:bg-orange hover:text-white px-10 sm:px-3 py-5 sm:py-1 rounded-l-full sm:rounded-l-none rounded-r-full text-white capitalize font-medium text-sm lg:text-md sm:absolute sm:top-0 sm:right-0 sm:h-full mt-3 sm:mt-0 leading-none w-full sm:w-auto"
+                  >
+                    Subscribe
+                  </button>
+                </form>
+                <div className="mailchimp-alerts text-centre">
+                  <div className="mailchimp-submitting"></div>
+                  <div className="mailchimp-success text-green-400"></div>
+                  <div className="mailchimp-error text-red-600"></div>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center justify-center">
+                <a href="#" aria-label="social links" className="text-lg text-dark hover:text-orange mx-3 leading-none transition">
+                  <i className="icon-social-facebook"></i>
+                </a>
+                <a href="#" aria-label="social links" className="text-lg text-dark hover:text-orange mx-3 leading-none transition">
+                  <i className="icon-social-twitter"></i>
+                </a>
+                <a href="#" aria-label="social links" className="text-lg text-dark hover:text-orange mx-3 leading-none transition">
+                  <i className="icon-social-instagram"></i>
+                </a>
+                <a href="#" aria-label="social links" className="text-lg text-dark hover:text-orange mx-3 leading-none transition">
+                  <i className="icon-social-youtube"></i>
+                </a>
+                <a href="#" aria-label="social links" className="text-lg text-dark hover:text-orange mx-3 leading-none transition">
+                  <i className="icon-social-dribbble"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         </footer>
+        
     )
 }
 

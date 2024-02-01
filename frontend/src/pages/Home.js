@@ -10,7 +10,7 @@ const Home = () => {
       <div className="hero min-h-screen" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1618183876181-3df5b83e7be9?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)'}}>
         <div className="hero-overlay bg-opacity-0"></div>
         <div className="hero-content text-center text-base-100">
-          <div className="max-w-lg glass rounded-box p-8 ">
+          <div className="max-w-lg glass rounded-box p-8 drop-shadow-2xl">
             <h1 className="mb-5 text-5xl font-bold"> Crafted for Queens. </h1>
             <p className="mb-5"> Made for you. </p>
             <button className="btn btn-primary text-base-100">Shop Now</button>
@@ -26,7 +26,7 @@ const Home = () => {
           <div className="artboard phone-1" ><img className='rounded-box image-full' src={homepage3}/></div>
         </div>
       </div>
-      <div className="hero min-h-screen bg-slate-100" style={{backgroundImage: 'url(https://cdn.discordapp.com/attachments/1199688598123978762/1201829266657136640/pinkGradient.png?ex=65cb3dba&is=65b8c8ba&hm=877589092b8ed0552966d7846a245b1f65a77486a98240b60049ad08790a2b08&)'}}>
+      <div className="hero min-h-screen bg-gradient-to-br from-red-50 to-white">
         <div className="hero-content flex-col lg:flex-row">
           <div className="artboard artboard-horizontal phone-1"><img className='rounded-box image-full' src={homepage4}/></div>
             <div className="rounded-box artboard artboard-horizontal phone-1 p-20 text-center">

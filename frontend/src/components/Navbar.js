@@ -27,7 +27,7 @@ function Navbar() {
         </div>
         <Link to='/'><a className="btn btn-ghost text-lg text-gray-500">LuxuriaLoom</a></Link>
       </div>
-      <div className="navbar-center hidden lg:flex ">
+      <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-gray-500">
           <li>
             <Link to='/'>Home</Link>
@@ -50,6 +50,7 @@ function Navbar() {
         <button className="btn btn-ghost text-gray-500"><Link to='/login'>Login</Link></button>
       </div>
     </div>
+    
   );
 }
 
