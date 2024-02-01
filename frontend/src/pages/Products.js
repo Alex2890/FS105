@@ -4,7 +4,7 @@ import { useState } from 'react'
 const Products = () => {
 
   const [handbags, setHandbags] = useState()
-
+  const [loading, setLoading] = useState(true)
 
 
   useEffect(() => {
@@ -14,12 +14,24 @@ const Products = () => {
       const data = await response.json()
       console.log(data)
       setHandbags(data)
+      setLoading(false)
     }
 
     getProducts()
   }, [])
 
   console.log(handbags)
+
+  if(loading){
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
+
+
   return (
     <div className='container my-10'>
       {/* <h2 className='text-left'>Find you the bag that suits</h2> */}
