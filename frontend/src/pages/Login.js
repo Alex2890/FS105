@@ -84,7 +84,7 @@ export default function Login() {
                 <button className="btn btn-primary">Login</button>
               <div className="flex justify-between items-center">
                 <label className="label">
-                  <Link to={'/forget-password'} className="label-text-alt link link-hover">Forgot password?</Link>
+                  <Link to={'/forgot-password'} className="label-text-alt link link-hover">Forgot password?</Link>
                 </label>
 
                 <label className="label">
