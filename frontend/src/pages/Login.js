@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { allData } from "../context/AppContext";
-import registerBgImage from "../assets/img/register_bg_2.png";
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -19,6 +18,8 @@ export default function Login() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+
+    const json = await response.json()
 
     console.log(json);
 
@@ -86,7 +87,7 @@ export default function Login() {
                 </label>
 
                 <label className="label">
-                  <Link to='/register'><p className="label-text-alt link link-hover">New user? <span className="text-blue-600 font-medium">Sign up</span></p></Link>
+                  <Link to='/register'><p className="label-text-alt link link-hover">New user? <span onClick={submitHandler} className="text-blue-600 font-medium">Sign up</span></p></Link>
                 </label>
               </div>
               </div>
