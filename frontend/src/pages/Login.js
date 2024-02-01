@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
-import { useContext, useState } from "react";
-import { allData } from "../context/AppContext";
 import Footer from "../components/Footer";
-import registerBgImage from "../assets/img/register_bg_2.png";
+import { allData } from "../context/AppContext";
 import { Link } from "react-router-dom";
 
 export default function Login() {
 
-  const context = useContext(allData)
+  const context = useContext(allData);
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const submitHandler = async(e) => {
-    e.preventDefault()
-    console.log(email, password)
+    e.preventDefault();
+    console.log(email, password);
 
 
     const response = await fetch('/api/users/login', {
@@ -80,7 +78,7 @@ export default function Login() {
 
               <div className="flex justify-between items-center">
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                  <Link to={'/forget-password'} className="label-text-alt link link-hover">Forgot password?</Link>
                 </label>
 
                 <label className="label">

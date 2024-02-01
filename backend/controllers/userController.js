@@ -253,4 +253,4 @@ const deleteUser = async (req, res) => {
   console.log(`User with ID ${user._id} has been deleted successfully`);
 };
 
-export { getAllUsers, createUser, loginUser, deleteUser };
+export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq };
