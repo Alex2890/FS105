@@ -5,13 +5,12 @@ import { allData } from "../context/AppContext";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-
   const context = useContext(allData);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
+
     e.preventDefault();
     console.log(email, password);
 
