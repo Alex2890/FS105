@@ -17,6 +17,7 @@ import Error from './pages/Error';
 import Faqs from './pages/Faqs';
 import Cart from './pages/Cart';
 import Admin from './pages/Admin';
+import SingleProduct from './pages/SingleProduct';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path='/faqs' element={<Faqs />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='products/product/:id' element={<SingleProduct />} />
 
 
 
