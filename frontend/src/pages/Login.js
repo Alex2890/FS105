@@ -9,6 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");  
 
+
   const submitHandler = async (e) => {
 
     e.preventDefault();
@@ -73,7 +74,10 @@ export default function Login() {
                   className="input input-bordered"
                   required
                   onChange={(e) => setPassword(e.currentTarget.value)}
-                />
+                />       
+
+              
+
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
