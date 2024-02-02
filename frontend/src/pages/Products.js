@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { CircleLoader } from 'react-spinners'
 
 const Products = () => {
 
@@ -14,7 +16,9 @@ const Products = () => {
       const data = await response.json()
       console.log(data)
       setHandbags(data)
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 300)
     }
 
     getProducts()
@@ -22,19 +26,22 @@ const Products = () => {
 
   console.log(handbags)
 
-  if(loading){
+
+
+  if (loading) {
     return (
       <div>
-        Loading...
+        {loading && <CircleLoader cssOverride={{ margin: 'auto', marginTop: '200px', marginBottom:"200px" }} size={100} />}
+
       </div>
     )
   }
 
-
-
   return (
+
+
     <div className='container my-10'>
-      {/* <h2 className='text-left'>Find you the bag that suits</h2> */}
+
 
       <div className="text-center">
         <h2 className="text-4xl font-extrabold text-indigo-800 mb-4">Discover Your Perfect Luxury Bag</h2>
@@ -53,7 +60,7 @@ const Products = () => {
               <h2 className="card-title cursor default">{item.bagName}</h2>
               <p className='cursor-default'>{item.description}</p>
               <div className="card-actions justify-end">
-                <button className="btn btn-primary">Details</button>
+                <Link to={`product/${item._id}`}><button className="btn btn-primary">Details</button></Link>
               </div>
             </div>
           </div>
@@ -61,7 +68,7 @@ const Products = () => {
       </div>
 
 
-   
+
 
 
 
@@ -95,4 +102,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Products;
