@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { allData } from "../context/AppContext";
-import registerBgImage from "../assets/img/register_bg_2.png";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
+
 
 export default function Login() {
   const context = useContext(allData);
@@ -72,23 +72,25 @@ export default function Login() {
                   required
                   onChange={(e) => setPassword(e.currentTarget.value)}
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
-              <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
-              <div className="flex justify-between items-center">
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                </label>
 
-                <label className="label">
-                  <Link to='/register'><p className="label-text-alt link link-hover">New user? <span className="text-blue-600 font-medium">Sign up</span></p></Link>
-                </label>
-              </div>
+              <div className="form-control mt-6">
+                <button className="btn btn-primary text-white">Login</button>
+                <div className="flex justify-between items-center">
+
+                  <label className="label">
+                    <Link to='/forgetpassword'>
+                    <p className="label-text-alt link link-hover">Forgot password?</p>
+                    </Link>
+                  </label>
+                  
+                  <label className="label">
+                    <Link to='/register'>
+                      <p className="label-text-alt link link-hover">New user? <span className="text-blue-600 font-medium">Sign up</span>
+                      </p>
+                    </Link>
+                  </label>
+                </div>
               </div>
             </form>
           </div>
