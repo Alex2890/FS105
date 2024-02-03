@@ -18,7 +18,7 @@ router.delete('/:id', deleteUser)
 // POST forgot password
 router.post('/forgot-password', forgotPassword);
 
-// POST reset password
-router.post('/reset-password', resetPassword);
+// PATCH reset password
+router.patch('/reset-password', resetPassword);
 
 export default router

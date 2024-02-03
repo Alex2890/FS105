@@ -23,7 +23,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post('/api/users/reset-password', {
+            const response = await axios.patch('/api/users/reset-password', {
                 token,
                 newPassword
             });
