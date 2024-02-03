@@ -85,8 +85,8 @@ const AppContext = ({ children }) => {
   ]
 
 
-  //localstorage data
-  useEffect(() => {
+   //localstorage data
+   useEffect(() => {
 
     if (shouldFetch) {
       const userLogin = JSON.parse(localStorage.getItem('user')) || null

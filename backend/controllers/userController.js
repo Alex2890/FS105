@@ -225,7 +225,10 @@ const loginUser = async (req, res) => {
           expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000) // 1 days in milliseconds
         };
         // res.cookie("token", token, cookieOptions).json(user.firstName);
-        res.cookie("token", token, cookieOptions).status(200).json({ token, user });
+        res.cookie("token", token, cookieOptions).status(200).json({ token, 
+          user: {
+            firstName: user.firstName,          } 
+        });
 
       }
     );
