@@ -1,7 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { allData } from "../context/AppContext.js";
+import Cookies from 'js-cookie';
 
 function Navbar() {
+
+  const { user, setUser } = useContext(allData)
+  console.log(user)
+
+  const logoutHandler = () => {
+
+    localStorage.removeItem('user');
+    window.location.href = "/";
+  }
+
+
+
   return (
     <div className="navbar py-3">
       <div className="navbar-start">
@@ -62,10 +77,36 @@ function Navbar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-ghost text-gray-500"><Link to='/login'>Login</Link></button>
+        <div>
+
+          <div className="dropdown dropdown-bottom dropdown-end">
+            <div tabIndex={0} role="button" className="btn m-1">
+              {user?.user.firstName}
+              <div className="ms-1 avatar placeholder">
+                <div className="bg-neutral text-neutral-content rounded-full w-8">
+                  <span className="text-xs">UI</span>
+                </div>
+              </div>
+            </div>
+            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+              <li>
+                {user?.user.firstName}
+
+              </li>
+              <li>
+                {user ? <button onClick={logoutHandler} className="btn btn-ghost text-gray-500"><Link to=''>Logout</Link></button> : <button className="btn btn-ghost text-gray-500"><Link to='/login'>Login</Link></button>
+                }
+              </li>
+
+            </ul>
+          </div>
+
+
+        </div>
+
       </div>
     </div>
-    
+
   );
 }
 

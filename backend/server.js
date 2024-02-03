@@ -8,6 +8,8 @@ import path from 'path';
 import itemInfo from './models/itemModels.js';
 import messagesRouter from './routes/messageRoutes.js'
 import productsRouter from './routes/productRoutes.js'
+import cookieParser from 'cookie-parser'
+
 
 dotenv.config()
 
@@ -24,7 +26,7 @@ app.use(express.json())
 
 app.use(cors())
 
-
+app.use(cookieParser())
 // all the magic happen below
 // ----------------------------------------------------------------------------------------------------
 app.use('/api/users', userRouter)
