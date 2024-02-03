@@ -8,6 +8,7 @@ import jwt from "jsonwebtoken";
 import dotenv from 'dotenv'
 dotenv.config()
 
+
 // JWT for maintaining user sessions after login
 
 const jwtSecret = 'dgafg1536453h1355ha4135thad';
@@ -223,10 +224,13 @@ const loginUser = async (req, res) => {
           httpOnly: true,
           expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000) // 1 days in milliseconds
         };
-        res.cookie("token", token, cookieOptions).json(user.firstName);
+        // res.cookie("token", token, cookieOptions).json(user.firstName);
+        res.cookie("token", token, cookieOptions).status(200).json({ token, user });
+
       }
     );
 
+    // res.status(200).json({token})
 
     //Ridwan's code below----------------------------------------------------------------------------
     // const token = jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: '1d' })

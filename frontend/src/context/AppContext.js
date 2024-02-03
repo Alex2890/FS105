@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createContext, useState } from "react";
 
 
@@ -18,6 +18,9 @@ const AppContext = ({ children }) => {
   const [city, setCity] = useState("")
   const [province, setProvince] = useState("")
   const [postalCode, setPostalCode] = useState("")
+  const [user, setUser] = useState()
+  const [shouldFetch, setShouldFetch] = useState(true);
+
 
 
   // for bags
@@ -82,11 +85,25 @@ const AppContext = ({ children }) => {
   ]
 
 
+  //localstorage data
+  useEffect(() => {
+
+    if (shouldFetch) {
+      const userLogin = JSON.parse(localStorage.getItem('user')) || null
+      console.log(userLogin)
+      setUser(userLogin)
+      setShouldFetch(false)
+    }
+
+
+  }, [shouldFetch])
+
+  console.log(user)
 
 
 
   return (
-    <allData.Provider value={{ password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray }}>
+    <allData.Provider value={{shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray }}>
       {children}
     </allData.Provider>
   )
