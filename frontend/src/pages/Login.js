@@ -7,11 +7,9 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const context = useContext(allData);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");  
-
+  const [password, setPassword] = useState("");
 
   const submitHandler = async (e) => {
-
     e.preventDefault();
     console.log(email, password);
 
@@ -21,24 +19,23 @@ export default function Login() {
       body: JSON.stringify({ email, password }),
     });
 
-    const json = await response.json()
+    const json = await response.json();
 
     console.log(json);
 
     if (!response.ok) {
-      console.log(json.error)
+      console.log(json.error);
     }
 
     if (response.ok) {
-      console.log(json.role)
-      //save user to local storage
-      localStorage.setItem('user', JSON.stringify(json))
+      console.log(json.role);
+      // save user to local storage
+      localStorage.setItem("user", JSON.stringify(json));
     }
-
-
-  }
+  };
 
   return (
+
     <>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
@@ -74,27 +71,32 @@ export default function Login() {
                   className="input input-bordered"
                   required
                   onChange={(e) => setPassword(e.currentTarget.value)}
-                />       
-
-              
-
+                />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary" onClick={submitHandler}>Login</button>
+                <button className="btn btn-primary" onClick={submitHandler}>Login</button>  
+
               <div className="flex justify-between items-center">
                 <label className="label">
-                  <Link to={'/forgot-password'} className="label-text-alt link link-hover">Forgot password?</Link>
+                  <Link to="/forgetpassword">
+                    <p className="label-text-alt link link-hover">
+                      Forgot password?
+                    </p>
+                  </Link>
                 </label>
-
                 <label className="label">
-                  <Link to='/register'><p className="label-text-alt link link-hover">New user? <span onClick={submitHandler} className="text-blue-600 font-medium">Sign up</span></p></Link>
+                  <Link to="/register">
+                    <p className="label-text-alt link link-hover">
+                      New user?{" "}
+                      <span className="text-blue-600 font-medium">Sign up</span>
+                    </p>
+                  </Link>
                 </label>
               </div>
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
