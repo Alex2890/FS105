@@ -80,7 +80,7 @@ export default function Login() {
 
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary" onClick={submitHandler}>Login</button>
               <div className="flex justify-between items-center">
                 <label className="label">
                   <Link to={'/forgot-password'} className="label-text-alt link link-hover">Forgot password?</Link>
