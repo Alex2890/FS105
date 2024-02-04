@@ -1,19 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom"
-import { useContext } from "react";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom"
+import { useContext, useEffect } from "react";
 import { allData } from "../context/AppContext.js";
 import Cookies from 'js-cookie';
+import Upload from "../pages/Upload.js";
 
 function Navbar() {
 
   const { user, setUser } = useContext(allData)
   console.log(user)
 
+
   const logoutHandler = () => {
 
     localStorage.removeItem('user');
     window.location.href = "/";
   }
+
+
 
 
 
@@ -41,9 +45,6 @@ function Navbar() {
               <Link to='/faqs'>FAQs</Link>
             </li>
             <li>
-              <Link to='/upload'>Upload Admin</Link>
-            </li>
-            <li>
               <Link to='/cart'>Cart</Link>
             </li>
 
@@ -68,12 +69,19 @@ function Navbar() {
           <li>
             <Link to='/faqs'>FAQs</Link>
           </li>
-          <li>
-            <Link to='/upload'>Upload Admin(will remove)</Link>
-          </li>
+          {/* <li>
+            <Link to={user?.user.role === 'admin' ? '/upload' : '/'}>Upload Admin</Link>
+          </li> */}
           <li>
             <Link to='/cart'>Cart</Link>
           </li>
+          
+          {user?.user.role === 'admin' && (
+            <li>
+              <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
+            </li>
+          )}
+
         </ul>
       </div>
       <div className="navbar-end">
@@ -96,11 +104,11 @@ function Navbar() {
 
             {user && <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
               <li>
-                {user?.user.firstName}
+                Hi, {user?.user.firstName}!
 
               </li>
               <li>
-                {user ? <button onClick={logoutHandler} className="btn btn-ghost text-gray-500"><Link to=''>Logout</Link></button> : <button className="btn btn-ghost text-gray-500"><Link to='/login'>Login</Link></button>
+                {user ? <button onClick={logoutHandler} className="btn btn-ghost text-gray-500 pt-4"><Link to=''>Logout</Link></button> : <button className="btn btn-ghost text-gray-500"><Link to='/login'>Login</Link></button>
                 }
               </li>
 

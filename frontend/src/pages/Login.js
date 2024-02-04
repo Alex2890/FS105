@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { allData } from "../context/AppContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {shouldFetch, setShouldFetch} = useContext(allData);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   const submitHandler = async (e) => {
 
@@ -34,6 +35,7 @@ export default function Login() {
       //save user to local storage
       localStorage.setItem('user', JSON.stringify(json))
       setShouldFetch(true)
+      navigate('/')
     }
   };
 
