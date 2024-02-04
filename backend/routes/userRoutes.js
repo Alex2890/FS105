@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllUsers, createUser, loginUser, deleteUser, forgotPassword, resetPassword } from '../controllers/userController.js'
+import { getAllUsers, createUser, loginUser, deleteUser, forgotPassword, resetPassword, logoutUser } from '../controllers/userController.js'
 
 const router = express.Router()
 
@@ -20,5 +20,8 @@ router.post('/forgot-password', forgotPassword);
 
 // PATCH reset password
 router.patch('/reset-password', resetPassword);
+
+//GET logout user
+router.get('/logout', logoutUser)
 
 export default router

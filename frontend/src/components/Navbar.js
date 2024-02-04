@@ -17,10 +17,14 @@ function Navbar() {
     setLogout(true)
   }
 
-  const closeModal = () => {
+  const closeModal = async() => {
     setLogout(false)
     window.location.href = "/";
     localStorage.removeItem('user');
+
+    const response = await fetch('/api/users/logout')
+    const json = await response.json()
+    console.log(json)
 
 
   }
