@@ -24,6 +24,8 @@ const Welcome = () => {
                         <Link to='/products'><button className="mt-5 btn bg-black border-black text-white hover:bg-white hover:text-black hover:border-black">Back to shopping</button></Link>
                         <h1 className='mt-10 bg-orange-200'>//THIS IS WHERE WE CAN PUT A WISHLIST ITEM LIST to remind user what they wish to buy//</h1>
                     </div>
+
+                    
                 </div>
             </div>
         </div>

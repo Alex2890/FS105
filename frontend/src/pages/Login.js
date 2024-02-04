@@ -5,10 +5,11 @@ import { allData } from "../context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const {shouldFetch, setShouldFetch} = useContext(allData);
+  const { shouldFetch, setShouldFetch } = useContext(allData);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
+  const [error, setError] = useState("")
 
   const submitHandler = async (e) => {
 
@@ -28,6 +29,7 @@ export default function Login() {
 
     if (!response.ok) {
       console.log(json.error);
+      setError(json.error)
     }
 
     if (response.ok) {
@@ -77,24 +79,25 @@ export default function Login() {
                 />
               </div>
               <div className="form-control mt-6">
-                <button onClick={submitHandler} className="btn btn-primary">Login</button>
-              <div className="flex justify-between items-center">
-                <label className="label">
-                  <Link to="/forgetpassword">
-                    <p className="label-text-alt link link-hover">
-                      Forgot password?
-                    </p>
-                  </Link>
-                </label>
-                <label className="label">
-                  <Link to='/register'><p className="label-text-alt link link-hover">New user? <span  className="text-blue-600 font-medium">Sign up</span></p></Link>
-                </label>
+                <button onClick={submitHandler} className="btn btn-primary mb-2">Login</button>
+                <div className="text-red-600 text-center">{error && error}</div>
+                <div className="flex justify-between items-center mt-4">
+                  <label className="label">
+                    <Link to="/forgetpassword">
+                      <p className="label-text-alt link link-hover">
+                        Forgot password?
+                      </p>
+                    </Link>
+                  </label>
+                  <label className="label">
+                    <Link to='/register'><p className="label-text-alt link link-hover">New user? <span className="text-blue-600 font-medium">Sign up</span></p></Link>
+                  </label>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
