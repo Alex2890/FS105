@@ -35,7 +35,7 @@ export default function Login() {
       //save user to local storage
       localStorage.setItem('user', JSON.stringify(json))
       setShouldFetch(true)
-      navigate('/')
+      navigate('/welcome')
     }
   };
 
