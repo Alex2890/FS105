@@ -5,6 +5,15 @@ const tailwindConfig = {
   theme: {
     extend: {},
   },
+  variants: {
+    extend: {
+      fill: ['hover'], // Enabling hover state for fill
+      stroke: ['hover'], // Enabling hover state for stroke
+    },
+  },
+  daisyui: {
+    themes: ["pastel"],
+  },
   plugins: [require('daisyui')],
 };
 

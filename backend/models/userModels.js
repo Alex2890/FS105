@@ -58,6 +58,9 @@ const userSchema = new Schema({
     resetPasswordExpires: {
         type: Date,
         required: false,
+    },
+    role:{
+        type:String,   
     }
   
 })

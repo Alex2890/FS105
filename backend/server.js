@@ -7,6 +7,9 @@ import multer from 'multer';
 import path from 'path';
 import itemInfo from './models/itemModels.js';
 import messagesRouter from './routes/messageRoutes.js'
+import productsRouter from './routes/productRoutes.js'
+import cookieParser from 'cookie-parser'
+
 
 dotenv.config()
 
@@ -23,14 +26,16 @@ app.use(express.json())
 
 app.use(cors())
 
-
+app.use(cookieParser())
 // all the magic happen below
 // ----------------------------------------------------------------------------------------------------
 app.use('/api/users', userRouter)
 app.use('/api/messages', messagesRouter)
-
+app.use('/api/products', productsRouter)
 // ----------------------------------------------------------------------------------------------------
 
+//for images on the product page front end
+app.use(express.static('public'))
 
 //upload image------------------------------------------------------------------------------------------
 
@@ -53,8 +58,16 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
     const { bagName, price, description, numberOfStocks } = req.body
 
-    const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
-    console.log(item)
+    try {
+        const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
+        console.log(item)
+        res.status(200).json({ message: "registered item successfully", item });
+
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+
 })
 // --------------------------------------------------------------------------------------------------------
 

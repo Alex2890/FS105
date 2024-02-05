@@ -5,6 +5,9 @@ import bcrypt from "bcrypt";
 import crypto from "crypto";
 import sendEmail from "../utils/sendEmail.js";
 import jwt from "jsonwebtoken";
+import dotenv from 'dotenv'
+dotenv.config()
+
 
 // JWT for maintaining user sessions after login
 
@@ -171,6 +174,7 @@ const createUser = async (req, res) => {
       city,
       province,
       postalCode,
+      role: "user",
     });
     res.status(200).json({ message: "registered successfully", user });
   } catch (error) {
@@ -181,7 +185,7 @@ const createUser = async (req, res) => {
 //POST login user
 
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     //validation
@@ -191,20 +195,22 @@ const loginUser = async (req, res) => {
 
     //to find valid email in the database
     const user = await userAccount.findOne({ email });
+    console.log(user)
 
     if (!user) {
       throw Error("Email cannot be found in the database");
     }
 
     //password is plain text, user.password is based passsword in the database
-    const match = await bcrypt.compareSync(password, user.password);
+    const match = bcrypt.compareSync(password, user.password);
 
     if (!match) {
       // res.status(400).json({message:"inccorecet passowrd ooo"})
       // res.status(400).json({message:'incorrect password'})
       throw Error("Incorrect password");
     }
-    jwt.sign(
+
+    const token = jwt.sign(
       {
         email: user.email,
         id: user._id,
@@ -213,17 +219,24 @@ const loginUser = async (req, res) => {
       { expiresIn: '1d' }, // Adjust the expiresIn according to your needs
       (err, token) => {
         if (err) throw err;
-        // Set cookie to expire in 3 days
+        // Set cookie to expire in 1 days
         const cookieOptions = {
           httpOnly: true,
-          expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000) // 3 days in milliseconds
+          expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000) // 1 days in milliseconds
         };
-        res.cookie("token", token, cookieOptions).json(user.firstName);
+        // res.cookie("token", token, cookieOptions).json(user.firstName);
+        res.cookie("token", token, cookieOptions).status(200).json({ token, user });
+
       }
     );
-    // res.status(200).json({ message: "successfully logged in" });
 
-    return user;
+    // res.status(200).json({token})
+
+    //Ridwan's code below----------------------------------------------------------------------------
+    // const token = jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: '1d' })
+
+    // res.status(200).json({ email, token, role: user.role, id:user._id, message: "it is working" });
+    //-------------------------------------------------------------------------------------------------
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -244,4 +257,13 @@ const deleteUser = async (req, res) => {
   console.log(`User with ID ${user._id} has been deleted successfully`);
 };
 
-export { getAllUsers, createUser, loginUser, deleteUser };
+
+//GET logout user
+
+const logoutUser = async (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: "user has been logged out successfully" });
+
+}
+
+export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser };
