@@ -61,23 +61,23 @@ function Navbar() {
 
           </ul>
         </div>
-        <Link to='/'><p className="btn btn-ghost text-lg">LuxuriaLoom</p></Link>
+        <Link to='/'><p className="btn text-lg">LuxuriaLoom</p></Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-gray-500">
-          <li>
+        <ul className="menu menu-horizontal text-gray-500">
+          <li className="px-3">
             <Link to='/'>Home</Link>
           </li>
-          <li>
+          <li className="px-3">
             <Link to='/aboutus'>About Us</Link>
           </li>
-          <li>
+          <li className="px-3">
             <Link to='/contact'>Contact</Link>
           </li>
-          <li>
+          <li className="px-3">
             <Link to='/products'>Products</Link>
           </li>
-          <li>
+          <li className="px-3">
             <Link to='/faqs'>FAQs</Link>
           </li>
           {/* <li>
