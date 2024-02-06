@@ -66,19 +66,19 @@ function Navbar() {
       </div>
       <div className="navbar-center lg:flex ">
         <ul className="navbar italic">
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/'>Home</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/aboutus'>About Us</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/contact'>Contact</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/products'>Products</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/faqs'>FAQs</Link>
           </li>
           {/* <li>
@@ -101,7 +101,7 @@ function Navbar() {
 
           <div className="dropdown dropdown-bottom dropdown-end">
 
-            {!user && <Link to='/login'><button className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">Login</button></Link>}
+            {!user && <Link to='/login'><button className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">Login</button></Link>}
 
             {user && <div tabIndex={0} role="button" className="btn m-1">
               {user?.user.firstName}
