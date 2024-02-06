@@ -1,8 +1,8 @@
 import React from 'react'
-import ridwan from '../images/ridwan.png';
-import alex from '../images/alex.png';
-import julia from '../images/julia.jpg';
-import vishal from '../images/vishal.jpeg';
+import ridwan from '../images/aboutUs/ridwan.png';
+import alex from '../images/aboutUs/alex.png';
+import julia from '../images/aboutUs/julia.jpg';
+import vishal from '../images/aboutUs/vishal.jpeg';
 
 
 

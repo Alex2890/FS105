@@ -44,18 +44,12 @@ export default function Login() {
   return (
 
     <>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/5705478/pexels-photo-5705478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
+
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-          </div>
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card w-96 shadow-2xl bg-base-100">
             <form className="card-body">
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -67,6 +61,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.currentTarget.value)}
                 />
               </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
@@ -78,8 +73,9 @@ export default function Login() {
                   onChange={(e) => setPassword(e.currentTarget.value)}
                 />
               </div>
+              
               <div className="form-control mt-6">
-                <button onClick={submitHandler} className="btn btn-primary mb-2">Login</button>
+                <button onClick={submitHandler} className="btn btn-primary mb-2 text-white no-animation">Login</button>
                 <div className="text-red-600 text-center">{error && error}</div>
                 <div className="flex justify-between items-center mt-4">
                   <label className="label">
