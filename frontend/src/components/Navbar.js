@@ -17,7 +17,7 @@ function Navbar() {
     setLogout(true)
   }
 
-  const closeModal = async() => {
+  const closeModal = async () => {
     setLogout(false)
     window.location.href = "/";
     localStorage.removeItem('user');
@@ -58,6 +58,19 @@ function Navbar() {
             <li>
               <Link to='/cart'>Cart</Link>
             </li>
+            {user?.user.role === 'admin' && (
+              <li>
+                <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
+              </li>
+            )}
+
+            {user?.user.role === 'user' && (
+              <li>
+                <Link to='/userdetails'>My Account</Link>
+              </li>
+            )
+
+            }
 
           </ul>
         </div>
@@ -92,6 +105,14 @@ function Navbar() {
               <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
             </li>
           )}
+
+          {user?.user.role === 'user' && (
+            <li>
+              <Link to='/userdetails'>My Account</Link>
+            </li>
+          )
+
+          }
 
         </ul>
       </div>
