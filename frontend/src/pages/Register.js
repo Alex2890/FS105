@@ -77,99 +77,101 @@ const Register = () => {
                     <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
         
-                    <div className='card-body grid grid-cols-1 gap-4'>
-                    <div className="form-control">
-                        <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-content">
-                        First name
-                        </label>
-                        <input
-                        onChange={(e) => setFirstName(e.currentTarget.value)}
-                        value={firstName}
-                        type="text"
-                        name="first-name"
-                        id="first-name"
-                        autoComplete="given-name"
-                        className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
-                        />
+                    <div className='card-body grid grid-cols-2 gap-4'>
+                        <div className="form-control">
+                            <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-content">
+                            First name
+                            </label>
+                            <input
+                            onChange={(e) => setFirstName(e.currentTarget.value)}
+                            value={firstName}
+                            type="text"
+                            name="first-name"
+                            id="first-name"
+                            autoComplete="given-name"
+                            className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
+                            />
+                        </div>
+            
+                        <div className="form-control">
+                            <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-content">
+                            Last name
+                            </label>
+                            <input
+                            onChange={(e) => setLastName(e.currentTarget.value)}
+                            value={lastName}
+                            type="text"
+                            name="last-name"
+                            id="last-name"
+                            autoComplete="family-name"
+                            className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
+                            />
+                        </div>
+            
+                        <div className="form-control">
+                            <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-content">
+                            Street address
+                            </label>
+                            <input
+                            onChange={(e) => setAddress(e.currentTarget.value)}
+                            value={address}
+                            type="text"
+                            name="street-address"
+                            id="street-address"
+                            autoComplete="street-address"
+                            className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
+                            />
+                        </div>
+            
+                        <div className="form-control">
+                            <label htmlFor="city" className="block text-sm font-medium leading-6 text-content">
+                            City
+                            </label>
+                            <input
+                            onChange={(e) => setCity(e.currentTarget.value)}
+                            value={city}
+                            type="text"
+                            name="city"
+                            id="city"
+                            autoComplete="address-level2"
+                            className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
+                            />
+                        </div>
+            
+                        <div className="form-control">
+                            <label htmlFor="region" className="block text-sm font-medium leading-6 text-content">
+                            State / Province
+                            </label>
+                            <input
+                            onChange={(e) => setProvince(e.currentTarget.value)}
+                            value={province}
+                            type="text"
+                            name="region"
+                            id="region"
+                            autoComplete="address-level1"
+                            className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
+                            />
+                        </div>
+            
+                        <div className="form-control">
+                            <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-content">
+                            ZIP / Postal code
+                            </label>
+                            <input
+                            onChange={(e) => setPostalCode(e.currentTarget.value)}
+                            value={postalCode}
+                            type="text"
+                            name="postal-code"
+                            id="postal-code"
+                            autoComplete="postal-code"
+                            className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
+                            />
+                        </div>
                     </div>
-        
-                    <div className="form-control">
-                        <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-content">
-                        Last name
-                        </label>
-                        <input
-                        onChange={(e) => setLastName(e.currentTarget.value)}
-                        value={lastName}
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
-                        className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
-                        />
-                    </div>
-        
-                    <div className="form-control">
-                        <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-content">
-                        Street address
-                        </label>
-                        <input
-                        onChange={(e) => setAddress(e.currentTarget.value)}
-                        value={address}
-                        type="text"
-                        name="street-address"
-                        id="street-address"
-                        autoComplete="street-address"
-                        className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
-                        />
-                    </div>
-        
-                    <div className="form-control">
-                        <label htmlFor="city" className="block text-sm font-medium leading-6 text-content">
-                        City
-                        </label>
-                        <input
-                        onChange={(e) => setCity(e.currentTarget.value)}
-                        value={city}
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                        className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
-                        />
-                    </div>
-        
-                    <div className="form-control">
-                        <label htmlFor="region" className="block text-sm font-medium leading-6 text-content">
-                        State / Province
-                        </label>
-                        <input
-                        onChange={(e) => setProvince(e.currentTarget.value)}
-                        value={province}
-                        type="text"
-                        name="region"
-                        id="region"
-                        autoComplete="address-level1"
-                        className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
-                        />
-                    </div>
-        
-                    <div className="form-control">
-                        <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-content">
-                        ZIP / Postal code
-                        </label>
-                        <input
-                        onChange={(e) => setPostalCode(e.currentTarget.value)}
-                        value={postalCode}
-                        type="text"
-                        name="postal-code"
-                        id="postal-code"
-                        autoComplete="postal-code"
-                        className="w-full h-10 input input-bordered text-gray-900 placeholder:text-gray-400"
-                        />
-                    </div>
-                    </div>
-        
-                    <div className="grid grid-cols-3 gap-4">
+
+                    <div className="divider"></div>
+
+                    <div className="grid grid-cols-1 gap-4 px-8">
                         <div className="form-control">
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-content">
                             Email address
