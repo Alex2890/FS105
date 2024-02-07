@@ -21,6 +21,7 @@ import SingleProduct from './pages/SingleProduct';
 import Welcome from './pages/Welcome';
 import { useContext, useEffect, useState } from 'react';
 import { allData } from './context/AppContext';
+import UserManagementPage from './pages/UserManagementPage';
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
   const [token, setToken] = useState('');
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
-  const {shouldFetch, setShouldFetch, user} = useContext(allData);
+  const { shouldFetch, setShouldFetch, user } = useContext(allData);
 
 
 
@@ -79,6 +80,10 @@ function App() {
 
         </> : <></>}
 
+        {token && role === 'user' ? <>
+          <Route path='/userdetails' element={<UserManagementPage />} />
+        </>:<></>
+        }
 
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />

@@ -266,4 +266,96 @@ const logoutUser = async (req, res) => {
 
 }
 
-export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser };
+
+//PATCH update the user account
+
+const updateUser = async (req, res) => {
+
+
+
+  try {
+
+    const { id } = req.params
+
+    // logic starts here
+    let email = req.body.email
+    let password = req.body.password
+    let password1 = req.body.password1
+    let postalCode = req.body.postalCode
+    let firstName = req.body.firstName
+    let lastName = req.body.lastName
+    let province = req.body.province
+    let city = req.body.city
+    let address = req.body.address
+
+
+    console.log(postalCode)
+    postalCode = postalCode.toString()
+
+    // const exists = await userAccount.findOne({ email });
+    // console.log(exists)
+
+    // if (exists ) {
+    //   throw Error("Email already in use");
+    // }
+
+    // Check if the email exists in the database, excluding the current user
+    const existingUser = await userAccount.findOne({ email, _id: { $ne: id } });
+
+    if (existingUser) {
+      throw Error("Email already in use");
+    }
+
+
+    if (email) {
+      if (!validator.isEmail(email)) {
+        throw Error("Email is not valid");
+      }
+    }
+
+    if (password) {
+      if (!validator.isStrongPassword(password)) {
+        throw Error("Password is not strong enough");
+      }
+    }
+
+    if (postalCode) {
+      if (!validator.isNumeric(postalCode)) {
+        throw Error("Postal Code has to be in numbers");
+      }
+    }
+
+
+
+
+
+    // password match? for user validation
+    if (password !== password1) {
+      throw Error("Passwords do not match");
+    }
+
+    const salt = await bcrypt.genSalt(10); //number of rounds for salt
+    const hashed = await bcrypt.hash(password, salt);
+
+    password = hashed.toString()
+    password1 = hashed.toString()
+
+
+
+    const user = await userAccount.findByIdAndUpdate({ _id: id }, { firstName, lastName, email, address, city, postalCode, province, password, password1 }, { new: true })
+
+    if (!user) {
+      return res.status(400).json({ error: "No such user" })
+    }
+
+
+    res.status(200).json({ user, message: "Update successfully" })
+
+  } catch (error) {
+
+    res.status(500).json({ message: error.message })
+  }
+
+}
+
+export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };
