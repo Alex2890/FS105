@@ -74,29 +74,30 @@ function Navbar() {
 
           </ul>
         </div>
-        <Link to='/'><p className="btn btn-ghost text-lg">LuxuriaLoom</p></Link>
+        <Link to='/'><p className="text-lg">LuxuriaLoom logo here</p></Link>
+        
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-gray-500">
-          <li>
+      <div className="navbar-center lg:flex ">
+        <ul className="navbar italic">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/'>Home</Link>
           </li>
-          <li>
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/aboutus'>About Us</Link>
           </li>
-          <li>
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/contact'>Contact</Link>
           </li>
-          <li>
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/products'>Products</Link>
           </li>
-          <li>
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/faqs'>FAQs</Link>
           </li>
           {/* <li>
             <Link to={user?.user.role === 'admin' ? '/upload' : '/'}>Upload Admin</Link>
           </li> */}
-          <li>
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
             <Link to='/cart'>Cart</Link>
           </li>
 
@@ -121,7 +122,7 @@ function Navbar() {
 
           <div className="dropdown dropdown-bottom dropdown-end">
 
-            {!user && <Link to='/login'><button className="btn btn-ghost text-gray-500">Login</button></Link>}
+            {!user && <Link to='/login'><button className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">Login</button></Link>}
 
             {user && <div tabIndex={0} role="button" className="btn m-1">
               {user?.user.firstName}
