@@ -77,7 +77,7 @@ function Navbar() {
         <Link to='/'><p className="text-lg">LuxuriaLoom logo here</p></Link>
         
       </div>
-      <div className="navbar-center lg:flex ">
+      <div className="navbar-center hidden lg:flex ">
         <ul className="navbar italic">
           <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/'>Home</Link>
