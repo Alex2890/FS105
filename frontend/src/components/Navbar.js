@@ -55,19 +55,32 @@ function Navbar() {
             <li>
               <Link to='/faqs'>FAQs</Link>
             </li>
-            <li>
-              <Link to='/cart'>Cart</Link>
-            </li>
+
             {user?.user.role === 'admin' && (
-              <li>
-                <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
-              </li>
+              <div>
+                <li>
+                  <Link to='/cart'>Cart</Link>
+                </li>
+                <li>
+                  <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
+                </li>
+              </div>
+
             )}
 
             {user?.user.role === 'user' && (
-              <li>
-                <Link to='/userdetails'>My Account</Link>
-              </li>
+              <div>
+                <li>
+                  <Link to='/cart'>Cart</Link>
+                </li>
+                <li>
+                  <Link to='/userdetails'>My Account</Link>
+                </li>
+                <li>
+                  <Link to='/wishlist'>My Wishlist</Link>
+                </li>
+              </div>
+
             )
 
             }
@@ -75,7 +88,7 @@ function Navbar() {
           </ul>
         </div>
         <Link to='/'><p className="text-lg">LuxuriaLoom logo here</p></Link>
-        
+
       </div>
       <div className="navbar-center hidden lg:flex ">
         <ul className="navbar italic">
@@ -97,20 +110,38 @@ function Navbar() {
           {/* <li>
             <Link to={user?.user.role === 'admin' ? '/upload' : '/'}>Upload Admin</Link>
           </li> */}
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
-            <Link to='/cart'>Cart</Link>
-          </li>
+
 
           {user?.user.role === 'admin' && (
-            <li>
-              <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
-            </li>
+            <div>
+              <li>
+                <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                  <Link to='/cart'>Cart</Link>
+                </li>
+              </li>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
+              </li>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                <Link to='/wishlist'>My Wishlist</Link>
+              </li>
+            </div>
+
           )}
 
           {user?.user.role === 'user' && (
-            <li>
-              <Link to='/userdetails'>My Account</Link>
-            </li>
+            <div>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                <Link to='/cart'>Cart</Link>
+              </li>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                <Link to='/userdetails'>My Account</Link>
+              </li>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                <Link to='/wishlist'>My Wishlist</Link>
+              </li>
+            </div>
+
           )
 
           }
