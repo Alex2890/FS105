@@ -54,4 +54,25 @@ const addProduct = async (req, res) => {
 }
 
 
-export { getAllWishListProducts, addProduct }
+//DELETE item from wishlist
+const deleteWishlistItem = async (req, res) =>{
+
+    try {
+        const {id} = req.params
+        console.log(id)
+
+        const wishlistItem = await wishListModels.findOneAndDelete({_id: id})
+
+        if(!wishlistItem){
+            return res.status(400).json({error:"No such item in the wishlist"})
+        }
+
+        res.status(200).json({wishlistItem, message:`item ${wishlistItem._id} deleted successfully`})
+
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+
+}
+
+export { getAllWishListProducts, addProduct, deleteWishlistItem }

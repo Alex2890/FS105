@@ -12,6 +12,11 @@ const SingleProduct = () => {
     const [product, setProduct] = useState()
     const [quantity, setQuantity] = useState(1);
     const [success, setSuccess] = useState(false)
+    const [message, setMessage] = useState(null)
+
+    const { wishlist, setWishlist } = useContext(allData)
+
+
 
     const handleIncrement = () => {
         setQuantity(quantity + 1);
@@ -56,6 +61,16 @@ const SingleProduct = () => {
     const wishListHandler = async () => {
         console.log(product)
 
+        const isProductInWishlist = wishlist.find(item => item.bagName === product.bagName && user?.user._id === item?.user_id);
+
+        if(isProductInWishlist){
+            setMessage("It is already in the wishlist!")
+            setTimeout(()=>{
+                setMessage(null)
+            }, 3000)
+            return console.log("it is already in the wishlist")
+        }
+
         const data = {
             user_id: user?.user._id,
             image: product.image,
@@ -75,6 +90,9 @@ const SingleProduct = () => {
 
         const json = await response.json()
         console.log(json)
+        setWishlist([...wishlist, data])
+        // setWishlist(prevWishlist => [...prevWishlist, data]);
+
 
         if (!response.ok) {
             console.log(json.error);
@@ -113,8 +131,8 @@ const SingleProduct = () => {
         <div>
 
             <div className='container'>
-                <Link to='/products'><button className='bg-black leading-none py-1 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                <Link to='/products'><button className='bg-black leading-none py-1 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                 </svg></button></Link>
 
             </div>
@@ -194,7 +212,16 @@ const SingleProduct = () => {
 
             {success && <div className="toast toast-end">
                 <div className="alert alert-info">
-                    <span className='text-xl'>Added into wishlist!</span>
+                    <span className='text-xl'>Product added into wishlist successfully!</span>
+                </div>
+                {/* <div className="alert alert-success">
+                    <span>Message sent successfully.</span>
+                </div> */}
+            </div>}
+
+            {message && <div className="toast toast-end">
+                <div className="alert alert-info">
+                    <span className='text-xl'>{message}</span>
                 </div>
                 {/* <div className="alert alert-success">
                     <span>Message sent successfully.</span>
