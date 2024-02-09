@@ -15,14 +15,14 @@ const AboutUs = () => {
 
 
             <div className='container my-10 text-content text-center'>
-                <h2 className="font-bold text-5xl mb-40 ">Our Team</h2>
+                <h2 className="text-3xl font-medium text-center mb-20 ">Our Team</h2>
 
                 <div className='mb-30 grid grid-cols-4 place-items-center text-center'>
 
                     <div className="card w-64 cent ">
                         <figure className='rounded-box'><img className='w-64 h-64' src={ridwan} alt="ridwan" /></figure>
                         <div className="card-body h-40">
-                            <h3 className="card-title mx-auto ">Ridwan</h3>
+                            <h3 className="card-title mx-auto font-normal">Ridwan</h3>
                             <p className=" mx-auto italic font-light text-base">Full Stack Developer</p>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ const AboutUs = () => {
                     <div className="card w-64 bg-base-100">
                         <figure className='rounded-box'><img className='w-64 h-64' src={julia} alt="julia" /></figure>
                         <div className="card-body h-40">
-                            <h3 className="card-title mx-auto ">Julia</h3>
+                            <h3 className="card-title mx-auto font-normal ">Julia</h3>
                             <p className=" mx-auto italic font-light text-base">Frontend Lead, Designer</p>
                         </div>
                     </div>
@@ -38,14 +38,14 @@ const AboutUs = () => {
                     <div className="card w-64 bg-base-100">
                         <figure className='rounded-box'><img className='w-64 h-64' src={alex} alt="alex" /></figure>
                         <div className="card-body h-40">
-                            <h3 className="card-title mx-auto ">Alex</h3>
+                            <h3 className="card-title mx-auto font-normal">Alex</h3>
                             <p className=" mx-auto italic font-light text-base">Backend Lead</p>
                         </div>
                     </div>
                     <div className="card w-64 bg-base-100">
                         <figure className='rounded-box'><img className='w-64 h-64' src={vishal} alt="vishal" /></figure>
                         <div className="card-body h-40">
-                            <h3 className="card-title mx-auto">Vishal</h3>
+                            <h3 className="card-title mx-auto font-normal">Vishal</h3>
                             <h2 className="mx-auto italic font-light text-base">Backend Lead, Designer</h2>
                         </div>
                     </div>
