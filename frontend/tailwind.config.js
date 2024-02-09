@@ -21,7 +21,7 @@ const tailwindConfig = {
           'secondary-content': '#150f10',
           'accent': '#b4e9d6',
           'accent-content': '#0c1310',
-          'neutral': '#f6cbd1',
+          'neutral': '#b5a7bb',
           'neutral-content': '#040b0e',
           'base-100': '#ffffff',
           'base-200': '#f9fafb',

@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { allData } from "../context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import bg from "../images/login/bg.jpg"
 
 export default function Login() {
   const { shouldFetch, setShouldFetch } = useContext(allData);
@@ -44,11 +45,10 @@ export default function Login() {
   return (
 
     <>
-      <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/5705478/pexels-photo-5705478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
-
+      <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/7394505/pexels-photo-7394505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="card w-96 shadow-2xl bg-base-100">
-            <form className="card-body">
+          <div className="card w-96 shadow-2xl bg-base-100 rounded-none">
+            <form className="card-body ">
 
               <div className="form-control">
                 <label className="label">

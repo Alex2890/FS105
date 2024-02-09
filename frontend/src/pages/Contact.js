@@ -79,7 +79,7 @@ const Contact = () => {
 
 
             <div className="card w-full max-w-m bg-base-100">
-              <form className="card-body outline outline-primary rounded-box">
+              <form className="card-body rounded-none p-14">
 
                 <div className="form-control">
                   <label className="label">

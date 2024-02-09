@@ -70,9 +70,9 @@ const Register = () => {
     }
 
     return (
-        <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/5705478/pexels-photo-5705478.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
+        <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/7394505/pexels-photo-7394505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
           <div className="hero-content flex-col lg:flex-row-reverse">
-            <div className="card bg-base-100">
+            <div className="card bg-base-100 rounded-none">
               <form className='card-body'>
                     <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>

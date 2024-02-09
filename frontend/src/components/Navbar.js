@@ -78,7 +78,7 @@ function Navbar() {
         
       </div>
       <div className="navbar-center lg:flex ">
-        <ul className="navbar italic">
+        <ul className="navbar">
           <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/'>Home</Link>
           </li>
