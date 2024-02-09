@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllWishListProducts, addProduct } from '../controllers/wishlistController.js'
+import { getAllWishListProducts, addProduct, deleteWishlistItem } from '../controllers/wishlistController.js'
 
 
 const router = express.Router()
@@ -10,5 +10,8 @@ router.get("/", getAllWishListProducts)
 
 //post prouct into wishlist
 router.post("/addwishlist", addProduct)
+
+//delete product from wishlist
+router.delete('/:id', deleteWishlistItem)
 
 export default router;

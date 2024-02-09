@@ -85,6 +85,11 @@ const AppContext = ({ children }) => {
   ]
 
 
+  // wishlist
+
+  const  [wishlist, setWishlist] = useState([])
+
+
    //localstorage data
    useEffect(() => {
 
@@ -103,7 +108,7 @@ const AppContext = ({ children }) => {
 
 
   return (
-    <allData.Provider value={{shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray }}>
+    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray }}>
       {children}
     </allData.Provider>
   )
