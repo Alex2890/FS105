@@ -271,11 +271,10 @@ const logoutUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
 
-
-
   try {
 
     const { id } = req.params
+
 
     // logic starts here
     let email = req.body.email
@@ -288,6 +287,8 @@ const updateUser = async (req, res) => {
     let city = req.body.city
     let address = req.body.address
 
+    const userAcc = await userAccount.findOne({ email });
+    console.log(userAcc)
 
     console.log(postalCode)
     postalCode = postalCode.toString()
@@ -334,11 +335,25 @@ const updateUser = async (req, res) => {
       throw Error("Passwords do not match");
     }
 
-    const salt = await bcrypt.genSalt(10); //number of rounds for salt
-    const hashed = await bcrypt.hash(password, salt);
 
-    password = hashed.toString()
-    password1 = hashed.toString()
+    // const salt = await bcrypt.genSalt(10); //number of rounds for salt
+    // const hashed = await bcrypt.hash(password, salt);
+
+    // password = hashed
+    // password1 = hashed
+
+
+    if (password == !userAcc.password) {
+      const salt = await bcrypt.genSalt(10); //number of rounds for salt
+      const hashed = await bcrypt.hash(password, salt);
+
+      password = hashed
+      password1 = hashed
+    } else {
+      console.log("password remains unchanged")
+    }
+
+
 
 
 

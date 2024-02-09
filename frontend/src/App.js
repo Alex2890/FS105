@@ -22,6 +22,7 @@ import Welcome from './pages/Welcome';
 import { useContext, useEffect, useState } from 'react';
 import { allData } from './context/AppContext';
 import UserManagementPage from './pages/UserManagementPage';
+import Wishlist from './pages/Wishlist';
 
 function App() {
 
@@ -76,12 +77,19 @@ function App() {
 
           <Route path="/upload" element={<Upload />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/wishlist' element = {<Wishlist />} />
+
+
 
 
         </> : <></>}
 
         {token && role === 'user' ? <>
           <Route path='/userdetails' element={<UserManagementPage />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/wishlist' element = {<Wishlist />} />
+
         </>:<></>
         }
 
@@ -90,7 +98,6 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path='*' element={<Error />} />
         <Route path='/faqs' element={<Faqs />} />
-        <Route path='/cart' element={<Cart />} />
         <Route path='products/product/:id' element={<SingleProduct />} />
         <Route path='/welcome' element={<Welcome />} />
 
