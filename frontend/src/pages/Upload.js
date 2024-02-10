@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { allData } from "../context/AppContext";
+import { Link } from 'react-router-dom';
 
 
 const Upload = () => {
@@ -66,6 +67,8 @@ const Upload = () => {
 
     return (
         <div className='container my-10'>
+
+            <Link to='/admin'><button className='rounded inline-block leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange mb-5'>Back to Admin</button></Link>
 
             <div className="p-8 border border-gray-600">
                 <h3 className="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-600 leading-none">Register Product Details</h3>

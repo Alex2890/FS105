@@ -80,6 +80,7 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
+
     resetPasswordExpires: {
         type: Date,
         required: false,
@@ -89,6 +90,10 @@ const userSchema = new Schema({
     },
 
     cart: [cartItemSchema]
+        type:String,  
+        require:false, 
+    }
+
   
 })
 

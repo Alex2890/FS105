@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CircleLoader } from 'react-spinners'
+import header from '../images/products/women-header.png'
 
 const Products = () => {
 
@@ -38,67 +39,30 @@ const Products = () => {
   }
 
   return (
+    <>
+      <div className="hero "><img className='w-full h-full' src={header}/></div>
 
-
-    <div className='container my-10'>
-
-
-      <div className="text-center">
-        <h2 className="text-4xl font-extrabold text-indigo-800 mb-4">Discover Your Perfect Luxury Bag</h2>
-        <p className="text-lg text-gray-600">Indulge in elegance with our curated collection of exquisite, premium handcrafted bags. Find the perfect accessory that complements your style and sophistication.</p>
-      </div>
-
-
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-5">
-        {handbags && handbags.map((item) => (
-          <div key={item.bagName} className="card bg-base-100 shadow-xl hover:bg-slate-200 hover:shadow-2xl">
-            <figure>
-              <img src={`http://localhost:5000/Images/${item.image}`} alt={item.bagName} />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title cursor default">{item.bagName}</h2>
-              <p className='cursor-default'>{item.description}</p>
-              <div className="card-actions justify-end">
-                <Link to={`product/${item._id}`}><button className="btn btn-primary">Details</button></Link>
+      <div className='container my-20'>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 my-5">
+          {handbags && handbags.map((item) => (
+            <div key={item.bagName} className="card rounded-none bg-base-100  hover:shadow-2xl">
+              <figure>
+                <img src={`http://localhost:5000/Images/${item.image}`} alt={item.bagName} />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title cursor default">{item.bagName}</h2>
+                <p className='cursor-default'>{item.description}</p>
+                <div className="card-actions justify-end">
+                  <Link to={`product/${item._id}`}><button className="btn btn-primary text-white no-animation">Details</button></Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* {handbags.map((item) => (
-        <div key={item?.bagName}>
-          <div className="card w-96 bg-base-100 shadow-xl">
-            <figure>
-              <img src={item?.image} alt={item?.bagName} />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{item?.bagName}</h2>
-              <p>{item?.description}</p>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Details</button>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
-      ))} */}
+      </div>
+    </>
 
-
-
-    </div>
+    
   )
 }
 

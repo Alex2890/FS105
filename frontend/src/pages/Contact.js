@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { allData } from '../context/AppContext.js';
 
+
 const Contact = () => {
   const {
     enquirerName,
@@ -40,7 +41,7 @@ const Contact = () => {
   };
 
   return (
-    <main className='text-gray-500'>
+    <>
       <div className="bg-white py-24">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
@@ -53,7 +54,7 @@ const Contact = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                   </svg>
                 </span>
-                <p className="flex-1">Address goes here, street, Crossroad 123.</p>
+                <p className="flex-1">2 Orchard Link, SCAPE #05 - 08 Near Somerset MRT, Singapore 237978</p>
               </div>
               <div className="flex flex-wrap items-center mb-8">
                 <span className="text-dark text-4xl mr-5">
@@ -69,12 +70,17 @@ const Contact = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
                   </svg>
                 </span>
-                <a href="tel:01234567890" className="flex-1">+1 35 776 859 011 / +1 35 776 859 011</a>
+                <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
+
+
+              
             </div>
 
-            <div className="card shrink-0 w-full max-w-m shadow-2xl bg-base-100">
-              <form className="card-body">
+
+            <div className="card w-full max-w-m bg-base-100">
+              <form className="card-body rounded-none p-14">
+
                 <div className="form-control">
                   <label className="label">
                     <span>Name</span>
@@ -120,7 +126,7 @@ const Contact = () => {
 
                   <div className="form-control mt-6">
                     <button
-                      className="btn drop-shadow-2xl text-gray-500" 
+                      className="btn btn-primary text-white no-animation" 
                       onClick={submitHandler}
                       type="submit"
                     >
@@ -132,6 +138,10 @@ const Contact = () => {
             </div>
           </div>
         </div>
+
+
+
+        
       </div>
 
       <div className='flex justify-center mb-20'>
@@ -145,7 +155,29 @@ const Contact = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-    </main>
+
+
+      <div className='flex justify-center mb-20 grid grid-cols-1"'>
+        <h6 className="footer-title text-center mb-10">Newsletter</h6> 
+        <div className='italic'>
+          We believe in using our platform for good. Partner with us to support artisan communities and sustainability initiatives around the world.
+        </div>
+
+        <form className='mx-auto w-80 mt-10'>
+          <fieldset className="form-control">
+            <label className="label">
+              <span className="label-text">Enter your email address</span>
+            </label> 
+            <div className="join">
+              <input type="text" placeholder="username@site.com" className="input input-bordered join-item" /> 
+              <button className="btn btn-primary join-item text-white no-animation">Subscribe</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+
+    </>
   );
 };
 
