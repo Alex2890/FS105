@@ -4,6 +4,31 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 
+const cartItemSchema = new Schema({
+    item: {
+      type: Schema.Types.ObjectId,
+      ref: 'itemInfo',
+      required: true
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      default: 1
+    },
+    bagName: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    }
+  });
+
 const userSchema = new Schema({
     email: {
         type: String,
@@ -61,9 +86,14 @@ const userSchema = new Schema({
         required: false,
     },
     role:{
+        type:String,   
+    },
+
+    cart: [cartItemSchema]
         type:String,  
         require:false, 
     }
+
   
 })
 
