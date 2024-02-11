@@ -22,8 +22,9 @@ const getProducts = async (req, res) => {
 const singleProduct = async (req, res) => {
     try {
 
-        const{id} = req.params
-        const product = await itemInfo.findById(id)
+        const{bagName} = req.params
+        console.log(bagName)
+        const product = await itemInfo.findOne({bagName})
 
         
 
