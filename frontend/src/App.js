@@ -89,7 +89,7 @@ function App() {
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
           {/* remove :id if using req.query */}
-          <Route path='/wishlist/:id' element = {<Wishlist />} />   
+          <Route path='/wishlist/' element = {<Wishlist />} />   
 
         </>:<></>
         }
