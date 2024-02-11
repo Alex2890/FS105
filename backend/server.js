@@ -9,6 +9,7 @@ import itemInfo from './models/itemModels.js';
 import messagesRouter from './routes/messageRoutes.js'
 import productsRouter from './routes/productRoutes.js'
 import cookieParser from 'cookie-parser'
+import reviewRouter from './routes/reviewRoutes.js'
 
 
 dotenv.config()
@@ -32,6 +33,7 @@ app.use(cookieParser())
 app.use('/api/users', userRouter)
 app.use('/api/messages', messagesRouter)
 app.use('/api/products', productsRouter)
+app.use('/api/reviews', reviewRouter);
 // ----------------------------------------------------------------------------------------------------
 
 //for images on the product page front end

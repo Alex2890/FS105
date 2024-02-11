@@ -21,6 +21,7 @@ import SingleProduct from './pages/SingleProduct';
 import Welcome from './pages/Welcome';
 import { useContext, useEffect, useState } from 'react';
 import { allData } from './context/AppContext';
+import ReviewPage from './pages/ReviewPage';
 
 function App() {
 
@@ -88,7 +89,7 @@ function App() {
         <Route path='/cart' element={<Cart />} />
         <Route path='products/product/:id' element={<SingleProduct />} />
         <Route path='/welcome' element={<Welcome />} />
-
+        <Route path="/reviews" element={<ReviewPage />} />
 
 
       </Routes>

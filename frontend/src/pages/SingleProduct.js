@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
 
+
 const SingleProduct = () => {
 
     const { id } = useParams()
@@ -131,6 +132,7 @@ const SingleProduct = () => {
                                             <Link to="/wishlist" className="text-md ml-8">
                                                 {heart}
                                             </Link>
+                                            
                                             {/* <Link to="/" className="text-md ml-8"><i className="icon-refresh"></i></Link> */}
                                         </div>
                                     </div>
