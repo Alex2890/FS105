@@ -89,10 +89,10 @@ const userSchema = new Schema({
         type:String,   
     },
 
-    cart: [cartItemSchema]
-        type:String,  
-        require:false, 
-    }
+    // cart: [cartItemSchema]
+    //     type:String,  
+    //     require:false, 
+    // }
 
   
 })
