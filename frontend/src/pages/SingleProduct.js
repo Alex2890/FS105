@@ -7,7 +7,7 @@ import { allData } from '../context/AppContext.js'
 
 const SingleProduct = () => {
 
-    const { id } = useParams()
+    const { bagName } = useParams()
     const [loading, setLoading] = useState(true)
     const [product, setProduct] = useState()
     const [quantity, setQuantity] = useState(1);
@@ -34,7 +34,7 @@ const SingleProduct = () => {
         setLoading(true)
 
         try {
-            const product = await fetch(`/api/products/${id}`)
+            const product = await fetch(`/api/products/${bagName}`)
             const json = await product.json()
 
             console.log(json)
@@ -115,7 +115,7 @@ const SingleProduct = () => {
 
     useEffect(() => {
         getSingleProduct()
-    }, [id])
+    }, [bagName])
 
 
     if (loading) {

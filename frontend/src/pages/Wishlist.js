@@ -98,7 +98,7 @@ const navigate = useNavigate()
               <h2 className="card-title">{item?.bagName}</h2>
               <p>$ {item?.price}</p>
               <div className="card-actions">
-                <button onClick={()=>{navigate(`/products`)}} className="btn btn-primary">Buy Now</button>
+                <button onClick={()=>{navigate(`/products/product/${item.bagName}`)}} className="btn btn-primary">Buy Now</button>
               </div>
             </div>
             <span id={item._id} name={item?.bagName} className='absolute right-0 hover:cursor-pointer' onClick={deleteButton}>{close}</span>
