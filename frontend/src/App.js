@@ -88,7 +88,8 @@ function App() {
         {token && role === 'user' ? <>
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/wishlist' element = {<Wishlist />} />
+          {/* remove :id if using req.query */}
+          <Route path='/wishlist/:id' element = {<Wishlist />} />   
 
         </>:<></>
         }

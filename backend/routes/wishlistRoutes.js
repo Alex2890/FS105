@@ -5,7 +5,7 @@ import { getAllWishListProducts, addProduct, deleteWishlistItem } from '../contr
 const router = express.Router()
 
 //get all products from wishlist
-router.get("/", getAllWishListProducts)
+router.get("/:id", getAllWishListProducts) //i can use either req.params with id or req.query wihtout id here on the wishlist code
 
 
 //post prouct into wishlist

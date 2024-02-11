@@ -11,7 +11,7 @@ const Wishlist = () => {
   </svg>
 
 
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
 
@@ -23,7 +23,9 @@ const navigate = useNavigate()
 
   useEffect(() => {
     const fetchWishlist = async () => {
-      const response = await fetch(`/api/wishlist?userId=${user?.user._id}`,
+      // const response = await fetch(`/api/wishlist?id=${user?.user._id}`, //this is using req.query. Below code is req.params
+      const response = await fetch(`/api/wishlist/${user?.user._id}`,
+
         {
           method: 'GET',
           headers: {
@@ -75,7 +77,7 @@ const navigate = useNavigate()
 
   const empty = wishlist.length === 0
 
-  
+
 
 
 
@@ -98,7 +100,7 @@ const navigate = useNavigate()
               <h2 className="card-title">{item?.bagName}</h2>
               <p>$ {item?.price}</p>
               <div className="card-actions">
-                <button onClick={()=>{navigate(`/products/product/${item.bagName}`)}} className="btn btn-primary">Buy Now</button>
+                <button onClick={() => { navigate(`/products/product/${item.bagName}`) }} className="btn btn-primary">Buy Now</button>
               </div>
             </div>
             <span id={item._id} name={item?.bagName} className='absolute right-0 hover:cursor-pointer' onClick={deleteButton}>{close}</span>
