@@ -90,12 +90,8 @@ const userSchema = new Schema({
     },
 
     cart: [cartItemSchema]
-        type:String,  
-        require:false, 
-    }
-
-  
-})
+        
+    })
 
 const userAccount = mongoose.model('userAccount', userSchema)
 
