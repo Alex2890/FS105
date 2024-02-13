@@ -32,12 +32,13 @@ const Contact = () => {
 
     if (response.ok) {
       console.log("it is in the database");
+      setEnquirerEmail(" ");
+      setEnquirerName(" ");
+      setSubject(" ");
+      setMessage(" ");
     }
 
-    setEnquirerEmail("");
-    setEnquirerName("");
-    setSubject("");
-    setMessage("");
+   
   };
 
   return (
@@ -91,6 +92,7 @@ const Contact = () => {
                     type="text"
                     name="name"
                     placeholder="Name"
+                    value={enquirerName}
                   />
 
                   <label className="label">
@@ -102,6 +104,7 @@ const Contact = () => {
                     type="email"
                     placeholder="Email"
                     name="email"
+                    value={enquirerEmail}
                   />
 
                   <label className="label">
@@ -113,6 +116,7 @@ const Contact = () => {
                     type="text"
                     placeholder="Subject"
                     name="subject"
+                    value={subject}
                   />
 
                   <label className="label">
@@ -122,6 +126,7 @@ const Contact = () => {
                     onChange={(e) => setMessage(e.currentTarget.value)}
                     className="input input-bordered w-full py-1 px-5 mb-5 h-32 text-base resize-none"
                     name="message"
+                    value={message}
                   ></textarea>
 
                   <div className="form-control mt-6">
