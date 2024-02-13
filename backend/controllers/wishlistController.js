@@ -10,14 +10,15 @@ const getAllWishListProducts = async (req, res) => {
     // console.log(id)
     // const userId = req.headers.authorization.split(' ')[1];
 
-    const {userId} = req.query
+    // const {id} = req.query
 
+    const {id} = req.params
 
     // console.log(userId)
 
     try {
 
-        const allWishlistProducts = await wishListModels.find({user_id: userId}).sort({ createdAt: -1 })
+        const allWishlistProducts = await wishListModels.find({user_id: id}).sort({ createdAt: -1 })
         res.status(200).json(allWishlistProducts)
 
     } catch (error) {

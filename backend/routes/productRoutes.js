@@ -7,6 +7,6 @@ const router = express.Router()
 router.get('/', getProducts)
 
 //GET single product
-router.get('/:id', singleProduct)
+router.get('/:bagName', singleProduct)
 
 export default router

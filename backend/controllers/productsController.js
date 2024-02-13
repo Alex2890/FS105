@@ -15,9 +15,12 @@ const getProducts = async (req, res) => {
 
 // Get a single product by ID
 const singleProduct = async (req, res) => {
-    const { id } = req.params;
+   
     try {
-        const product = await itemInfo.findById(id);
+        const{bagName} = req.params
+        console.log(bagName)
+        const product = await itemInfo.findOne({bagName})
+
         if (!product) {
             return res.status(404).json({ error: 'Product not found' });
         }

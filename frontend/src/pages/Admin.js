@@ -137,15 +137,13 @@ const Admin = () => {
                       <h3 className="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-600 leading-none">Billing Address</h3>
 
                       <address className="not-italic">
-                        <p><strong>Alex Tuntuni</strong></p>
+                        <p><strong>{user?.user.firstName}</strong></p>
                         <p>
-                          1355 Market St, Suite 900 <br />
-                          San Francisco, CA 94103
+                          {user?.user.address} <br />
+                          {user?.user.city} {user?.user.province} <br/>
+                          {user?.user.postalCode}
                         </p>
-                        <p>Mobile: (123) 456-7890</p>
                       </address>
-
-                      <a href="#" className="transition-all hover:text-orange">Edit Address</a>
                     </div>
                   </div>
                 }

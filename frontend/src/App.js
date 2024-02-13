@@ -88,7 +88,8 @@ function App() {
         {token && role === 'user' ? <>
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/wishlist' element = {<Wishlist />} />
+          {/* remove :id if using req.query */}
+          <Route path='/wishlist/' element = {<Wishlist />} />   
 
         </>:<></>
         }
@@ -98,7 +99,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path='*' element={<Error />} />
         <Route path='/faqs' element={<Faqs />} />
-        <Route path='products/product/:id' element={<SingleProduct />} />
+        <Route path='products/product/:bagName' element={<SingleProduct />} />
         <Route path='/welcome' element={<Welcome />} />
 
 
