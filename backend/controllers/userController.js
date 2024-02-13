@@ -1,5 +1,5 @@
+import itemInfo from '../models/itemModels.js';
 import userAccount from "../models/userModels.js";
-import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
@@ -9,10 +9,95 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 
+const jwtSecret = process.env.JWT_SECRET || 'your_jwt_secret';
+
+// Adds a product to the user's shopping cart
+const addProductToCart = async (req, res) => {
+  const userId = req.user.id; // Assuming user ID is extracted from JWT
+  const { itemId, quantity = 1 } = req.body;
+  try {
+      const user = await userAccount.findById(userId);
+      const item = await itemInfo.findById(itemId);
+      if (!user) return res.status(404).json({ message: 'User not found' });
+      if (!item) return res.status(404).json({ message: 'Item not found' });
+
+      // Check if the item is already in the cart
+      const itemIndex = user.cart.findIndex(cartItem => cartItem.item.toString() === itemId);
+      if (itemIndex > -1) {
+          // Update quantity if item exists
+          user.cart[itemIndex].quantity += quantity;
+      } else {
+          // Add new item to cart
+          user.cart.push({ item: itemId, quantity });
+      }
+      await user.save();
+      res.json({ message: 'Item added to cart', cart: user.cart });
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
+// Retrieves the user's shopping cart
+const getUserCart = async (req, res) => {
+  try {
+      // Assuming you have a User model where each user has a cart
+      const user = await userAccount.findById(req.user.id).populate('cart.item');
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+      res.json(user.cart);
+  } catch (error) {
+      res.status(500).send("Server error");
+  }
+};
+
+// Updates a product quantity in the user's shopping cart
+const updateProductInCart = async (req, res) => {
+  const userId = req.user.id; // Assuming user ID is extracted from JWT
+  const { itemId, quantity } = req.body; // Quantity can be adjusted here
+  try {
+      const user = await userAccount.findById(userId);
+      const item = await itemInfo.findById(itemId);
+      if (!user) return res.status(404).json({ message: 'User not found' });
+      if (!item) return res.status(404).json({ message: 'Item not found' });
+
+      const itemIndex = user.cart.findIndex(cartItem => cartItem.item.toString() === itemId);
+      if (itemIndex > -1) {
+          // Update quantity if item exists
+          user.cart[itemIndex].quantity = quantity; // Set the new quantity
+      } else {
+          return res.status(404).json({ message: 'Item not in cart' });
+      }
+      await user.save();
+      res.json({ message: 'Cart updated', cart: user.cart });
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
+// Removes a product from the user's shopping cart
+const removeProductFromCart = async (req, res) => {
+  const userId = req.user.id; // Assuming user ID is extracted from JWT
+  const { itemId } = req.body;
+  try {
+      const user = await userAccount.findById(userId);
+      if (!user) return res.status(404).json({ message: 'User not found' });
+
+      const itemIndex = user.cart.findIndex(cartItem => cartItem.item.toString() === itemId);
+      if (itemIndex > -1) {
+          // Remove item if exists
+          user.cart.splice(itemIndex, 1);
+      } else {
+          return res.status(404).json({ message: 'Item not in cart' });
+      }
+      await user.save();
+      res.json({ message: 'Item removed from cart', cart: user.cart });
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
 // JWT for maintaining user sessions after login
-
-const jwtSecret = 'dgafg1536453h1355ha4135thad';
-
 function getUserDataFromReq(req) {
   return new Promise((resolve, reject) => {
     jwt.verify(req.cookies.token, jwtSecret, async (err, userData) => {
@@ -373,4 +458,4 @@ const updateUser = async (req, res) => {
 
 }
 
-export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };
+export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser,  addProductToCart, getUserCart, updateProductInCart, removeProductFromCart };
