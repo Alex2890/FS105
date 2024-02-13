@@ -105,29 +105,82 @@ const AppContext = ({ children }) => {
   console.log(user)
 
 
-  // for Cart
-  const [cartItems, setCartItems] = useState([]);
+  // for Cart  
+  const [cartItems, setCartItems] = useState([]); // State to store the cart items
 
-  // Retrieve cart from localStorage on initial load
   useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(savedCart);
-  }, []);
 
-  // Save cart to localStorage whenever it changes
+    if (shouldFetch) {
+      const userLogin = JSON.parse(localStorage.getItem('user')) || null
+      console.log(userLogin)
+      setUser(userLogin)
+      setShouldFetch(false)
+    }
+
+
+  }, [shouldFetch])
+  
+
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    const fetchCart = async () => {
+      if (user && user.token) {
+        try {
+          const response = await fetch('/api/users/cart', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`,
+            },
+          });
+          if (!response.ok) {
+            throw new Error('Could not fetch cart.');
+          }
+          const result = await response.json();
+          setCartItems(result.cart);
+        } catch (error) {
+          console.error('Error fetching cart:', error);
+        }
+      } else {
+        setCartItems([]); // Clear cart if there's no user logged in
+      }
+    };
 
-  const addToCart = (item) => {
-    
-      // If it doesn't exist, add the new item with a quantity of 1
-      setCartItems([...cartItems, { ...item, quantity: 1 }]); // Adds item with quantity 1
-};
+    fetchCart();
+  }, [user]);
+
+  const addToCart = async (productDetails) => {
+    if (!user || !user.token) {
+      alert("Please log in to add items to the cart.");
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/cart/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(productDetails),
+      });
+
+      if (!response.ok) throw new Error('Failed to add to cart');
+
+      const updatedCart = await response.json();
+      // Assuming the API returns the entire updated cart
+      setCartItems(updatedCart);
+
+      // Provide user feedback
+      console.log('Product added to cart successfully');
+      // Alternatively, use a more user-friendly notification system here
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alert("Failed to add product to cart. Please try again.");
+    }
+  };
+
 
   return (
 
-    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray, cartItems, addToCart }}>
+    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray, cartItems, setCartItems, addToCart }}>
       {children}
     </allData.Provider>
   )

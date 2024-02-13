@@ -203,7 +203,7 @@
 
 
 import React, { useEffect, useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { CircleLoader } from "react-spinners";
 import { allData } from "../context/AppContext";
 
@@ -212,8 +212,9 @@ const SingleProduct = () => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
 //   const { wishlist, setWishlist, user } = useContext(allData);
-  const { addToCart } = useContext(allData);
-//   const { wishlist, setWishlist, user, addToCart } = useContext(allData); // Destructured addToCart from context
+  // const { addToCart } = useContext(allData);
+  const { wishlist, setWishlist, user, addToCart } = useContext(allData); // Destructured addToCart from context
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSingleProduct = async () => {
@@ -242,41 +243,54 @@ const SingleProduct = () => {
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
     </svg>
 
-//   const addToWishlist = async () => {
-//     try {
-//       const data = {
-//         user_id: user?.user._id,
-//         image: product.image,
-//         price: product.price,
-//         description: product.description,
-//         bagName: product.bagName,
-//       };
+  const addToWishlist = async () => {
+    try {
+      const data = {
+        user_id: user?.user._id,
+        image: product.image,
+        price: product.price,
+        description: product.description,
+        bagName: product.bagName,
+      };
 
-//       const response = await fetch(`/api/wishlist/addwishlist`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data),
-//       });
+      const response = await fetch(`/api/wishlist/addwishlist`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-//       if (!response.ok) {
-//         throw new Error("Network response was not ok");
-//       }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-//       const json = await response.json();
-//       setWishlist((prevWishlist) => [...prevWishlist, data]);
-//       // Handle success message here
-//     } catch (error) {
-//       console.error("Failed to add to wishlist:", error);
-//       // Handle error message here
-//     }
-//   };
+      const json = await response.json();
+      setWishlist((prevWishlist) => [...prevWishlist, data]);
+      // Handle success message here
+    } catch (error) {
+      console.error("Failed to add to wishlist:", error);
+      // Handle error message here
+    }
+  };
 
 // Function to add product to cart
 const handleAddToCart = async () => {
-    addToCart(id); // Assuming addToCart function takes product ID as argument
+  const productDetails = {
+    id: product.id, // Make sure this is the correct product identifier
+    quantity: 1, // Adjust this as necessary, e.g., based on user input
+    image: product.image,
+    price: product.price
   };
+
+  try {
+    await addToCart(productDetails); // Make sure this function is properly defined in your context and handles API calls
+    navigate('/cart'); // Navigate to the Cart page after adding to cart
+  } catch (error) {
+    console.error("Error adding product to cart:", error);
+    // Optionally handle error, e.g., show a notification
+  }
+};
 
   if (loading) {
     return (
@@ -364,7 +378,7 @@ const handleAddToCart = async () => {
                           </button>
                         </div>
                         <Link
-                        //   onClick={wishListHandler}
+                          onClick={addToWishlist}
                           className="text-md ml-8"
                         >
                           {heart}

@@ -33,7 +33,7 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unqiue: true
+        unique: true
     },
 
     password: {
@@ -86,15 +86,11 @@ const userSchema = new Schema({
         required: false,
     },
     role:{
-        type:String,   
+        type:String,
+        required:false,    
     },
 
-    cart: [cartItemSchema]
-        type:String,  
-        require:false, 
-    }
-
-  
+    cart: [cartItemSchema]  
 })
 
 const userAccount = mongoose.model('userAccount', userSchema)
