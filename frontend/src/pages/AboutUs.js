@@ -17,7 +17,7 @@ const AboutUs = () => {
             <div className='container my-10 text-content text-center'>
                 <h2 className="text-3xl font-medium text-center mb-20 ">Our Team</h2>
 
-                <div className='mb-30 grid grid-cols-4 place-items-center text-center'>
+                <div className='place-items-center text-center mb-30 grid grid-cols-1 gap-20 sm:grid-cols-2 lg:grid-cols-4'>
 
                     <div className="card w-64 cent ">
                         <figure className='rounded-box'><img className='w-64 h-64' src={ridwan} alt="ridwan" /></figure>

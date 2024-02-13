@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { allData } from '../context/AppContext.js';
+import bg from '../images/login/bg.jpg'
 
 
 const Contact = () => {
@@ -72,6 +73,7 @@ const Contact = () => {
                 </span>
                 <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
+              <div><img src={bg}></img></div>
 
 
               
