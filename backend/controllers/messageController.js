@@ -3,6 +3,7 @@ import messagesList from "../models/messageModels.js";
 import nodemailer from 'nodemailer';
 
 
+
 //POST message from frontend contact us page to database
 
 const postMessage = async (req, res) => {
@@ -21,14 +22,15 @@ const postMessage = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'luxurialoom@gmail.com',
-                pass: 'ajau ikov ojpg djah',
+                user: 'anandlee209@gmail.com',
+                // pass: 'ajau ikov ojpg djah',
+                pass: process.env.EMAIL_PASSWORD,
             },
         });
 
         const mailOptions = {
             from: `${enquirerName} <${enquirerEmail}>`,
-            to: 'luxurialoom@gmail.com',
+            to: 'anandlee209@gmail.com',
             subject: `${subject}`,
             text: `Name: ${enquirerName}\nEmail: ${enquirerEmail}\nMessage: ${message}`,
         };
