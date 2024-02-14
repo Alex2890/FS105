@@ -33,7 +33,7 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unqiue: true
     },
 
     password: {
@@ -86,8 +86,7 @@ const userSchema = new Schema({
         required: false,
     },
     role:{
-        type:String,
-        required:false,    
+        type:String,   
     },
 
     cart: [cartItemSchema]  
