@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Rating from 'react-rating-stars-component';
 import axios from 'axios';
 import user111 from '../images/reviews/user.png';
+import { useParams } from 'react-router-dom';
 
 const ReviewPage = () => {
     const [reviews, setReviews] = useState([]);
     const [user, setUser] = useState('');
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState('');
-
+    const {bagName} = useParams();
     // Define fetchReviews function outside of useEffect
     const fetchReviews = async () => {
         try {
-            const response = await axios.get('/api/reviews');
+            const response = await axios.get(`/api/reviews/${bagName}`);
             setReviews(response.data);
         } catch (error) {
             console.error('Error fetching reviews:', error);
@@ -27,7 +28,7 @@ const ReviewPage = () => {
         e.preventDefault();
       
         try {
-            await axios.post(`/api/reviews`, { user, rating, comment });
+            await axios.post(`/api/reviews`, { user, rating, comment, item: bagName });
             fetchReviews(); // Refetch reviews after adding a new one
             setUser('');
             setRating(5);
@@ -103,7 +104,6 @@ const ReviewPage = () => {
 };
 
 export default ReviewPage;
-
 
 
 

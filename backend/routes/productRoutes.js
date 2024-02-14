@@ -9,7 +9,7 @@ const router = express.Router()
 router.get('/', getProducts)
 
 //GET single product
-router.get('/:id', singleProduct)
+router.get('/:bagName', singleProduct)
 
 // POST a product to the cart
 router.post('/add-to-cart', authenticateToken, addProductToCart);

@@ -3,7 +3,7 @@ import { getReviews, addReview }  from '../controllers/reviewController.js';
 
 const router = express.Router();
 
-router.get('/', getReviews);
+router.get('/:bagName', getReviews);
 router.post('/', addReview);
 
 export default router;

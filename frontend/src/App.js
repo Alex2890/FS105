@@ -100,9 +100,9 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path='*' element={<Error />} />
         <Route path='/faqs' element={<Faqs />} />
-        <Route path='products/product/:id' element={<SingleProduct />} />
+        <Route path='products/product/:bagName' element={<SingleProduct />} />
         <Route path='/welcome' element={<Welcome />} />
-        <Route path='/reviews' element = {<ReviewPage />} />
+        <Route path='/reviews/:bagName' element = {<ReviewPage />} />
 
 
       </Routes>
