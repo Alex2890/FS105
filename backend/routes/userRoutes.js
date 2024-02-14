@@ -1,10 +1,7 @@
 import express from 'express'
-import { getAllUsers, createUser, loginUser, deleteUser, forgotPassword, resetPassword, logoutUser, updateUser, getUserCart, addProductToCart, updateProductInCart, removeProductFromCart } from '../controllers/userController.js'
-import authenticateToken from '../middleware/authenticateToken.js';
+import { getAllUsers, createUser, loginUser, deleteUser, forgotPassword, resetPassword, logoutUser, updateUser } from '../controllers/userController.js'
 
 const router = express.Router()
-
-// USER Routes
 
 //GET all users
 router.get('/',getAllUsers)
@@ -29,19 +26,5 @@ router.get('/logout', logoutUser)
 
 //PATCH update user
 router.patch('/update/:id', updateUser)
-
-// CART Routes
-
-//POST for user's cart
-router.post('/cart/add-to-cart', authenticateToken, addProductToCart)
-
-//GET for user's cart
-router.get('/cart', authenticateToken, getUserCart)
-
-//PATCH for specific item
-router.patch('/cart/items/:itemId', authenticateToken, updateProductInCart) // Update specific cart item
-
-//Delete for specific item
-router.delete('/cart/items/:itemId', authenticateToken, removeProductFromCart) // Remove specific cart item
 
 export default router
