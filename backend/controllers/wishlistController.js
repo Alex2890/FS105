@@ -10,14 +10,15 @@ const getAllWishListProducts = async (req, res) => {
     // console.log(id)
     // const userId = req.headers.authorization.split(' ')[1];
 
-    const {userId} = req.query
+    // const {id} = req.query
 
+    const {id} = req.params
 
     // console.log(userId)
 
     try {
 
-        const allWishlistProducts = await wishListModels.find({user_id: userId}).sort({ createdAt: -1 })
+        const allWishlistProducts = await wishListModels.find({user_id: id}).sort({ createdAt: -1 })
         res.status(200).json(allWishlistProducts)
 
     } catch (error) {
@@ -54,4 +55,25 @@ const addProduct = async (req, res) => {
 }
 
 
-export { getAllWishListProducts, addProduct }
+//DELETE item from wishlist
+const deleteWishlistItem = async (req, res) =>{
+
+    try {
+        const {id} = req.params
+        console.log(id)
+
+        const wishlistItem = await wishListModels.findOneAndDelete({_id: id})
+
+        if(!wishlistItem){
+            return res.status(400).json({error:"No such item in the wishlist"})
+        }
+
+        res.status(200).json({wishlistItem, message:`item ${wishlistItem._id} deleted successfully`})
+
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+
+}
+
+export { getAllWishListProducts, addProduct, deleteWishlistItem }
