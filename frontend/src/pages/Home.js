@@ -13,7 +13,7 @@ const Home = () => {
           <div className="max-w-lg bg bg-white rounded-none p-10">
             <h1 className="mb-5 text-base-content text-4xl italic font-light  w-96"> Crafted for Queens </h1>
             <p className="mb-5 text-base-content text-sm italic font-light"> made for you </p>
-            <button className="btn btn-primary text-white no-animation mt-3">Shop Now</button>
+            <button className="btn btn-primary text-white no-animation rounded-none mt-3">Shop Now</button>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@ const Home = () => {
           <div className="artboard artboard-horizontal phone-1"><img className='image-full' src={homepage4}/></div>
             <div className="rounded-box artboard artboard-horizontal phone-1 p-20 text-center">
               <p className='mb-10 text-base-content italic'>"Experience the unmatched quality and craftsmanship of our designer bags. Each stitch, each detail, is a testament to the heritage and expertise of these iconic brands. Owning a LuxuriaLoom bag is an investment in timeless luxury that will be cherished for generations to come."</p>
-              <button className="btn btn-primary text-white no-animation ">Explore our collection</button>
+              <button className="btn btn-primary text-white no-animation rounded-none">Explore our collection</button>
           </div>
         </div>
       </div>
