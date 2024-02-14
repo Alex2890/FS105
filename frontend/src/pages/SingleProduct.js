@@ -14,7 +14,7 @@
 
 //     const { wishlist, setWishlist } = useContext(allData);
 
- 
+
 
 //     const getSingleProduct = async (req, res) => {
 //         setLoading(true)
@@ -91,8 +91,8 @@
 //             setTimeout(()=>{
 //                 setSuccess(false)
 //             }, 3000)
-            
-            
+
+
 //         }
 
 
