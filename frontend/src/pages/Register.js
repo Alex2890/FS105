@@ -70,7 +70,7 @@ const Register = () => {
     }
 
     return (
-        <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/7394505/pexels-photo-7394505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
+        <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://cdn.discordapp.com/attachments/1199688598123978762/1207549896618541056/tamara-bellis-IwVRO3TLjLc-unsplash.jpg?ex=65e00d7a&is=65cd987a&hm=aa3935250fa45e48cf8bd36d86b5fbcf0b1b1e7bc924ceba11414c4c244621e5&)'}}>
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="card bg-base-100 rounded-none">
               <form className='card-body'>
@@ -221,7 +221,7 @@ const Register = () => {
                     </div>
         
                     <div className='flex items-center justify-center flex-col mt-5'>
-                    {success ? '' : <button onClick={registerButton} className="btn btn-primary mb-2 text-white no-animation">Register</button>}
+                    {success ? '' : <button onClick={registerButton} className="btn btn-primary mb-2 text-white no-animation rounded-none">Register</button>}
                     <div className={success ? 'mt-2 text-green-600' : 'mt-2 text-red-600'}>
                         {success ? successMessage : error}
                     </div>

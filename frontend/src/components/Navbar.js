@@ -92,19 +92,19 @@ function Navbar() {
       </div>
       <div className="navbar-center hidden lg:flex ">
         <ul className="navbar">
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
             <Link to='/'>Home</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
             <Link to='/aboutus'>About Us</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
             <Link to='/contact'>Contact</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
             <Link to='/products'>Products</Link>
           </li>
-          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
+          <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
             <Link to='/faqs'>FAQs</Link>
           </li>
           {/* <li>
