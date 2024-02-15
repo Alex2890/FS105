@@ -362,9 +362,11 @@ const SingleProduct = () => {
           marginTop: "200px", 
           marginBottom: "200px", 
         }} 
-        size={100}      
-      ); 
-  } 
+        size={100} 
+      /> 
+    ); 
+  }      
+      
  
   if (!product) { 
     return <div>Product not found.</div>; 
