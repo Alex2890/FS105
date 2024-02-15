@@ -433,54 +433,45 @@ const SingleProduct = () => {
                   <p className="mb-8">{product.description}</p> 
 
                   <div>
-                  
-                   <Link to={`/reviews/${product.bagName}`}>
-                           <button className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
-                             Reviews
-                           </button>
-                         </Link>
-                   </div>
+                    <div className="mb-8">
+                      <div className="flex flex-wrap items-center mt-8">
+                        <div className="ml-0 sm:ml-8">
+                          <button onClick={handleAddToCart} className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
+                            Add to Cart
+                          </button>
+                        </div>
+                        <Link
+                          onClick={wishListHandler}
+                          className="text-md ml-8"
+                        >
+                          {heart}
+                        </Link>
+                      </div>
 
-                  <div> 
-                    <div className="mb-8"> 
-                      <div className="flex flex-wrap items-center mt-8"> 
-                        <div className="ml-0 sm:ml-8"> 
-                          <button onClick={handleAddToCart} className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange"> 
-                            Add to Cart 
-                          </button> 
-                        </div> 
-                        <Link 
-                          onClick={wishListHandler} 
-                          className="text-md ml-8" 
-                        > 
-                          {heart} 
-                        </Link> 
-                      </div> 
- 
- 
-                    </div> 
-                  </div> 
- 
-                  {/* toastbox */} 
-                  <div className="toast toast-end"> 
-                    {/* <div className="alert alert-info"> 
-                      <span>New mail arrived.</span> 
-                    </div> */} 
- 
-                    {success && <div className="alert alert-success"> 
- 
-                      <span className="text text-xl">Hello {user?.user.firstName}. {message}</span> 
-                    </div>} 
-                  </div> 
- 
-                </div> 
-              </div> 
-            </div> 
-          </div> 
-        </div> 
-      )} 
-    </div> 
-  ); 
-}; 
- 
+
+                    </div>
+                  </div>
+
+                  {/* toastbox */}
+                  <div className="toast toast-end">
+                    {/* <div className="alert alert-info">
+                      <span>New mail arrived.</span>
+                    </div> */}
+
+                    {success && <div className="alert alert-success">
+                      
+                      <span className="text text-xl">Hello {user?.user.firstName}. {message}</span>
+                    </div>}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default SingleProduct;
