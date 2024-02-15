@@ -33,7 +33,7 @@ function Navbar() {
 
 
   return (
-    <div className="navbar py-3">
+    <div className="navbar py-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -90,7 +90,7 @@ function Navbar() {
         <Link to='/'><p className="text-lg">LuxuriaLoom logo here</p></Link>
 
       </div>
-      <div className="navbar-center lg:flex ">
+      <div className="navbar-center hidden lg:flex ">
         <ul className="navbar">
           <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">
             <Link to='/'>Home</Link>

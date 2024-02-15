@@ -23,6 +23,9 @@ const singleProduct = async (req, res) => {
     try {
 
         const{bagName} = req.params
+        
+        console.log(bagName)
+
         const product = await itemInfo.findOne({bagName})
 
         

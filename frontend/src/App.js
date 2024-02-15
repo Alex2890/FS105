@@ -90,8 +90,6 @@ function App() {
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element = {<Wishlist />} />
-          
-
         </>:<></>
         }
 
