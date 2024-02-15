@@ -51,7 +51,7 @@ const storage = multer.diskStorage({
         cb(null, 'public/Images')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+        cb(null, file.originalname + "_" + Date.now() + path.extname(file.originalname))
     }
 })
 
@@ -66,6 +66,12 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const { bagName, price, description, numberOfStocks } = req.body
 
     try {
+
+        if (!bagName || !price || !description || !numberOfStocks || !req.file){
+            throw Error("Please field in all empty fields")
+        }
+
+
         const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
         console.log(item)
         res.status(200).json({ message: "registered item successfully", item });

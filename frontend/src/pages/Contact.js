@@ -75,7 +75,7 @@ const Contact = () => {
                 </span>
                 <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
-              <div className="artboard artboard-horizontal phone-1"><img src={contact}></img></div>
+              <div className="" ><img src={contact}></img></div>
 
 
               

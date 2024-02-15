@@ -113,7 +113,7 @@ const Cart = () => {
                                     <ul className="-my-8">
                                         {cartItems.map((item, index) => (
                                             <React.Fragment key={`${index}`}>
-                                                <li className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+                                                <li className="flex flex-col justify-center items-center space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
                                                     <div className="shrink-0">
                                                         <img className="h-24 w-24 max-w-full rounded-lg object-cover" src={`http://localhost:5000/Images/${item[1].image}`} alt={item[1].bagName} />
                                                     </div>
@@ -121,7 +121,7 @@ const Cart = () => {
                                                     <div className="relative flex flex-1 flex-col justify-center items-center">
                                                         <div className="sm:col-gap-5 sm:grid sm:grid-cols-2">
                                                             <div className="pr-8 sm:pr-5">
-                                                                <p className="text-base font-semibold text-gray-900">{item[1].bagName}</p>
+                                                                <p className="text-base pt-2 sm:pt-0 font-semibold text-gray-900">{item[1].bagName}</p>
                                                             </div>
 
                                                             <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
