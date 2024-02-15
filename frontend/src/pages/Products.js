@@ -62,7 +62,7 @@ const Products = () => {
                 <h2 className="card-title cursor default">{item.bagName}</h2>
                 <p className='cursor-default'>{item.description}</p>
 
-                <div className="card-actions justify-end">
+                <div className="card-actions mt-5 justify-start">
                   <Link to={`product/${item.bagName}`}><button className="btn btn-primary text-white no-animation">Details</button></Link>
 
                 </div>
