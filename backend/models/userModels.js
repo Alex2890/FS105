@@ -89,9 +89,11 @@ const userSchema = new Schema({
         type:String,   
     },
 
-    cart: [cartItemSchema]  
+    cart: [cartItemSchema]
+        
+    })
 
-})
+
 
 const userAccount = mongoose.model('userAccount', userSchema)
 

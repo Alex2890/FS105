@@ -61,8 +61,10 @@ const Products = () => {
               <div className="card-body">
                 <h2 className="card-title cursor default">{item.bagName}</h2>
                 <p className='cursor-default'>{item.description}</p>
-                <div className="card-actions justify-start">
-                  <Link to={`product/${item._id}`}><button className="btn btn-primary text-white no-animation rounded-none">Details</button></Link>
+
+                <div className="card-actions justify-end">
+                  <Link to={`product/${item.bagName}`}><button className="btn btn-primary text-white no-animation">Details</button></Link>
+
                 </div>
               </div>
             </div>
