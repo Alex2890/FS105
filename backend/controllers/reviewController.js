@@ -10,6 +10,40 @@ const getReviews = async (req, res) => {
   }
 };
 
+// Controller function to add a review
+const addReview = async (req, res) => {
+  try {
+      const { user, rating, comment, item } = req.body;
+
+      // Check if the user has already reviewed this item
+      const existingReview = await Review.findOne({ user, item });
+      if (existingReview) {
+          return res.status(400).json({ message: 'User has already reviewed this item.' });
+      }
+      // Create a new review object
+      const newReview = new Review({
+        user,
+        rating,
+        comment,
+        item
+    });
+
+      // Save the review to the database
+      await newReview.save();
+
+      // Send a success response
+      res.status(201).json({ message: 'Review added successfully.' });
+  } catch (error) {
+      console.error('Error adding review:', error);
+      res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
+
+ export {getReviews, addReview} 
+
+
+
 // const getReviews = async (req, res) => {
 //     try {
 //       const { bagName } = req.query;
@@ -27,16 +61,21 @@ const getReviews = async (req, res) => {
 //   };
   
 
-const addReview = async (req, res) => {    
-  const { user, rating, comment, item } = req.body;
-  try {
-    const newReview = new Review({ user, rating, comment, item });
-    await newReview.save();
-    res.status(201).json(newReview);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+// const addReview = async (req, res) => {    
+//   const { user, rating, comment, item } = req.body;
+//   try {
+//     const newReview = new Review({ user, rating, comment, item });
+//     await newReview.save();
+//     res.status(201).json(newReview);
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
 
-export { getReviews, addReview };
+// export { getReviews, addReview };
+
+
+
+
+
 
