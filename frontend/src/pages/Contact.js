@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { allData } from '../context/AppContext.js';
-import bg from '../images/login/bg.jpg'
+import contact from "../images/contact/contact.jpg"
 
 
 const Contact = () => {
@@ -46,7 +46,7 @@ const Contact = () => {
       <div className="bg-white py-24">
         <div className="container">
         
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+          <div className="grid sm:grid-cols-1 sm:gap-10 lg:grid-cols-2 lg:gap-4">
             <div className="contact-info-area">
               <h2 className="font-medium text-4xl mb-5">CONTACT US</h2>
               <div className="flex flex-wrap items-center mb-5">
@@ -74,7 +74,7 @@ const Contact = () => {
                 </span>
                 <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
-              <div className="artboard artboard-horizontal phone-1"><img src={bg}></img></div>
+              <div className="artboard artboard-horizontal phone-1"><img src={contact}></img></div>
 
 
               

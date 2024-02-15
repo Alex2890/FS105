@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { allData } from "../context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
-import bg from "../images/login/bg.jpg"
+
 
 export default function Login() {
   const { shouldFetch, setShouldFetch } = useContext(allData);
@@ -45,7 +45,7 @@ export default function Login() {
   return (
 
     <>
-      <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://images.pexels.com/photos/7394505/pexels-photo-7394505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)'}}>
+      <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://cdn.discordapp.com/attachments/1199688598123978762/1207549896618541056/tamara-bellis-IwVRO3TLjLc-unsplash.jpg?ex=65e00d7a&is=65cd987a&hm=aa3935250fa45e48cf8bd36d86b5fbcf0b1b1e7bc924ceba11414c4c244621e5&)'}}>
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card w-96 shadow-2xl bg-base-100 rounded-none">
             <form className="card-body ">
@@ -75,7 +75,7 @@ export default function Login() {
               </div>
               
               <div className="form-control mt-6">
-                <button onClick={submitHandler} className="btn btn-primary mb-2 text-white no-animation">Login</button>
+                <button onClick={submitHandler} className="btn btn-primary mb-2 text-white no-animation rounded-none">Login</button>
                 <div className="text-red-600 text-center">{error && error}</div>
                 <div className="flex justify-between items-center mt-4">
                   <label className="label">

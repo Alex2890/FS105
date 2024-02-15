@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CircleLoader } from 'react-spinners'
-import header from '../images/products/productsHeader.jpg'
+
 
 const Products = () => {
 
