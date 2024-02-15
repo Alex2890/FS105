@@ -36,6 +36,9 @@ app.use('/api/users', userRouter)
 app.use('/api/messages', messagesRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/wishlist', wishlistRouter)
+app.use('/api/cart',cartRouter)
+
+app.use('/api/reviews', reviewRouter)
 // ----------------------------------------------------------------------------------------------------
 
 //for images on the product page front end
