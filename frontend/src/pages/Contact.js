@@ -91,7 +91,6 @@ const Contact = () => {
                     className="input input-bordered"
                     type="text"
                     name="name"
-                    placeholder="Name"
                     value={enquirerName}
                   />
 
@@ -102,7 +101,6 @@ const Contact = () => {
                     onChange={(e) => setEnquirerEmail(e.currentTarget.value)}
                     className="input input-bordered"
                     type="email"
-                    placeholder="Email"
                     name="email"
                     value={enquirerEmail}
                   />
@@ -114,7 +112,6 @@ const Contact = () => {
                     onChange={(e) => setSubject(e.currentTarget.value)}
                     className="input input-bordered"
                     type="text"
-                    placeholder="Subject"
                     name="subject"
                     value={subject}
                   />

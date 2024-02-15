@@ -321,9 +321,46 @@ const SingleProduct = () => {
 
   }
 
-  const handleAddToCart = () => {
-    console.log('it is working')
+  const handleAddToCart = async () => {
+    console.log(product)
+
+    const data = {
+      user_id: user?.user._id,
+      bagName: product.bagName,
+      description: product.description,
+      image: product.image,
+      price: product.price,
+      quantity: 1
+    }
+
+    const response = await fetch('/api/cart', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+
+    })
+
+    const json = await response.json()
+
+    if (!response.ok) {
+      console.log(json.error)
+    }
+
+    if (response.ok) {
+      console.log(json)
+      setMessage("Item has been added to cart")
+      setSuccess(true)
+
+      setTimeout(() => {
+        setSuccess(false)
+      }, 3000)
+    }
+
   }
+
+
 
 
   if (loading) {
@@ -430,7 +467,7 @@ const SingleProduct = () => {
                     </div> */}
 
                     {success && <div className="alert alert-success">
-                      
+
                       <span className="text text-xl">Hello {user?.user.firstName}. {message}</span>
                     </div>}
                   </div>
