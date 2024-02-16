@@ -10,6 +10,8 @@ import messagesRouter from './routes/messageRoutes.js'
 import productsRouter from './routes/productRoutes.js'
 import cookieParser from 'cookie-parser'
 import wishlistRouter from './routes/wishlistRoutes.js'
+import cartRouter from './routes/cartRoutes.js'
+import reviewRouter from './routes/reviewRoutes.js';
 
 
 dotenv.config()
@@ -34,6 +36,9 @@ app.use('/api/users', userRouter)
 app.use('/api/messages', messagesRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/wishlist', wishlistRouter)
+app.use('/api/cart',cartRouter)
+
+app.use('/api/reviews', reviewRouter)
 // ----------------------------------------------------------------------------------------------------
 
 //for images on the product page front end
@@ -46,7 +51,7 @@ const storage = multer.diskStorage({
         cb(null, 'public/Images')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+        cb(null, file.originalname + "_" + Date.now() + path.extname(file.originalname))
     }
 })
 
@@ -61,6 +66,12 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const { bagName, price, description, numberOfStocks } = req.body
 
     try {
+
+        if (!bagName || !price || !description || !numberOfStocks || !req.file){
+            throw Error("Please field in all empty fields")
+        }
+
+
         const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
         console.log(item)
         res.status(200).json({ message: "registered item successfully", item });

@@ -23,6 +23,7 @@ import { useContext, useEffect, useState } from 'react';
 import { allData } from './context/AppContext';
 import UserManagementPage from './pages/UserManagementPage';
 import Wishlist from './pages/Wishlist';
+import ReviewPage from './pages/ReviewPage';
 
 function App() {
 
@@ -72,14 +73,14 @@ function App() {
         <Route path="/register" element={!user ? <Register /> : <Home />} />
         <Route path="/forgot-password" element={!user ? <ForgotPassword /> : <Navigate to='/' />} />
         <Route path="/reset-password/:token" element={!user ? <ResetPassword /> : <Navigate to='/' />} />
-
+      
         {token && role === 'admin' ? <>
 
           <Route path="/upload" element={<Upload />} />
           <Route path="/admin" element={<Admin />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element = {<Wishlist />} />
-
+          
 
 
 
@@ -88,9 +89,7 @@ function App() {
         {token && role === 'user' ? <>
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
-          {/* remove :id if using req.query */}
-          <Route path='/wishlist/' element = {<Wishlist />} />   
-
+          <Route path='/wishlist' element = {<Wishlist />} />
         </>:<></>
         }
 
@@ -101,7 +100,7 @@ function App() {
         <Route path='/faqs' element={<Faqs />} />
         <Route path='products/product/:bagName' element={<SingleProduct />} />
         <Route path='/welcome' element={<Welcome />} />
-
+        <Route path='/reviews/:bagName' element = {<ReviewPage />} />
 
 
       </Routes>

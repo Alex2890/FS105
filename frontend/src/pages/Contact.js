@@ -33,12 +33,13 @@ const Contact = () => {
 
     if (response.ok) {
       console.log("it is in the database");
+      setEnquirerEmail(" ");
+      setEnquirerName(" ");
+      setSubject(" ");
+      setMessage(" ");
     }
 
-    setEnquirerEmail("");
-    setEnquirerName("");
-    setSubject("");
-    setMessage("");
+   
   };
 
   return (
@@ -75,9 +76,6 @@ const Contact = () => {
                 <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
               <div className="mt-10 artboard artboard-horizontal phone-1"><img src={contact}></img></div>
-
-
-              
             </div>
 
 
@@ -93,7 +91,7 @@ const Contact = () => {
                     className="input input-bordered"
                     type="text"
                     name="name"
-                    placeholder="Name"
+                    value={enquirerName}
                   />
 
                   <label className="label">
@@ -103,8 +101,8 @@ const Contact = () => {
                     onChange={(e) => setEnquirerEmail(e.currentTarget.value)}
                     className="input input-bordered"
                     type="email"
-                    placeholder="Email"
                     name="email"
+                    value={enquirerEmail}
                   />
 
                   <label className="label">
@@ -114,8 +112,8 @@ const Contact = () => {
                     onChange={(e) => setSubject(e.currentTarget.value)}
                     className="input input-bordered"
                     type="text"
-                    placeholder="Subject"
                     name="subject"
+                    value={subject}
                   />
 
                   <label className="label">
@@ -125,6 +123,7 @@ const Contact = () => {
                     onChange={(e) => setMessage(e.currentTarget.value)}
                     className="input input-bordered w-full py-1 px-5 mb-5 h-32 text-base resize-none"
                     name="message"
+                    value={message}
                   ></textarea>
 
                   <div className="form-control mt-6">

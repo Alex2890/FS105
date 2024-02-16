@@ -5,6 +5,7 @@ import home4 from "../images/home/home4.jpg"
 import home5 from "../images/home/home5.jpg"
 import home6 from "../images/home/home6.jpg"
 import home7 from "../images/home/home7.jpg"
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
           <div className="mt-48">
             <h1 className="mb-10 text-5xl italic font-light"> Crafted for Queens </h1>
             <p className="mb-10 italic font-normal">made for you </p>
-            <button className="btn btn-primary text-white  rounded-none">Shop Now</button>
+            <Link to='/products'><button className="btn btn-primary text-white  rounded-none">Shop Now</button></Link>
           </div>
         </div>
       </div>
@@ -77,7 +78,7 @@ const Home = () => {
           <div className=""><img src={home6}/></div>
             <div className="w-96 text-center ml-0 lg:ml-40">
               <p className='mb-10 text-base-content italic'>"Experience the unmatched quality and craftsmanship of our designer bags. Each stitch, each detail, is a testament to the heritage and expertise of these iconic brands. Owning a LuxuriaLoom bag is an investment in timeless luxury that will be cherished for generations to come."</p>
-              <button className="btn btn-primary text-white no-animation rounded-none">See More</button>
+              <Link to='/products'><button className="btn btn-primary text-white no-animation rounded-none">See More</button></Link>
           </div>
         </div>
       </div>
