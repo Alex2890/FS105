@@ -84,7 +84,7 @@ const Wishlist = () => {
   return (
     <div className='container'>
 
-      <div className='text-center text-2xl underline underline-offset-8'>
+      <div className='text-center text-2xl underline underline-offset-8 mt-10 mb-20'>
         My Wishlist
       </div>
 
@@ -92,7 +92,7 @@ const Wishlist = () => {
 
       <div className='grid grid-cols-1 gap-10 place-items-center sm:grid-cols-2 md:grid-cols-3'>
         {wishlist.map(item => (
-          <div key={item?._id} className="card bg-base-100 shadow-xl">
+          <div key={item?._id} className="card bg-base-100 outline outline-1 outline-slate-200">
             <figure className="px-10 pt-10">
               <img src={`http://localhost:5000/Images/${item?.image}`} alt="Shoes" className="rounded-xl" />
             </figure>
@@ -103,7 +103,7 @@ const Wishlist = () => {
                 <button onClick={() => { navigate(`/products/product/${item.bagName}`) }} className="btn btn-primary">Buy Now</button>
               </div>
             </div>
-            <span id={item._id} name={item?.bagName} className='absolute right-0 hover:cursor-pointer' onClick={deleteButton}>{close}</span>
+            <span id={item._id} name={item?.bagName} className='absolute right-0 hover:cursor-pointer mt-5 mr-5' onClick={deleteButton}>{close}</span>
           </div>
 
         ))}

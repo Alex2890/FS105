@@ -165,8 +165,9 @@ const Contact = () => {
 
       <div className='flex justify-center mb-20 grid grid-cols-1"'>
         <h6 className="footer-title text-center mb-10">Newsletter</h6> 
-        <div className='italic'>
-          We believe in using our platform for good. Partner with us to support artisan communities and sustainability initiatives around the world.
+        <div className='w-96 italic text-center'>
+          <p className='mb-5'>We believe in using our platform for good. Partner with us to support artisan communities and sustainability initiatives around the world.</p>
+          <p>Crave exclusive offers, insider trends, and early access to new collections? Subscribe to the LuxuriaLoom Club and indulge in a world of premium perks. Be the first to snag limited-edition bags, score VIP discounts, and get expert styling tips delivered straight to your inbox. Shine brighter, shop smarter, subscribe now!</p>
         </div>
 
         <form className='mx-auto w-80 mt-10'>
