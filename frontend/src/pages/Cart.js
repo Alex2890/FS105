@@ -7,28 +7,12 @@ const Cart = () => {
 
 
     const { cartItems, setCartItems, user } = useContext(allData)
-    const [shouldFetch, setShouldFetch] = useState(false)
+    const [shouldFetch, setShouldFetch] = useState(true)
+    const [total, setTotal] = useState(0)
 
     //to get all the items from cart
 
-    const getCartItems = async () => {
-        const response = await fetch(`/api/cart/${user?.user._id}`)
-        const data = await response.json()
-        // const uniqueMap = new Map(data.map(item => [item.bagName, item]))
-        // const uniqueArray = Array.from(uniqueMap)
-        setCartItems(data)
-        setShouldFetch(false)
 
-
-        // const totalamt = uniqueArray.reduce((total, item) => {
-        //     return total + item[1].price
-        // }, 0)
-        // console.log(totalamt)
-        // setTotal(totalamt)
-
-    }
-
-    console.log(cartItems)
 
     useEffect(() => {
 
@@ -38,33 +22,28 @@ const Cart = () => {
 
     }, [shouldFetch])
 
+    const getCartItems = async () => {
 
-    // const incrementHandler = (index) => {
-    //     // Create a copy of cartItems to avoid mutating state directly
-    //     const updatedCartItems = [...cartItems];
+        const response = await fetch(`/api/cart/${user?.user._id}`)
+        const data = await response.json()
+        // const uniqueMap = new Map(data.map(item => [item.bagName, item]))
+        // const uniqueArray = Array.from(uniqueMap)
+        setCartItems(data)
+        console.log(cartItems)
 
-    //     // Update the quantity for the specified item
-    //     updatedCartItems[index][1].quantity += 1;
-    //     updatedCartItems[index][1].price += originalData[index].price;
-    //     console.log(cartItems[index][1].price)
+        const totalAmt = cartItems.reduce((accumulator, item) => {
+            return accumulator + item.price
+        }, 0)
 
-    //     const totalamt = updatedCartItems.reduce((total, item) => {
-    //         return total + item[1].price
-    //     }, 0)
-    //     console.log(totalamt)
-    //     setTotal(totalamt)
+        setTotal(totalAmt)
+        setShouldFetch(false)
 
-    //     // Update the state with the modified cartItems
-    //     setCartItems(updatedCartItems);
+    }
 
-    //     console.log(cartItems)
-    // }
-
-    // const decrementHandler = () => {
-    //     console.log("decrement")
+    
 
 
-    // }
+
 
     const incrementHandler = (item) => {
         console.log(item._id)
@@ -77,15 +56,48 @@ const Cart = () => {
 
         // Create a new array with the updated item
         const updatedCartItems = [...cartItems];
-        updatedCartItems[itemIndex] = { ...item, quantity: item.quantity + 1 };
+        updatedCartItems[itemIndex] = { ...item, quantity: item.quantity + 1, price: item.price * (item.quantity + 1) / item.quantity };
 
         // Update the state with the new array
         setCartItems(updatedCartItems);
 
+        const totalAmt = updatedCartItems.reduce((accumulator, item) => {
+            return accumulator + item.price
+        }, 0)
+    
+        console.log(totalAmt)
+
+        setTotal(totalAmt)
+
+
     }
 
-    const decrementHandler = (id) => {
+    const decrementHandler = (item) => {
+        const itemIndex = cartItems.findIndex(cartItem => cartItem._id === item._id)
+        console.log(itemIndex)
 
+        const updatedCartItems = [...cartItems]
+
+        if (item.quantity === 1) {
+            updatedCartItems[itemIndex] = { ...item, quantity: 1 }
+            setCartItems(updatedCartItems)
+            console.log("item cannot be less than 0")
+            return
+        }
+
+        updatedCartItems[itemIndex] = { ...item, quantity: item.quantity - 1, price: item.price * (item.quantity - 1) / item.quantity }
+
+
+
+        setCartItems(updatedCartItems)
+
+        const totalAmt = updatedCartItems.reduce((accumulator, item) => {
+            return accumulator + item.price
+        }, 0)
+    
+        console.log(totalAmt)
+
+        setTotal(totalAmt)
     }
 
     if (cartItems.length === 0) {
@@ -175,7 +187,7 @@ const Cart = () => {
                                                         </div>
                                                     </div>
 
-                                                    <div onClick={() => deleteHandler(item._id)}>
+                                                    <div className='hover:cursor-pointer' onClick={() => deleteHandler(item._id)}>
                                                         {deleteButton}
                                                     </div>
                                                 </li>
@@ -198,7 +210,7 @@ const Cart = () => {
                                 </div>
                                 <div className="mt-6 flex items-center justify-between">
                                     <p className="text-sm font-medium text-gray-900">Total</p>
-                                    <p className="text-2xl font-semibold text-gray-900"><span className="text-xs font-normal text-gray-400">SGD</span>0</p>
+                                    <p className="text-2xl font-semibold text-gray-900"><span className="text-xs font-normal text-gray-400">SGD</span>{total}</p>
                                 </div>
 
                                 <div className="mt-6 text-center">

@@ -8,7 +8,6 @@ import Upload from "../pages/Upload.js";
 function Navbar() {
 
   const { user, setUser } = useContext(allData)
-  console.log(user)
   const [logout, setLogout] = useState(false)
 
 
