@@ -12,11 +12,14 @@ import cookieParser from 'cookie-parser'
 import wishlistRouter from './routes/wishlistRoutes.js'
 import cartRouter from './routes/cartRoutes.js'
 import reviewRouter from './routes/reviewRoutes.js';
+import { Console } from 'console';
+import Stripe from 'stripe';
 
 
 dotenv.config()
 
 const app = express()
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 
 // app.get('/', (req, res) => {
@@ -76,6 +79,17 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 
 })
+
+// app.get("/config", (req, res) => {
+//     res.send({
+//         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+//     });   
+// });
+
+// app.post("/create-payment-intent", async (req, res) => {
+
+// });
+
 // --------------------------------------------------------------------------------------------------------
 
 mongoose.connect(process.env.MONGO_URL)

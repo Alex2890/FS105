@@ -90,6 +90,8 @@ function App() {
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element = {<Wishlist />} />
+          {/* <Route path='/payment' element = {<Payment />} />
+          <Route path='/completion' element = {<Completion />} /> */}
         </>:<></>
         }
 
