@@ -79,7 +79,7 @@ export default function Login() {
                 <div className="text-red-600 text-center">{error && error}</div>
                 <div className="flex justify-between items-center mt-4">
                   <label className="label">
-                    <Link to="/forgetpassword">
+                    <Link to="/forgot-password">
                       <p className="label-text-alt link link-hover">
                         Forgot password?
                       </p>
