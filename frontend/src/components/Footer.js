@@ -4,12 +4,12 @@ import { Link, Navigate } from "react-router-dom"
 const Footer = () => {
   return (
     <>
-      <div className="divider divider-secondary"></div>
-      <footer className="footer footer-center p-10 bg-base-100 text-base-content rounded">
+      
+      <footer className="mt-48 footer footer-center p-10 bg-base-100 text-base-content rounded">
         <nav className="grid grid-flow-col gap-4">
           <Link className="link link-hover">About us</Link>
           <Link className="link link-hover">Contact</Link>
-          <Link className="link link-hover">Jobs</Link>`
+          <Link className="link link-hover">Jobs</Link>
         </nav> 
         <nav>
           <div className="grid grid-flow-col gap-4">

@@ -56,7 +56,7 @@ const ReviewPage = () => {
 
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto mt-20">
       <div className="max-w-lg mx-auto">
         <div>
           <h2 className="text-xl font-semibold mb-4">Customer Reviews</h2>
@@ -78,11 +78,11 @@ const ReviewPage = () => {
             ))}
           </ul>
         </div>
-        <hr className="my-8" />
+        <hr className="my-10" />
         <div>
           <h2 className="text-xl font-semibold mb-4">Add Your Review</h2>
           <p>If you have purchased this item before, please share your review on the product.</p>
-          <form onSubmit={handleAddReview} className="space-y-4">
+          <form onSubmit={handleAddReview} className="space-y-4 mt-5">
             <div className="grid grid-cols-3 gap-4">
               <div className="col-span-2">
                 <label className="block">
@@ -108,7 +108,7 @@ const ReviewPage = () => {
               Comment:
               <textarea value={comment} onChange={(e) => setComment(e.target.value)} className="w-full border border-gray-300 rounded px-4 py-2" required />
             </label>
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Submit Review</button>
+            <button type="submit" className="btn btn-primary">Submit Review</button>
           </form>
         </div>
         <hr className="my-8" />

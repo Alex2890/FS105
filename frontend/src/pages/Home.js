@@ -5,6 +5,7 @@ import home4 from "../images/home/home4.jpg"
 import home5 from "../images/home/home5.jpg"
 import home6 from "../images/home/home6.jpg"
 import home7 from "../images/home/home7.jpg"
+import home8 from "../images/home/home8.jpg"
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -23,11 +24,11 @@ const Home = () => {
 
       <div className="hero min-h-screen flex">
         <div className='w-1/2 bg-cover bg-center flex items-center justify-center' style={{ backgroundImage: `url(${home2})`, minHeight: '100vh' }}>
-            <p className="text-white mt-48 text-4xl font-light">Carry confidence, wherever you go.</p>
+            <p className="text-white text-center mt-48 text-4xl font-light">Carry confidence, wherever you go.</p>
         </div>
         
         <div className='w-1/2 bg-cover bg-center flex items-center justify-center' style={{ backgroundImage: `url(${home3})`, minHeight: '100vh' }}>
-            <p className="text-white mt-48 text-4xl font-light">Your story, exquisitely crafted.</p>
+            <p className="text-white text-center mt-48 text-4xl font-light">Your story, exquisitely crafted.</p>
         </div>
 
       </div>
@@ -75,7 +76,7 @@ const Home = () => {
 
       <div className="hero min-h-screen ">
         <div className="hero-content grid grid-cols-1 lg:grid-cols-2">
-          <div className=""><img src={home6}/></div>
+          <div className=""><img src={home8}/></div>
             <div className="w-96 text-center ml-0 lg:ml-40">
               <p className='mb-10 text-base-content italic'>"Experience the unmatched quality and craftsmanship of our designer bags. Each stitch, each detail, is a testament to the heritage and expertise of these iconic brands. Owning a LuxuriaLoom bag is an investment in timeless luxury that will be cherished for generations to come."</p>
               <Link to='/products'><button className="btn btn-primary text-white no-animation rounded-none">See More</button></Link>

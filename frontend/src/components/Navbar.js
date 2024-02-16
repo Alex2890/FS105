@@ -115,14 +115,14 @@ function Navbar() {
           {user?.user.role === 'admin' && (
             <div>
               <li>
-                <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+                <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                   <Link to='/cart'>Cart</Link>
                 </li>
               </li>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
               </li>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to='/wishlist'>My Wishlist</Link>
               </li>
             </div>
@@ -131,13 +131,13 @@ function Navbar() {
 
           {user?.user.role === 'user' && (
             <div>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to='/cart'>Cart</Link>
               </li>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to='/userdetails'>My Account</Link>
               </li>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-300">
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to='/wishlist'>My Wishlist</Link>
               </li>
             </div>
@@ -153,7 +153,7 @@ function Navbar() {
 
           <div className="dropdown dropdown-bottom dropdown-end">
 
-            {!user && <Link to='/login'><button className="px-5 transition duration-150 border-b-2 border-transparent hover:border-red-200">Login</button></Link>}
+            {!user && <Link to='/login'><button className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">Login</button></Link>}
 
             {user && <div tabIndex={0} role="button" className="btn m-1">
               {user?.user.firstName}

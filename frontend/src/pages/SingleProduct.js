@@ -409,7 +409,7 @@ const SingleProduct = () => {
     <div>
       <div className="container">
         <Link to="/products">
-          <button className="bg-black leading-none py-1 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
+          <button className="btn mt-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -451,10 +451,10 @@ const SingleProduct = () => {
                 </div>
 
                 <div>
-                  <h3 className="font-medium text-lg capitalize">
+                  <h3 className="font-bold text-lg  mb-5 ">
                     {product.bagName}
                   </h3>
-                  <h5 className="font-bold text-md leading-none text-orange my-3">
+                  <h5 className="font-bold text-md leading-none text-red-700 mb-5">
                     ${product.price}
                   </h5>
                   {/* <div className="mb-3"> 
@@ -463,7 +463,7 @@ const SingleProduct = () => {
                       {product.numberOfStocks} left in stock 
                     </span> 
                   </div>  */}
-                  <p className="mb-8">{product.description}</p>
+                  <p className="mb-10">{product.description}</p>
 
 
 
@@ -471,13 +471,13 @@ const SingleProduct = () => {
                     <div className="mb-8">
                       <div className="flex flex-wrap items-center mt-8 gap-8">
                         <div className="ml-0 sm:">
-                          <button onClick={handleAddToCart} className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
+                          <button onClick={handleAddToCart} className="btn btn-primary">
                             Add to Cart
                           </button>
                         </div>
 
                         <Link to={`/reviews/${product.bagName}`}>
-                          <button className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
+                          <button className="btn btn-primary">
                             Reviews
                           </button>
                         </Link>
