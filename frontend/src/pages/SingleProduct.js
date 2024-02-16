@@ -202,27 +202,11 @@ const SingleProduct = () => {
 
   const { bagName } = useParams()
   const [loading, setLoading] = useState(true)
-  const [product, setProduct] = useState()
-  const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState()  
   const [success, setSuccess] = useState(false)
   const [message, setMessage] = useState(null)
 
   const { wishlist, setWishlist, cartItems, setCartItems } = useContext(allData)
-
-  console.log(cartItems)
-  console.log(wishlist)
-
-  // const handleIncrement = () => { 
-  //   setQuantity(quantity + 1); 
-  // }; 
-
-  // const handleDecrement = () => { 
-  //   if (quantity > 1) { 
-  //     setQuantity(quantity - 1); 
-  //   } 
-  // }; 
-
-  // console.log(quantity) 
 
   const getSingleProduct = async (req, res) => {
     setLoading(true)
