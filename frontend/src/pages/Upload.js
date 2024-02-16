@@ -10,13 +10,15 @@ const Upload = () => {
     console.log(bagName, price, description, numberOfStocks)
 
     const [selectedFile, setSelectedFile] = useState(null)
+    const [message, setMessage] = useState("")
+    const [success, setSuccess] = useState(false)
 
     const handleFileChange = async (e) => {
         setSelectedFile(e.target.files[0])
-        console.log(e.target.files)
+        console.log(e.target.files[0])
     }
 
-    const handleUpload = async () => {
+    const handleUpload = async (e) => {
         // const formData = new FormData();
         // formData.append('image', selectedFile);
 
@@ -31,6 +33,8 @@ const Upload = () => {
         // } catch (error) {
         //     console.error('Error uploading image:', error.message);
         // }
+
+        e.preventDefault()
 
         console.log(selectedFile)
         const formData = new FormData();
@@ -47,7 +51,7 @@ const Upload = () => {
 
         const response = await fetch('/upload', {
             method: "POST",
-            body: FormData,
+            body: formData,
 
 
 
@@ -55,13 +59,24 @@ const Upload = () => {
 
         const json = await response.json()
 
+        if (!response.ok) {
+            console.log(json.error)
+            setMessage(json.error)
+        }
+
         console.log(json)
 
-        setBagName("")
-        setDescription("")
-        setNumberOfStocks("")
-        setSelectedFile("")
-        setPrice("")
+        if (response.ok) {
+            setBagName("")
+            setDescription("")
+            setNumberOfStocks("")
+            setSelectedFile("")
+            setPrice("")
+            setMessage("Uploaded successfully")
+            setSuccess(true)
+        }
+
+
 
     };
 
@@ -97,9 +112,11 @@ const Upload = () => {
                             <input onChange={handleFileChange} className="border border-solid border-gray-300 w-full py-2 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="file" type="file" />
                         </div>
 
-                        <div className="col-span-12">
+                        <div className="col-span-12 mb-3">
                             <button className="rounded inline-block leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange" onClick={handleUpload}>Upload</button>
                         </div>
+
+                        <div className={success? "col-span-12 text-green-500" :"col-span-12 text-red-600"}>{message}</div>
                     </div>
                 </form>
             </div>

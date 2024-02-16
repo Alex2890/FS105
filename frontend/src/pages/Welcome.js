@@ -22,7 +22,7 @@ const Welcome = () => {
 
                         </p>
                         <Link to='/products'><button className="mt-5 btn bg-black border-black text-white hover:bg-white hover:text-black hover:border-black">Back to shopping</button></Link>
-                        <h1 className='mt-10 bg-orange-200'>//THIS IS WHERE WE CAN PUT A WISHLIST ITEM LIST to remind user what they wish to buy//</h1>
+                        <Link to='/wishlist'><h1 className='mt-10 underline underline-offset-4 hover:cursor-pointer'>Explore Your Wishlist</h1></Link>
                     </div>
 
                     

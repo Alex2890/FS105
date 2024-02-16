@@ -206,8 +206,7 @@ const SingleProduct = () => {
   const [success, setSuccess] = useState(false)
   const [message, setMessage] = useState(null)
 
-  const { wishlist, setWishlist } = useContext(allData)
-
+  const { wishlist, setWishlist, cartItems, setCartItems } = useContext(allData)
 
   const getSingleProduct = async (req, res) => {
     setLoading(true)
@@ -230,7 +229,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     getSingleProduct()
-  }, [])
+  }, [bagName])
 
   //   heart for wishlist 
   const heart = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 hover:fill-red-700 hover:stroke-red-700">
@@ -239,6 +238,8 @@ const SingleProduct = () => {
 
   const { user } = useContext(allData)
   console.log(user?.user._id)
+
+ 
 
 
   const wishListHandler = async () => {
@@ -299,7 +300,33 @@ const SingleProduct = () => {
   }
 
   const handleAddToCart = async () => {
-    console.log(product)
+    console.log(product.bagName)
+
+    // const duplicateItem = cartItems.find(item=>{
+    //   if(item.bagName === product.bagName){
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // })
+
+    // if(duplicateItem){
+    //   return console.log("it is already in the bag")
+    // }
+
+    const duplicateIteminCart = cartItems.find(item => {
+      return item.bagName === product.bagName;
+    });
+
+    if(duplicateIteminCart){
+      setMessage("It is already in the cart")
+      setSuccess(true)
+
+      setTimeout(() => {
+        setSuccess(false)
+      }, 3000)
+      return
+    }
 
     const data = {
       user_id: user?.user._id,
@@ -329,6 +356,7 @@ const SingleProduct = () => {
       console.log(json)
       setMessage("Item has been added to cart")
       setSuccess(true)
+      setCartItems([...cartItems, data])
 
       setTimeout(() => {
         setSuccess(false)
@@ -336,6 +364,9 @@ const SingleProduct = () => {
     }
 
   }
+
+
+
 
 
 

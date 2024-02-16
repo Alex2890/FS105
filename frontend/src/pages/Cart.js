@@ -1,91 +1,136 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { allData } from "../context/AppContext.js";
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-    //ALEX's CODE
-    // const { cartItems } = useContext(allData);
-
-    //  // Function to handle quantity change
-    // const handleQuantityChange = (itemId, newQuantity) => {
-
-    //     // Prevent negative quantity 
-    //     if (newQuantity < 1) return;
-
-    //     // Find the item and update its quantity
-    //     const updatedItems = cartItems.map(item => {
-    //         if (item._id === itemId) {
-    //             return { ...item, quantity: newQuantity };
-    //         }
-    //         return item;
-    //     });
-
-    //     // // Update the global state
-    //     // addToCart(updatedItems);
-    // };
 
 
-    const [cartItems, setCartItems] = useState([])
-    const [quantity, setQuantity] = useState(1)
-
-    const [originalData, setOriginalData] = useState([])
+    const { cartItems, setCartItems, user } = useContext(allData)
+    const [shouldFetch, setShouldFetch] = useState(true)
     const [total, setTotal] = useState(0)
 
     //to get all the items from cart
 
-    const getCartItems = async () => {
-        const response = await fetch('/api/cart')
-        const data = await response.json()
-        const uniqueMap = new Map(data.map(item => [item.bagName, item]))
-        const uniqueArray = Array.from(uniqueMap)
-        console.log(uniqueArray)
-        setCartItems(uniqueArray)
-        setOriginalData(data)
-        console.log(uniqueArray)
 
-        const totalamt = uniqueArray.reduce((total, item) => {
-            return total + item[1].price
-        }, 0)
-        console.log(totalamt)
-        setTotal(totalamt)
-
-    }
 
     useEffect(() => {
+
         getCartItems()
 
 
 
-    }, [])
+    }, [shouldFetch])
 
+    const getCartItems = async () => {
 
-    const incrementHandler = (index) => {
-        // Create a copy of cartItems to avoid mutating state directly
-        const updatedCartItems = [...cartItems];
+        const response = await fetch(`/api/cart/${user?.user._id}`)
+        const data = await response.json()
+        // const uniqueMap = new Map(data.map(item => [item.bagName, item]))
+        // const uniqueArray = Array.from(uniqueMap)
+        setCartItems(data)
+        console.log(cartItems)
 
-        // Update the quantity for the specified item
-        updatedCartItems[index][1].quantity += 1;
-        updatedCartItems[index][1].price += originalData[index].price;
-        console.log(cartItems[index][1].price)
-
-        const totalamt = updatedCartItems.reduce((total, item) => {
-            return total + item[1].price
+        const totalAmt = cartItems.reduce((accumulator, item) => {
+            return accumulator + item.price
         }, 0)
-        console.log(totalamt)
-        setTotal(totalamt)
 
-        // Update the state with the modified cartItems
+        setTotal(totalAmt)
+        setShouldFetch(false)
+
+    }
+
+    
+
+
+
+
+    const incrementHandler = (item) => {
+        console.log(item._id)
+        // item.quantity = item.quantity + 1
+        // setCartItems([...cartItems, [...item, item.quantity]])
+
+        // Find the index of the item in the cart
+        const itemIndex = cartItems.findIndex(cartItem => cartItem._id === item._id);
+        console.log(itemIndex)
+
+        // Create a new array with the updated item
+        const updatedCartItems = [...cartItems];
+        updatedCartItems[itemIndex] = { ...item, quantity: item.quantity + 1, price: item.price * (item.quantity + 1) / item.quantity };
+
+        // Update the state with the new array
         setCartItems(updatedCartItems);
 
-        console.log(cartItems)
+        const totalAmt = updatedCartItems.reduce((accumulator, item) => {
+            return accumulator + item.price
+        }, 0)
+    
+        console.log(totalAmt)
+
+        setTotal(totalAmt)
+
+
     }
 
-    const decrementHandler = () => {
-        console.log("decrement")
+    const decrementHandler = (item) => {
+        const itemIndex = cartItems.findIndex(cartItem => cartItem._id === item._id)
+        console.log(itemIndex)
+
+        const updatedCartItems = [...cartItems]
+
+        if (item.quantity === 1) {
+            updatedCartItems[itemIndex] = { ...item, quantity: 1 }
+            setCartItems(updatedCartItems)
+            console.log("item cannot be less than 0")
+            return
+        }
+
+        updatedCartItems[itemIndex] = { ...item, quantity: item.quantity - 1, price: item.price * (item.quantity - 1) / item.quantity }
 
 
+
+        setCartItems(updatedCartItems)
+
+        const totalAmt = updatedCartItems.reduce((accumulator, item) => {
+            return accumulator + item.price
+        }, 0)
+    
+        console.log(totalAmt)
+
+        setTotal(totalAmt)
     }
 
+    if (cartItems.length === 0) {
+        return (
+            <div className='container text-center'>
+                Your cart is empty.
+                <Link to='/products'><div className='underline underline-offset-4 hover:no-underline hover:text-xl'>Click here to continue shopping</div></Link>
+            </div>
+        )
+    }
+
+
+    // delete button
+    const deleteButton = <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
+    </svg>
+
+    const deleteHandler = async (id) => {
+        const response = await fetch(`/api/cart/${id}`, {
+            method: "DELETE"
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            console.log(data.error)
+        }
+
+        if (response.ok) {
+            console.log(data)
+            setShouldFetch(true)
+        }
+    }
 
 
     return (
@@ -113,29 +158,37 @@ const Cart = () => {
                                     <ul className="-my-8">
                                         {cartItems.map((item, index) => (
                                             <React.Fragment key={`${index}`}>
-                                                <li className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+                                                <li className="flex flex-col justify-center items-center space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
                                                     <div className="shrink-0">
-                                                        <img className="h-24 w-24 max-w-full rounded-lg object-cover" src={`http://localhost:5000/Images/${item[1].image}`} alt={item[1].bagName} />
+                                                        <img className="h-24 w-24 max-w-full rounded-lg object-cover" src={`http://localhost:5000/Images/${item.image}`} alt={item.bagName} />
                                                     </div>
 
                                                     <div className="relative flex flex-1 flex-col justify-center items-center">
                                                         <div className="sm:col-gap-5 sm:grid sm:grid-cols-2">
                                                             <div className="pr-8 sm:pr-5">
-                                                                <p className="text-base font-semibold text-gray-900">{item[1].bagName}</p>
+                                                                <p className="text-base pt-2 sm:pt-0 font-semibold text-gray-900">{item.bagName}</p>
                                                             </div>
 
                                                             <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
-                                                                <p className="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">${item[1].price}</p>
+
+                                                                <p className="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">${item.price}</p>
 
                                                                 <div className="sm:order-1">
                                                                     <div className="mx-auto flex h-8 items-stretch text-gray-600">
-                                                                        <button onClick={() => decrementHandler(index)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">-</button>
-                                                                        <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{item[1].quantity}</div>
-                                                                        <button onClick={() => incrementHandler(index)} className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">+</button>
+                                                                        <button onClick={() => decrementHandler(item)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">-</button>
+                                                                        <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{item.quantity}</div>
+                                                                        <button onClick={() => incrementHandler(item)} className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">+</button>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
+
+
                                                         </div>
+                                                    </div>
+
+                                                    <div className='hover:cursor-pointer' onClick={() => deleteHandler(item._id)}>
+                                                        {deleteButton}
                                                     </div>
                                                 </li>
                                                 {/* Additional items like subtotal, shipping, and total can stay outside the map */}
