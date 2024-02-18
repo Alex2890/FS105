@@ -12,7 +12,6 @@ const ReviewPage = () => {
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState('');
     const [userHasReviewed, setUserHasReviewed] = useState(false);
-    const [ reviewed , setReviewed] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const { user: userData } = useContext(allData); // Rename user to avoid conflict with useState
     const {bagName} = useParams();
@@ -36,6 +35,8 @@ const ReviewPage = () => {
       setUserHasReviewed(hasReviewed);
   }, [reviews, userData]);
 
+  console.log(userHasReviewed)
+
   const handleAddReview = async (e) => {
     e.preventDefault();
     
@@ -44,21 +45,23 @@ const ReviewPage = () => {
     //     setModalMessage('You have already reviewed this product.');
     //     return;
     // }
-    console.log(reviewed);
 
     try {
-        await axios.post(`/api/reviews`, { user: userData, rating, comment, item: bagName });
+        const response = await axios.post(`/api/reviews`, { user: userData, rating, comment, item: bagName });
+        const responseData = response.data
+        console.log(responseData)
         //fetchReviews();
         setRating(5);
         setComment('');
-        if (reviewed) {
-          // User has already reviewed, prevent adding a new review
-          setModalMessage('You have already reviewed this product.');
-          return;
-      } else {
-        setModalMessage('Thanks for your review!');
-        setReviewed(true);
-      }
+        setModalMessage(responseData.message)
+      //   if (userHasReviewed) {
+      //     // User has already reviewed, prevent adding a new review
+      //     setModalMessage('You have already reviewed this product.');
+      //     return;
+      // } else {
+      //   setModalMessage('Thanks for your review!');
+      //   setUserHasReviewed(true);
+      // }
         
     } catch (error) {
         if (error.response && error.response.status === 400) {
