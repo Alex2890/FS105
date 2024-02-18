@@ -13,29 +13,30 @@ const getReviews = async (req, res) => {
 // Controller function to add a review
 const addReview = async (req, res) => {
   try {
-      const { user, rating, comment, item } = req.body;
+    const { user, rating, comment, item } = req.body;
 
-      // Check if the user has already reviewed this item
-      const existingReview = await Review.findOne({ user, item });
-      if (existingReview) {
-          return res.status(400).json({ message: 'User has already reviewed this item.' });
-      }
-      // Create a new review object
-      const newReview = new Review({
-        user,
-        rating,
-        comment,
-        item
+    // Check if the user has already reviewed this item
+    const existingReview = await Review.findOne({ user: user?.user.firstName, item });
+    if (existingReview) {
+      return res.status(200).json({ message: 'User has already reviewed this item.' });
+    }
+
+    // Create a new review object
+    const newReview = new Review({
+      user: user?.user.firstName, // Use the user's first name
+      rating,
+      comment,
+      item
     });
 
-      // Save the review to the database
-      await newReview.save();
+    // Save the review to the database
+    await newReview.save();
 
-      // Send a success response
-      res.status(201).json({ message: 'Review added successfully.' });
+    // Send a success response
+    res.status(201).json({ message: 'Review added successfully.' });
   } catch (error) {
-      console.error('Error adding review:', error);
-      res.status(500).json({ message: 'Internal server error.' });
+    console.error('Error adding review:', error);
+    res.status(500).json({ message: 'Internal server error.' });
   }
 };
 

@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Rating from 'react-rating-stars-component';
 import axios from 'axios';
 import user111 from '../images/reviews/user.png';
 import { useParams, Link } from 'react-router-dom';
+import { allData } from '../context/AppContext.js'
+
 
 const ReviewPage = () => {
     const [reviews, setReviews] = useState([]);
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState(''); // Fix here
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState('');
     const [userHasReviewed, setUserHasReviewed] = useState(false);
+    const [ reviewed , setReviewed] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const { user: userData } = useContext(allData); // Rename user to avoid conflict with useState
     const {bagName} = useParams();
 
     const fetchReviews = async () => {
@@ -28,29 +32,41 @@ const ReviewPage = () => {
 
     useEffect(() => {
       // Check if the user has already reviewed when reviews or user change
-      const hasReviewed = reviews.some(review => review.user === user);
+      const hasReviewed = reviews.some(review => review.user === userData);
       setUserHasReviewed(hasReviewed);
-  }, [reviews, user]);
+  }, [reviews, userData]);
 
   const handleAddReview = async (e) => {
-      e.preventDefault();
-      
-      if (userHasReviewed) {
+    e.preventDefault();
+    
+    // if (reviewed) {
+    //     // User has already reviewed, prevent adding a new review
+    //     setModalMessage('You have already reviewed this product.');
+    //     return;
+    // }
+    console.log(reviewed);
+
+    try {
+        await axios.post(`/api/reviews`, { user: userData, rating, comment, item: bagName });
+        //fetchReviews();
+        setRating(5);
+        setComment('');
+        if (reviewed) {
           // User has already reviewed, prevent adding a new review
           setModalMessage('You have already reviewed this product.');
           return;
-      }
-
-      try {
-        await axios.post(`/api/reviews`, { user, rating, comment, item: bagName });
-        fetchReviews();
-        setUser('');
-        setRating(5);
-        setComment('');
+      } else {
         setModalMessage('Thanks for your review!');
+        setReviewed(true);
+      }
+        
     } catch (error) {
-        console.error('Error adding review:', error);
-        setModalMessage('Internal server error. Please try again later.');
+        if (error.response && error.response.status === 400) {
+            setModalMessage(error.response.data.message); // Display custom error message from the server
+        } else {
+            console.error('Error adding review:', error);
+            setModalMessage('Internal server error. Please try again later.');
+        }
     }
 };
 
@@ -84,12 +100,19 @@ const ReviewPage = () => {
           <p>If you have purchased this item before, please share your review on the product.</p>
           <form onSubmit={handleAddReview} className="space-y-4">
             <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2">
-                <label className="block">
-                  User:
-                  <input type="text" value={user} onChange={(e) => setUser(e.target.value)} className="w-full border border-gray-300 rounded px-4 py-2" required />
-                </label>
-              </div>
+            <div className="col-span-2">
+            <label className="block">
+              User:
+              <input 
+                type="text" 
+                value={userData?.user.firstName} 
+                onChange={(e) => setUser(e.target.value)} 
+                className="w-full border border-gray-300 rounded px-4 py-2" 
+                disabled // Disable the input field
+                required 
+              />
+            </label>
+            </div>
               <div>
                 <label className="block">
                   Rating:
@@ -129,5 +152,3 @@ const ReviewPage = () => {
 };
 
 export default ReviewPage;
-
-
