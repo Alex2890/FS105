@@ -12,11 +12,14 @@ import cookieParser from 'cookie-parser'
 import wishlistRouter from './routes/wishlistRoutes.js'
 import cartRouter from './routes/cartRoutes.js'
 import reviewRouter from './routes/reviewRoutes.js';
+import { Console } from 'console';
+import Stripe from 'stripe';
 
 
 dotenv.config()
 
 const app = express()
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 
 // app.get('/', (req, res) => {
@@ -51,7 +54,7 @@ const storage = multer.diskStorage({
         cb(null, 'public/Images')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+        cb(null, file.originalname + "_" + Date.now() + path.extname(file.originalname))
     }
 })
 
@@ -66,6 +69,12 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const { bagName, price, description, numberOfStocks } = req.body
 
     try {
+
+        if (!bagName || !price || !description || !numberOfStocks || !req.file){
+            throw Error("Please field in all empty fields")
+        }
+
+
         const item = await itemInfo.create({ image: req.file.filename, bagName, price, description, numberOfStocks })
         console.log(item)
         res.status(200).json({ message: "registered item successfully", item });
@@ -76,6 +85,17 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 
 })
+
+// app.get("/config", (req, res) => {
+//     res.send({
+//         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+//     });   
+// });
+
+// app.post("/create-payment-intent", async (req, res) => {
+
+// });
+
 // --------------------------------------------------------------------------------------------------------
 
 mongoose.connect(process.env.MONGO_URL)

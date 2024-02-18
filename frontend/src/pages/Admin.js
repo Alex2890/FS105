@@ -43,13 +43,13 @@ const Admin = () => {
           <div id="shoptab" className="grid grid-cols-12 gap-y-5 lg:gap-y-0 gap-x-5">
             <div className="col-span-12 lg:col-span-4">
               <ul className="shop-tab-nav account-nav flex flex-wrap flex-col">
-                <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='dashboard'>dashboad</a></li>
+                <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='dashboard'>dashboard</a></li>
                 {/* <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='orders'>orders</a></li> */}
-                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='address'>address</a></li>
-                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='account'> Account Details</a></li>
-                <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='account'>Upload Product</a></li>
+                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='address'>address</a></li>
+                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='account'> Account Details</a></li>
+                <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block" id='account'>Upload Product</a></li>
 
-                <li><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-b border-gray-600 block" onClick={logoutHandler}>Logout</a></li>
+                <li><a className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</a></li>
               </ul>
             </div>
             <div className="col-span-12 lg:col-span-8">
@@ -187,7 +187,7 @@ const Admin = () => {
                           </div>
 
                           <div className="col-span-12">
-                            <button className="inline-block leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange" aria-label="Save Changes">Save Changes</button>
+                            <button className="btn btn-primary" aria-label="Save Changes">Save Changes</button>
                           </div>
                         </div>
                       </form>
@@ -208,7 +208,7 @@ const Admin = () => {
             <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
           </div>
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-          <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          <div className="inline-block align-bottom bg-white rounded-none px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div>
               <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
@@ -230,7 +230,7 @@ const Admin = () => {
             </div>
             <div className="mt-5 sm:mt-6">
               <button onClick={closeModalLogout}
-                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
+                className="inline-flex justify-center w-full rounded-none border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
                 OK
               </button>
             </div>

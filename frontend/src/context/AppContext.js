@@ -108,26 +108,9 @@ const AppContext = ({ children }) => {
   // for Cart
   const [cartItems, setCartItems] = useState([]);
 
-  // Retrieve cart from localStorage on initial load
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(savedCart);
-  }, []);
-
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addToCart = (item) => {
-    
-      // If it doesn't exist, add the new item with a quantity of 1
-      setCartItems([...cartItems, { ...item, quantity: 1 }]); // Adds item with quantity 1
-};
-
   return (
 
-    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray, cartItems, addToCart }}>
+    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray, cartItems, setCartItems }}>
       {children}
     </allData.Provider>
   )

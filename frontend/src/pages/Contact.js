@@ -75,10 +75,7 @@ const Contact = () => {
                 </span>
                 <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
-              <div className="artboard artboard-horizontal phone-1"><img src={contact}></img></div>
-
-
-              
+              <div className="mt-10"><img src={contact}></img></div>
             </div>
 
 
@@ -153,10 +150,10 @@ const Contact = () => {
         
       </div>
 
-      <div className='flex justify-center mb-20'>
+      <div className='container lg:w-2/4 flex justify-center mb-20'>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7899666052795!2d103.83293041076051!3d1.3008932617253237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1996d80bf041%3A0x65962d763fdc49db!2sMAGES%20Institute%20of%20Excellence!5e0!3m2!1sen!2ssg!4v1706333068895!5m2!1sen!2ssg"
-          width="60%"
+          width="100%"
           height="450"
           style={{ border: '0' }}
           allowFullScreen=""
@@ -168,8 +165,9 @@ const Contact = () => {
 
       <div className='flex justify-center mb-20 grid grid-cols-1"'>
         <h6 className="footer-title text-center mb-10">Newsletter</h6> 
-        <div className='italic'>
-          We believe in using our platform for good. Partner with us to support artisan communities and sustainability initiatives around the world.
+        <div className='container w-96 italic text-center'>
+          <p className='mb-5'>We believe in using our platform for good. Partner with us to support artisan communities and sustainability initiatives around the world.</p>
+          <p>Crave exclusive offers, insider trends, and early access to new collections? Subscribe to the LuxuriaLoom Club and indulge in a world of premium perks. Be the first to snag limited-edition bags, score VIP discounts, and get expert styling tips delivered straight to your inbox. Shine brighter, shop smarter, subscribe now!</p>
         </div>
 
         <form className='mx-auto w-80 mt-10'>
