@@ -118,10 +118,10 @@ const UserManagementPage = () => {
                     <div id="shoptab" className="grid grid-cols-12 gap-y-5 lg:gap-y-0 gap-x-5">
                         <div className="col-span-12 lg:col-span-4">
                             <ul className="shop-tab-nav account-nav flex flex-wrap flex-col">
-                                <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='dashboard'>Dashboard</a></li>
-                                <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='orders'>orders</a></li>
-                                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='address'>address</a></li>
-                                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block" id='account'> Account Details</a></li>
+                                <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='dashboard'>Dashboard</a></li>
+                                <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='orders'>orders</a></li>
+                                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='address'>address</a></li>
+                                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='account'> Account Details</a></li>
                                 <li><button className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</button></li>
                             </ul>
                         </div>

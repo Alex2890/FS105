@@ -11,6 +11,7 @@ const Cart = () => {
 
     //to get all the items from cart
 
+
     useEffect(() => {
 
         getCartItems()
@@ -70,6 +71,7 @@ const Cart = () => {
         setShouldFetch(false)
 
     }
+
 
     const incrementHandler = (item) => {
         console.log(item._id)

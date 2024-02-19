@@ -12,6 +12,7 @@ import cookieParser from 'cookie-parser'
 import wishlistRouter from './routes/wishlistRoutes.js'
 import cartRouter from './routes/cartRoutes.js'
 import reviewRouter from './routes/reviewRoutes.js';
+
 // import { Console } from 'console';
 import Stripe from 'stripe';
 import checkPassword from './middleware/autheticateCheckApi.js';
@@ -127,6 +128,7 @@ app.post("/payment", async (req, res) => {
     }
   });
   
+
 
 // --------------------------------------------------------------------------------------------------------
 

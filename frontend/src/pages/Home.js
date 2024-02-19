@@ -162,7 +162,6 @@ const Home = () => {
         </div>
       </motion.div>
     </AnimatePresence>
-
       <motion.div 
       initial="offscreen"
       whileInView="onscreen"
