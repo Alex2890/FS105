@@ -73,11 +73,12 @@ function Navbar() {
                   <Link to='/cart'>Cart</Link>
                 </li>
                 <li>
-                  <Link to='/userdetails'>My Account</Link>
-                </li>
-                <li>
                   <Link to='/wishlist'>My Wishlist</Link>
                 </li>
+                <li>
+                  <Link to='/userdetails'>My Account</Link>
+                </li>
+
               </div>
 
             )
@@ -86,9 +87,9 @@ function Navbar() {
 
           </ul>
         </div>
-       <div className="flex">
+        <div className="flex">
           <Link to='/' className=""><img width={100} src="/logo/Cream_Brown_Simple_Creative_Bag_Logo_1.gif1_1.gif" alt="logo_luxuria" /></Link>
-       </div>
+        </div>
 
       </div>
       <div className="navbar-center hidden lg:flex ">
@@ -121,11 +122,12 @@ function Navbar() {
                 </li>
               </li>
               <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
-                <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
-              </li>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to='/wishlist'>My Wishlist</Link>
               </li>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
+                <Link to={user?.user.role === 'admin' ? '/admin' : '/'}>Admin Page</Link>
+              </li>
+
             </div>
 
           )}
@@ -136,11 +138,12 @@ function Navbar() {
                 <Link to='/cart'>Cart</Link>
               </li>
               <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
-                <Link to='/userdetails'>My Account</Link>
-              </li>
-              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
                 <Link to='/wishlist'>My Wishlist</Link>
               </li>
+              <li className="px-5 transition duration-150 border-b-2 border-transparent hover:border-black">
+                <Link to='/userdetails'>My Account</Link>
+              </li>
+
             </div>
 
           )
@@ -171,6 +174,13 @@ function Navbar() {
               <li>
                 Hi, {user?.user.firstName}!
 
+              </li>
+              <li>
+                {user?.user.role === "user" ? <button className="btn btn-ghost text-gray-500 pt-4">
+                  <Link to='/userdetails'>My Account</Link>
+                </button> : <button className="btn btn-ghost text-gray-500 pt-4">
+                  <Link to='/admin'>Admin</Link>
+                </button>}
               </li>
               <li>
                 {user ? <button onClick={logoutHandler} className="btn btn-ghost text-gray-500 pt-4"><Link to=''>Logout</Link></button> : <button className="btn btn-ghost text-gray-500"><Link to='/login'>Login</Link></button>

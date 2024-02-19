@@ -15,6 +15,20 @@ const Admin = () => {
   const [logout, setLogout] = useState(false)
 
 
+  const [password, setPassword] = useState("")
+  const [password1, setPassword1] = useState("")
+  const [email, setEmail] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [address, setAddress] = useState("")
+  const [city, setCity] = useState("")
+  const [province, setProvince] = useState("")
+  const [postalCode, setPostalCode] = useState("")
+
+  const [success, setSuccess] = useState(false)
+
+
+
   const closeModalLogout = () => {
     setLogout(false)
 
@@ -34,6 +48,61 @@ const Admin = () => {
   const { user } = useContext(allData)
 
 
+  const saveHandler = async (e) => {
+    e.preventDefault()
+    console.log(user?.user._id)
+
+    const data = {
+      firstName: firstName || user?.user.firstName,
+      lastName: lastName || user?.user.lastName,
+      email: email || user?.user.email,
+      province: province || user?.user.province,
+      city: city || user?.user.city,
+      password: password || user?.user.password,
+      password1: password1 || user?.user.password1,
+      address: address || user?.user.address,
+      postalCode: postalCode || user?.user.postalCode,
+    }
+
+    const response = await fetch(`api/users/update/${user?.user._id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+
+
+    })
+
+    const json = await response.json()
+    console.log(json)
+
+
+    if (!response.ok) {
+      console.log(json.error, "whats wring?")
+    }
+
+    if (response.ok) {
+
+      setFirstName("")
+      setLastName("")
+      setAddress("")
+      setCity("")
+      setProvince("")
+      setPostalCode("")
+      setEmail("")
+      setPassword("")
+      setPassword1("")
+      console.log("it is working fine here", json)
+      setSuccess(true)
+
+    }
+
+  }
+
+
+  const closeModal = () => {
+    setSuccess(false)
+  }
+
 
 
   return (
@@ -43,11 +112,11 @@ const Admin = () => {
           <div id="shoptab" className="grid grid-cols-12 gap-y-5 lg:gap-y-0 gap-x-5">
             <div className="col-span-12 lg:col-span-4">
               <ul className="shop-tab-nav account-nav flex flex-wrap flex-col">
-                <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='dashboard'>dashboard</a></li>
+                <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='dashboard'>dashboard</a></li>
                 {/* <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='orders'>orders</a></li> */}
-                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='address'>address</a></li>
-                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='account'> Account Details</a></li>
-                <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block" id='account'>Upload Product</a></li>
+                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='address'>address</a></li>
+                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='account'> Account Details</a></li>
+                <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='account'>Upload Product</a></li>
 
                 <li><a className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</a></li>
               </ul>
@@ -140,7 +209,7 @@ const Admin = () => {
                         <p><strong>{user?.user.firstName}</strong></p>
                         <p>
                           {user?.user.address} <br />
-                          {user?.user.city} {user?.user.province} <br/>
+                          {user?.user.city} {user?.user.province} <br />
                           {user?.user.postalCode}
                         </p>
                       </address>
@@ -155,39 +224,61 @@ const Admin = () => {
                       <form action="#">
                         <div className="grid grid-cols-12 gap-x-5">
                           <div className="col-span-12 lg:col-span-6 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="first-name" placeholder="First Name" type="text" />
+                            <input onChange={e => setFirstName(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={firstName} id="first-name" placeholder="First Name" type="text" />
                           </div>
 
                           <div className="col-span-12 lg:col-span-6 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="last-name" placeholder="Last Name" type="text" />
+                            <input onChange={e => setLastName(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={lastName} id="last-name" placeholder="Last Name" type="text" />
                           </div>
 
                           <div className="col-span-12 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="display-name" placeholder="Display Name" type="text" />
+                            <input onChange={e => setEmail(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={email} id="email" placeholder="Email Address" type="text" />
+                          </div>
+
+
+                          <div className="col-span-12 mb-5">
+                            <h4 className="font-semibold text-base capitalize">Address change</h4>
                           </div>
 
                           <div className="col-span-12 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="email" placeholder="Email Address" type="email" />
+                            <input onChange={e => setAddress(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={address} id="address" placeholder="Address" type="text" />
                           </div>
+
+                          <div className="col-span-12 lg:col-span-6 mb-5">
+                            <input onChange={e => setCity(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={city} id="city" placeholder="City" type="text" />
+                          </div>
+
+                          <div className="col-span-12 lg:col-span-6 mb-5">
+                            <input onChange={e => setPostalCode(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={postalCode} id="postalCode" placeholder="Postal Code" type="text" />
+                          </div>
+
+                          <div className="col-span-12 lg:col-span-6 mb-5">
+                            <input onChange={e => setProvince(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" value={province} id="province" placeholder="Province" type="text" />
+                          </div>
+
+
+
+
+
 
                           <div className="col-span-12 mb-5">
                             <h4 className="font-semibold text-base capitalize">Password change</h4>
                           </div>
 
-                          <div className="col-span-12 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="current-pwd" placeholder="Current Password" type="password" />
+                          {/* <div className="col-span-12 mb-5">
+        <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="current-pwd" placeholder="Current Password" type="password" />
+      </div> */}
+
+                          <div className="col-span-12 lg:col-span-6 mb-5">
+                            <input onChange={e => setPassword(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="password" value={password} placeholder="New Password" type="password" />
                           </div>
 
                           <div className="col-span-12 lg:col-span-6 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="new-pwd" placeholder="New Password" type="password" />
-                          </div>
-
-                          <div className="col-span-12 lg:col-span-6 mb-5">
-                            <input className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="confirm-pwd" placeholder="Confirm Password" type="password" />
+                            <input onChange={e => setPassword1(e.currentTarget.value)} className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base" id="password1" value={password1} placeholder="Confirm Password" type="password" />
                           </div>
 
                           <div className="col-span-12">
-                            <button className="btn btn-primary" aria-label="Save Changes">Save Changes</button>
+                            <button onClick={saveHandler} className="btn btn-primary">Save Changes</button>
                           </div>
                         </div>
                       </form>
@@ -200,6 +291,42 @@ const Admin = () => {
           </div>
         </div>
       </div>
+
+      {success && <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
+        <div className="mx-auto min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+          </div>
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+          <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div>
+              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-6 h-6 fill-emerald-800">
+                  <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+                </svg>
+
+              </div>
+              <div className="mt-3 text-center sm:mt-5">
+                <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                  Hello, {user?.user.firstName}!
+                </h3>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">
+                    You have succesfully update your account.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="mt-5 sm:mt-6">
+              <button onClick={closeModal}
+                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>}
 
 
       {logout && <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
