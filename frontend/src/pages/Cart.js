@@ -9,6 +9,8 @@ const Cart = () => {
     const [shouldFetch, setShouldFetch] = useState(true)
     const [total, setTotal] = useState(0)
 
+
+
     //to get all the items from cart
 
 
@@ -19,11 +21,11 @@ const Cart = () => {
     }, [shouldFetch])
 
     const handlePayment = async () => {
-        
+
         const headers = {
             "Content-Type": "application/json",
-            
-          };
+
+        };
 
         const responseget = await fetch(`/config?password=${process.env.REACT_APP_API_KEY}`)
 
@@ -47,11 +49,11 @@ const Cart = () => {
             sessionId: session.id
         });
 
-        if(results.error){
+        if (results.error) {
             console.log(results.error)
         }
 
-    }   
+    }
 
 
     const getCartItems = async () => {
@@ -92,7 +94,7 @@ const Cart = () => {
         const totalAmt = updatedCartItems.reduce((accumulator, item) => {
             return accumulator + item.price
         }, 0)
-    
+
         console.log(totalAmt)
 
         setTotal(totalAmt)
@@ -122,7 +124,7 @@ const Cart = () => {
         const totalAmt = updatedCartItems.reduce((accumulator, item) => {
             return accumulator + item.price
         }, 0)
-    
+
         console.log(totalAmt)
 
         setTotal(totalAmt)
@@ -158,6 +160,34 @@ const Cart = () => {
             console.log(data)
             setShouldFetch(true)
         }
+    }
+
+
+    //update cart
+
+    const updateCartHandler = async () => {
+        console.log("update cart handler is working")
+        console.log(cartItems)
+        const data = {
+            items: cartItems
+        }
+        const response = await fetch(`/api/cart/${user?.user._id}`, {
+            method: "PATCH",
+            headers : {
+                "Content-Type": "application/json",
+
+            },
+            body:JSON.stringify(data)
+        })
+
+        const json = await response.json()
+        console.log(json)
+
+        if (!response.ok) {
+            console.log(json.error, "whats wring?")
+        }
+
+
     }
 
 
@@ -236,6 +266,11 @@ const Cart = () => {
                                             <p className="text-lg font-semibold text-gray-900">$8.00</p>
                                         </div> */}
                                 </div>
+
+                                <div className='flex justify-end'>
+                                    <button onClick={updateCartHandler} className='btn btn-primary text-white no-animation'>Update Cart</button>
+                                </div>
+
                                 <div className="mt-6 flex items-center justify-between">
                                     <p className="text-sm font-medium text-gray-900">Total</p>
                                     <p className="text-2xl font-semibold text-gray-900"><span className="text-xs font-normal text-gray-400">SGD</span>{total}</p>
