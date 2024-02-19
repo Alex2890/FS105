@@ -97,37 +97,37 @@ app.get("/config", checkPassword, (req, res) => {
 });
 
 app.post("/payment", async (req, res) => {
-  try {
-    const { products } = req.body; // Array Products
-
-    const itemProducts = products.map((itemproduct) => ({
-      price_data: {
-        currency: "usd",
-        product_data: {
-          name: itemproduct.bagName,
-          images: ["none"],// Use base 64 to work properly the image
+    try {
+      const { products } = req.body; // Array Products
+  
+      const itemProducts = products.map((itemproduct) => ({
+        price_data: {
+          currency: "sgd",
+          product_data: {
+            name: itemproduct.bagName,
+            images: [`http://localhost:5000/Images/${itemproduct.image}`], // Use base 64 to work properly the image
+          },
+          unit_amount: Math.round(itemproduct.price * 100), // this is the amount
         },
-        unit_amount: Math.round(itemproduct.price * 100), // this is the amount
-      },
-      quantity: itemproduct.quantity,
-    }));
-
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: itemProducts, // Per line items
-      mode: "payment",
-      success_url: "http://localhost:3000/successpayment", // if success go to success url
-      // cancel_url: "http://localhost:3000/cart" // If cancel
-    });
-
-
-    res.json({ id: session.id });
-  } catch (err) {
-    return res.status(501).json({ error: err.message });
-  }
-});
-
+        quantity: itemproduct.quantity,
+      }));
+  
+      
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card', 'paynow'],
+        line_items: itemProducts, // Per line items
+        mode: "payment",
+        success_url: "http://localhost:3000/cart", // if success go to success url
+        cancel_url: "http://localhost:3000/cart" // If cancel
+      });
+  
+    
+      res.json({ id: session.id });
+    } catch (err) {
+      return res.status(501).json({ error: err.message });
+    }
+  });
+  
 
 
 // --------------------------------------------------------------------------------------------------------
