@@ -1,9 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 
-
 const allData = createContext()
-
-
 
 
 const AppContext = ({ children }) => {
@@ -20,7 +17,7 @@ const AppContext = ({ children }) => {
   const [user, setUser] = useState()
   const [shouldFetch, setShouldFetch] = useState(true);
 
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth);
 
   // for bags
 
@@ -104,13 +101,46 @@ const AppContext = ({ children }) => {
 
   console.log(user)
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  
+  const AnimateTextVariants = {
+    offscreen: { y: "100%", opacity: 0 },
+    onscreen: { y: "0%", opacity: 1 }
+  }
+  
+  const AnimateCard = {
+    offscreen: { y: "100%", opacity: 0 },
+    onscreen: { y: "0%", opacity: 1 }
+  }
+  
+
+  const AnimateZoomVariant = {
+    offscreen: {
+      scale: 0,
+    },
+    onscreen: {
+      scale: 1,
+    }
+  }
+  
 
   // for Cart
   const [cartItems, setCartItems] = useState([]);
 
   return (
 
-    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray, cartItems, setCartItems }}>
+    <allData.Provider value={{wishlist, setWishlist, shouldFetch,setShouldFetch, user, setUser, password, setPassword, password1, setPassword1, email, setEmail, firstName, setFirstName, lastName, setLastName, address, setAddress, city, setCity, province, setProvince, postalCode, setPostalCode, bagName, setBagName, price, setPrice, description, setDescription, numberOfStocks, setNumberOfStocks, enquirerEmail, setEnquirerEmail, enquirerName, setEnquirerName, subject, setSubject, message, setMessage, FAQsArray, cartItems, setCartItems, isMobile, AnimateCard, AnimateTextVariants, AnimateZoomVariant }}>
       {children}
     </allData.Provider>
   )

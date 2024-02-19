@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { allData } from "../context/AppContext.js";
 import { Link } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
 
 const Cart = () => {
-
-
 
     const { cartItems, setCartItems, user } = useContext(allData)
     const [shouldFetch, setShouldFetch] = useState(true)
@@ -13,14 +12,47 @@ const Cart = () => {
     //to get all the items from cart
 
 
-
     useEffect(() => {
 
         getCartItems()
 
-
-
     }, [shouldFetch])
+
+    const handlePayment = async () => {
+        
+        const headers = {
+            "Content-Type": "application/json",
+            
+          };
+
+        const responseget = await fetch(`/config?password=${process.env.REACT_APP_API_KEY}`)
+
+        const apidata = await responseget.json();
+
+        const stripe = await loadStripe(apidata.publishableKey);
+
+        const body = {
+            products: cartItems,
+        }
+
+        const response = await fetch(`/payment`, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body),
+        })
+
+        const session = await response.json();
+
+        const results = stripe.redirectToCheckout({
+            sessionId: session.id
+        });
+
+        if(results.error){
+            console.log(results.error)
+        }
+
+    }   
+
 
     const getCartItems = async () => {
 
@@ -39,10 +71,6 @@ const Cart = () => {
         setShouldFetch(false)
 
     }
-
-    
-
-
 
 
     const incrementHandler = (item) => {
@@ -214,7 +242,7 @@ const Cart = () => {
                                 </div>
 
                                 <div className="mt-6 text-center">
-                                    <button type="button" className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
+                                    <button onClick={handlePayment} type="button" className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
                                         Checkout
                                         <svg xmlns="http://www.w3.org/2000/svg" className="group-hover:ml-8 ml-4 h-6 w-6 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />

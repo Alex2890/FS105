@@ -83,7 +83,7 @@ const Upload = () => {
     return (
         <div className='container my-10'>
 
-            <Link to='/admin'><button className='rounded inline-block leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange mb-5'>Back to Admin</button></Link>
+            <Link to='/admin'><button className='btn btn-primary mb-5'>Back to Admin</button></Link>
 
             <div className="p-8 border border-gray-600">
                 <h3 className="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-600 leading-none">Register Product Details</h3>
@@ -113,7 +113,7 @@ const Upload = () => {
                         </div>
 
                         <div className="col-span-12 mb-3">
-                            <button className="rounded inline-block leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange" onClick={handleUpload}>Upload</button>
+                            <button className="btn btn-primary" onClick={handleUpload}>Upload</button>
                         </div>
 
                         <div className={success? "col-span-12 text-green-500" :"col-span-12 text-red-600"}>{message}</div>
