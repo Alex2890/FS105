@@ -12,8 +12,10 @@ import cookieParser from 'cookie-parser'
 import wishlistRouter from './routes/wishlistRoutes.js'
 import cartRouter from './routes/cartRoutes.js'
 import reviewRouter from './routes/reviewRoutes.js';
-import { Console } from 'console';
+
+// import { Console } from 'console';
 import Stripe from 'stripe';
+import checkPassword from './middleware/autheticateCheckApi.js';
 
 
 dotenv.config()
@@ -86,15 +88,47 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 })
 
-// app.get("/config", (req, res) => {
-//     res.send({
-//         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-//     });   
-// });
 
-// app.post("/create-payment-intent", async (req, res) => {
 
-// });
+app.get("/config", checkPassword, (req, res) => {
+    res.send({
+        publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    });   
+});
+
+app.post("/payment", async (req, res) => {
+    try {
+      const { products } = req.body; // Array Products
+  
+      const itemProducts = products.map((itemproduct) => ({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: itemproduct.bagName,
+            images: ["none"], // Use base 64 to work properly the image
+          },
+          unit_amount: Math.round(itemproduct.price * 100), // this is the amount
+        },
+        quantity: itemproduct.quantity,
+      }));
+  
+      
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: itemProducts, // Per line items
+        mode: "payment",
+        success_url: "http://localhost:3000/cart", // if success go to success url
+        cancel_url: "http://localhost:3000/cart" // If cancel
+      });
+  
+    
+      res.json({ id: session.id });
+    } catch (err) {
+      return res.status(501).json({ error: err.message });
+    }
+  });
+  
+
 
 // --------------------------------------------------------------------------------------------------------
 

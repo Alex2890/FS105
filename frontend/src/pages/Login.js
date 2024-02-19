@@ -47,17 +47,16 @@ export default function Login() {
     <>
       <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://cdn.discordapp.com/attachments/1199688598123978762/1207549896618541056/tamara-bellis-IwVRO3TLjLc-unsplash.jpg?ex=65e00d7a&is=65cd987a&hm=aa3935250fa45e48cf8bd36d86b5fbcf0b1b1e7bc924ceba11414c4c244621e5&)'}}>
         <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="card w-96 shadow-2xl bg-base-100 rounded-none">
-            <form className="card-body ">
-
+          <div className="card w-full sm:w-96 shadow-2xl bg-base-100 rounded-none">
+            <form className="card-body w-full">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  type="email"
+                  type="email"  
                   placeholder="email"
-                  className="input input-bordered"
+                  className="input w-full input-bordered"
                   onChange={(e) => setEmail(e.currentTarget.value)}
                 />
               </div>
