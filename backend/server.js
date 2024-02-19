@@ -102,10 +102,10 @@ app.post("/payment", async (req, res) => {
   
       const itemProducts = products.map((itemproduct) => ({
         price_data: {
-          currency: "usd",
+          currency: "sgd",
           product_data: {
             name: itemproduct.bagName,
-            images: ["none"], // Use base 64 to work properly the image
+            images: [`http://localhost:5000/Images/${itemproduct.image}`], // Use base 64 to work properly the image
           },
           unit_amount: Math.round(itemproduct.price * 100), // this is the amount
         },
@@ -114,7 +114,7 @@ app.post("/payment", async (req, res) => {
   
       
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
+        payment_method_types: ['card', 'paynow'],
         line_items: itemProducts, // Per line items
         mode: "payment",
         success_url: "http://localhost:3000/cart", // if success go to success url
