@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CircleLoader } from 'react-spinners'
-
+import { motion } from "framer-motion"
+import { allData } from '../context/AppContext'
+const AnimateCardOnScreen = {
+  offscreen: { y: "20%", opacity: 0 },
+  onscreen: { y: "0%", opacity: 1 }
+}
 
 const Products = () => {
 
+  const { isMobile } = useContext(allData)
+
   const [handbags, setHandbags] = useState()
   const [loading, setLoading] = useState(true)
-
 
   useEffect(() => {
 
@@ -24,10 +30,6 @@ const Products = () => {
 
     getProducts()
   }, [])
-
-  console.log(handbags)
-
-
 
   if (loading) {
     return (
@@ -52,9 +54,21 @@ const Products = () => {
       </div>
 
       <div className='container my-20'>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 my-5">
-          {handbags && handbags.map((item) => (
-            <div key={item.bagName} className="card rounded-none bg-base-100 outline outline-1 outline-slate-200 ">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 my-5">
+          {handbags && handbags.map((item, index) => (
+            <motion.div
+                key={index}
+                variants={AnimateCardOnScreen}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ amount: 0.0 }}
+                className={`card rounded-none bg-base-100 outline outline-1 outline-slate-200`}
+                transition={{
+                  duration: .75,
+                  delay: isMobile < 768 ? .25 : (index % 3) - 0.25 < 0 ? 0.25 : ((index % 3) - 0.25 < 1.25 ? 0.75 : 1.25)
+                }}
+              >
               <figure>
                 <img src={`http://localhost:5000/Images/${item.image}`} alt={item.bagName} />
               </figure>
@@ -63,10 +77,9 @@ const Products = () => {
                 {/* <p className='cursor-default'>{item.description}</p> */}
                 <div className="card-actions justify-end">
                   <Link to={`product/${item.bagName}`}><button className="btn btn-primary text-white no-animation">Details</button></Link>
-
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

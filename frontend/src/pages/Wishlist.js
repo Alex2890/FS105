@@ -78,9 +78,6 @@ const Wishlist = () => {
   const empty = wishlist.length === 0
 
 
-
-
-
   return (
     <div className='container'>
 

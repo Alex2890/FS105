@@ -86,7 +86,9 @@ function Navbar() {
 
           </ul>
         </div>
-        <Link to='/'><p className="text-lg">LuxuriaLoom logo here</p></Link>
+       <div className="flex">
+          <Link to='/' className=""><img width={100} src="/logo/Cream_Brown_Simple_Creative_Bag_Logo_1.gif1_1.gif" alt="logo_luxuria" /></Link>
+       </div>
 
       </div>
       <div className="navbar-center hidden lg:flex ">
