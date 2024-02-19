@@ -72,12 +72,12 @@ const Register = () => {
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: 'url(https://cdn.discordapp.com/attachments/1199688598123978762/1207549896618541056/tamara-bellis-IwVRO3TLjLc-unsplash.jpg?ex=65e00d7a&is=65cd987a&hm=aa3935250fa45e48cf8bd36d86b5fbcf0b1b1e7bc924ceba11414c4c244621e5&)'}}>
           <div className="hero-content flex-col lg:flex-row-reverse">
-            <div className="card bg-base-100 rounded-none">
+            <div className="card bg-base-100 rounded-none ">
               <form className='card-body'>
                     <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
                     <p className="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
         
-                    <div className='card-body grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-4'>
                         <div className="form-control">
                             <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-content">
                             First name
@@ -171,7 +171,7 @@ const Register = () => {
 
                     <div className="divider"></div>
 
-                    <div className="grid grid-cols-1 gap-4 px-8">
+                    <div className="grid grid-cols-1 gap-4">
                         <div className="form-control">
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-content">
                             Email address
