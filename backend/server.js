@@ -87,9 +87,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 
 })
+// --------------------------------------------------------------------------------------------------------------------------------//
 
-
-
+// stripe
 app.get("/config", checkPassword, (req, res) => {
     res.send({
         publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
