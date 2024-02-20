@@ -117,7 +117,7 @@ app.post("/payment", async (req, res) => {
         payment_method_types: ['card', 'paynow'],
         line_items: itemProducts, // Per line items
         mode: "payment",
-        success_url: "http://localhost:3000/cart", // if success go to success url
+        success_url: "http://localhost:3000/successpayment", // if success go to success url
         cancel_url: "http://localhost:3000/cart" // If cancel
       });
   
