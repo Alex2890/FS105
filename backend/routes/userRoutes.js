@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllUsers, createUser, loginUser, deleteUser, forgotPassword, resetPassword, logoutUser, updateUser } from '../controllers/userController.js'
+import { getAllUsers, createUser, loginUser, deleteUser, forgotPassword, resetPassword, logoutUser, updateUser, getUser } from '../controllers/userController.js'
 
 const router = express.Router()
 
@@ -26,5 +26,7 @@ router.get('/logout', logoutUser)
 
 //PATCH update user
 router.patch('/update/:id', updateUser)
+
+router.get('/:id', getUser)
 
 export default router

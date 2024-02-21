@@ -106,6 +106,22 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+export const viewUser = async (req, res) => {
+  try {
+    const user = await userAccount.findOne({ _id: req.params.id });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ user }); // Change 'customer' to 'user'
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
 //POST a user into the database "sign up"
 
 const createUser = async (req, res) => {
@@ -290,9 +306,14 @@ const updateUser = async (req, res) => {
     const userAcc = await userAccount.findOne({ email });
     console.log(userAcc)
 
-    console.log(postalCode)
-    postalCode = postalCode.toString()
-
+    // console.log(postalCode)
+    // postalCode = postalCode.toString()
+    if (postalCode !== undefined) { 
+      postalCode = postalCode.toString(); 
+    } else { 
+      console.log("postalCode is undefined"); 
+      // Handle the case where postalCode is undefined 
+    }
     // const exists = await userAccount.findOne({ email });
     // console.log(exists)
 
@@ -343,16 +364,27 @@ const updateUser = async (req, res) => {
     // password1 = hashed
 
 
-    if (password == !userAcc.password) {
-      const salt = await bcrypt.genSalt(10); //number of rounds for salt
-      const hashed = await bcrypt.hash(password, salt);
+    // if (password == !userAcc.password) {
+    //   const salt = await bcrypt.genSalt(10); //number of rounds for salt
+    //   const hashed = await bcrypt.hash(password, salt);
 
-      password = hashed
-      password1 = hashed
-    } else {
-      console.log("password remains unchanged")
+    //   password = hashed
+    //   password1 = hashed
+    // } else {
+    //   console.log("password remains unchanged")
+    // }
+    if (userAcc !== null) { 
+      if (password && password !== userAcc.password) { 
+        const salt = await bcrypt.genSalt(10); 
+        const hashed = await bcrypt.hash(password, salt); 
+     
+        password = hashed; 
+      } else { 
+        console.log("Password remains unchanged"); 
+    } 
+    } else { 
+      console.log("User account not found"); 
     }
-
 
 
 
@@ -373,4 +405,17 @@ const updateUser = async (req, res) => {
 
 }
 
-export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };
+const getUser = async (req, res) => { 
+ 
+  const { id } = req.params 
+ 
+  try { 
+    const user = await userAccount.find({ _id: id }) 
+    res.status(200).json(user) 
+  } catch (error) { 
+    res.status(500).json({ error: error.message }); 
+ 
+  } 
+}
+
+export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser, getUser};
