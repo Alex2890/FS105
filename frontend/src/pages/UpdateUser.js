@@ -76,10 +76,10 @@ const UpdateUser = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto w-9/12 mt-20 p-8 border border-gray-600">
       <h2 className="text-2xl font-bold mb-4">Update User</h2>
       <form onSubmit={handleSubmit} className="container">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName">First Name</label>
             <input onChange={e => setFirstName(e.currentTarget.value)}
@@ -159,15 +159,15 @@ const UpdateUser = () => {
           </div>
           
         </div>
-        <button type="submit" className="mt-4 bg-blue-500 text-white rounded-md px-4 py-2">Update User</button>
+        <button type="submit" className="mt-4 btn btn-warning">Update User</button>
       </form>
     
       {modalMessage && (
       <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg border border-gray-300 p-4 flex flex-col items-center">
+      <div className="bg-white rounded-lg border border-gray-600 p-4 flex flex-col items-center">
       <p className="text-xl font-semibold mb-4">{modalMessage}</p>
       <Link to="/admin">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">Ok</button>
+        <button className="btn btn-warning">Ok</button>
       </Link>
      </div>
     </div>

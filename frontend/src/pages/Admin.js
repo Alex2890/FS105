@@ -347,10 +347,10 @@ const deleteUser = async (user_id) => {
                                 <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">{user.email}</td>
                                 <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">
                                 <div className="flex justify-between">
-                                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">
+                                <button className="btn btn-warning">
                                         <Link to={`/update/${user._id}`}>Update</Link>
                                 </button>
-                                <button onClick={() => deleteUser(user._id)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">
+                                <button onClick={() => deleteUser(user._id)} className="btn btn-error">
                                         Delete
                                 </button>
                                         </div>
