@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import home2 from "../images/home/home2.jpg"
 import home3 from "../images/home/home3.jpg"
 import home4 from "../images/home/home4.jpg"
@@ -9,6 +9,8 @@ import home8 from "../images/home/home8.jpg"
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion"
 import { allData } from '../context/AppContext.js'
+import { useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const AnimatHomeVariants = {
   offscreen: { scale: 1.25 },
@@ -29,11 +31,56 @@ const Home = () => {
 
   const {AnimateCard, AnimateTextVariants, AnimateZoomVariant} = useContext(allData);
 
+  const controls = useAnimation();
+  const [mainref, inView] = useInView();
+
+  const controlsTwoImage = useAnimation()
+  const [twoImageref, TwoinView] = useInView();
+  
+  const controlsCard = useAnimation();
+  const [Cardref, CardinView] = useInView();
+
+  const controlsBigImage = useAnimation()
+  const [BigImageref, BigImageinView] = useInView();
+  
+  const controlsExperience = useAnimation()
+  const [Experienceref, ExperienceinView] = useInView();
+  
+
+
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("onscreen");
+    }
+
+    if(TwoinView)
+    {
+      controlsTwoImage.start("onscreen");
+    }
+
+    if(CardinView){
+      controlsCard.start("onscreen");
+    }
+
+    if(BigImageinView)
+    {
+      controlsBigImage.start("onscreen");
+    }
+
+    if(ExperienceinView)
+    {
+      controlsExperience.start("onscreen");
+    }
+
+  }, [controls, inView, TwoinView, controlsTwoImage, CardinView, controlsCard, BigImageinView, controlsBigImage, ExperienceinView, controlsExperience]);
+
   return (
     <>
       <motion.div 
             initial="offscreen"
-            whileInView="onscreen"
+            animate={controls}
+            ref={mainref}
             viewport={{ amount: 0.0}} className='overflow-hidden'>
         <motion.div 
             variants={AnimatHomeVariants}
@@ -53,14 +100,15 @@ const Home = () => {
       </motion.div>
       <motion.div 
         initial="offscreen"
-        whileInView="onscreen"
+        animate={controlsTwoImage}
+        ref={twoImageref}
         viewport={{ amount: 0.0 }}
         className='overflow-hidden'>
         <div className="hero min-h-screen max-[768px]:flex-col flex">
             <div
                 className='relative w-full md:w-1/2 overflow-hidden'>
                 <motion.div 
-                 variants={AnimatHomeVariants}
+                variants={AnimatHomeVariants}
                 className='bg-cover bg-center flex items-center justify-center scale-125' style={{ backgroundImage: `url(${home2})`, minHeight: '100vh' }}>
           
                 </motion.div>
@@ -71,25 +119,27 @@ const Home = () => {
                   Carry confidence, wherever you go.
                 </motion.p>
             </div>
-           
-            <div className='relative w-full md:w-1/2 overflow-hidden'>
-              <motion.div 
+
+            <div
+                className='relative w-full md:w-1/2 overflow-hidden'>
+                <motion.div 
                 variants={AnimatHomeVariants}
                 className='bg-cover bg-center flex items-center justify-center scale-125' style={{ backgroundImage: `url(${home3})`, minHeight: '100vh' }}>
+          
                 </motion.div>
                 <motion.p
                   variants={AnimateTextVariants}
-                  className="absolute top-[40%] transform translate-x-[-50%] translate-y-[-50%] w-full text-white text-center mt-48 text-4xl font-light">
-                    Your story, exquisitely crafted.
-                  </motion.p>
+                  transition={{ duration: 2 }}
+                 className="absolute top-[40%] transform translate-x-[-50%] translate-y-[-50%] w-full text-white text-center mt-48 text-4xl font-light">
+                 Your story, exquisitely crafted.
+                </motion.p>
             </div>
           </div>
       </motion.div>
-
-    <AnimatePresence>
     <motion.div 
         initial="offscreen"
-        whileInView="onscreen"
+        ref={Cardref}
+        animate={controlsCard}
         viewport={{ amount: 0.0 }}
         className="hero min-h-screen"
       >
@@ -97,7 +147,7 @@ const Home = () => {
           <div className='container flex flex-col items-center px-4'>
             <motion.div
               variants={AnimateCard}
-              transition={{ duration: 2,
+              transition={{ duration: 1.25,
                 ease: "backInOut",
                 delay: 0
               }}
@@ -106,9 +156,9 @@ const Home = () => {
             </motion.div>
             <motion.div
               variants={AnimateTextVariants}
-              transition={{ duration: 2,
+              transition={{ duration: 1.25,
                 ease: "backInOut",
-                delay: 0.25
+                delay: 0
               }}
             className='text-center mt-10'>
               <h6 className='font-bold underline'>PERSONALIZATION</h6>
@@ -119,18 +169,18 @@ const Home = () => {
           <div className='container flex flex-col items-center px-4'>
             <motion.div
              variants={AnimateCard}
-             transition={{ duration: 2,
+             transition={{ duration: 1.25,
                ease: "backInOut",
-               delay: 0.50
+               delay: 0.20
              }}
             >
              <img src={home5} className="max-w-full h-auto"/>
             </motion.div>
             <motion.div 
               variants={AnimateTextVariants}
-              transition={{ duration: 2,
+              transition={{ duration: 1.25,
                 ease: "backInOut",
-                delay: 0.75
+                delay: 0.20
               }}
             className='text-center mt-10'>
               <h6 className='font-bold underline'>PACKAGING</h6>
@@ -141,18 +191,18 @@ const Home = () => {
           <div className='container flex flex-col items-center px-4'>
           <motion.div
            variants={AnimateCard}
-           transition={{ duration: 2,
+           transition={{ duration: 1.25,
              ease: "backInOut",
-             delay: 1
+             delay: 0.30
            }}
           >
             <img src={home6} className="max-w-full h-auto"/>
           </motion.div> 
             <motion.div
             variants={AnimateTextVariants}
-            transition={{ duration: 2,
+            transition={{ duration: 1.25,
               ease: "backInOut",
-              delay: 0.50
+              delay: 0.30
             }}
             className='text-center mt-10'>
               <h6 className='font-bold underline'>COLLECT IN STORE</h6>
@@ -161,10 +211,10 @@ const Home = () => {
           </div>
         </div>
       </motion.div>
-    </AnimatePresence>
       <motion.div 
       initial="offscreen"
-      whileInView="onscreen"
+      ref={BigImageref}
+      animate={controlsBigImage}
       viewport={{ amount: 0.0 }}
       className='hero min-h-screen' >
         <div className='hero-content grid grid-cols-1'>
@@ -188,7 +238,8 @@ const Home = () => {
 
       <motion.div 
        initial="offscreen"
-       whileInView="onscreen"
+       ref={Experienceref}
+       animate={controlsExperience}
        viewport={{ amount: 0.3 }}
       className="hero min-h-screen ">
         <div className="hero-content grid grid-cols-1 lg:grid-cols-2">
