@@ -7,9 +7,9 @@ const Footer = () => {
       
       <footer className="mt-48 footer footer-center p-10 bg-base-100 text-base-content rounded">
         <nav className="grid grid-flow-col gap-4">
-          <Link className="link link-hover">About us</Link>
-          <Link className="link link-hover">Contact</Link>
-          <Link className="link link-hover">Jobs</Link>
+          <Link className="link link-hover" to='/aboutus'>About us</Link>
+          <Link className="link link-hover" to='/contact'>Contact</Link>
+          <Link className="link link-hover" to='/faqs'>FAQs</Link>
         </nav> 
         <nav>
           <div className="grid grid-flow-col gap-4">
@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
         </nav> 
         <aside>
-          <p>Copyright © 2024 - All right reserved by Mages Institute</p>
+          <p>Copyright © {new Date().getFullYear()} - All right reserved by Mages Institute</p>
         </aside>
       </footer>
     </>
