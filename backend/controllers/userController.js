@@ -106,6 +106,22 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+
+//get one user from the database
+const getUser = async (req, res) => {
+
+  const { id } = req.params
+
+  try {
+    const user = await userAccount.find({ _id: id })
+    res.status(200).json(user)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+
+  }
+}
+
+
 //POST a user into the database "sign up"
 
 const createUser = async (req, res) => {
@@ -287,11 +303,20 @@ const updateUser = async (req, res) => {
     let city = req.body.city
     let address = req.body.address
 
+    // console.log(cart,"cart")
+
     const userAcc = await userAccount.findOne({ email });
     console.log(userAcc)
 
-    console.log(postalCode)
-    postalCode = postalCode.toString()
+    // console.log(postalCode)
+    // postalCode = postalCode.toString()
+
+    if (postalCode !== undefined) {
+      postalCode = postalCode.toString();
+    } else {
+      console.log("postalCode is undefined");
+      // Handle the case where postalCode is undefined
+    }
 
     // const exists = await userAccount.findOne({ email });
     // console.log(exists)
@@ -343,21 +368,37 @@ const updateUser = async (req, res) => {
     // password1 = hashed
 
 
-    if (password == !userAcc.password) {
-      const salt = await bcrypt.genSalt(10); //number of rounds for salt
-      const hashed = await bcrypt.hash(password, salt);
+    // if (password == !userAcc.password) {
+    //   const salt = await bcrypt.genSalt(10); //number of rounds for salt
+    //   const hashed = await bcrypt.hash(password, salt);
 
-      password = hashed
-      password1 = hashed
+    //   password = hashed
+    //   password1 = hashed
+    // } else {
+    //   console.log("password remains unchanged")
+    // }
+
+    if (userAcc !== null) {
+      if (password && password !== userAcc.password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(password, salt);
+    
+        password = hashed;
+      } else {
+        console.log("Password remains unchanged");
+    }
     } else {
-      console.log("password remains unchanged")
+      console.log("User account not found");
     }
 
 
+    let cart = req?.body.cart
+    console.log(req.body.cart, "here")
 
 
 
-    const user = await userAccount.findByIdAndUpdate({ _id: id }, { firstName, lastName, email, address, city, postalCode, province, password, password1 }, { new: true })
+
+    const user = await userAccount.findByIdAndUpdate({ _id: id }, { firstName, lastName, email, address, city, postalCode, province, password, password1, cart }, { new: true })
 
     if (!user) {
       return res.status(400).json({ error: "No such user" })
@@ -373,4 +414,4 @@ const updateUser = async (req, res) => {
 
 }
 
-export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };
+export { getAllUsers, getUser, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };

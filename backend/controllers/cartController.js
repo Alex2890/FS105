@@ -98,15 +98,15 @@ const updateCart = async (req, res) => {
         const updatePromises = cartItems.map(async (cartItem) => {
             const updatedCart = await cartModels.updateMany(
                 { user_id: id, 'bagName': cartItem.bagName },
-                { $set: {'quantity': cartItem.quantity } }
+                { $set: { 'quantity': cartItem.quantity } }
             );
-                console.log(updatedCart, "updatedCart")
+            console.log(updatedCart, "updatedCart")
             return updatedCart;
         });
 
         const result = await Promise.all(updatePromises);
 
-        console.log(result,"result")
+        console.log(result, "result")
         res.status(200).json({ message: "Updated userCart successfully", result });
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -114,5 +114,33 @@ const updateCart = async (req, res) => {
 };
 
 
+//delete ALL items from cart
 
-export { addItemToCart, getItems, deleteItem, updateCart }
+const deleteAllItems = async (req, res) => {
+    
+
+    const {id} = req.params
+    console.log(id)
+
+    try {
+
+        const cartItem = await cartModels.deleteMany({ user_id: id })
+
+        console.log(cartItem, "cartItem")
+
+
+
+
+
+        if (!cartItem) {
+            return res.status(400).json({ error: "No such item in the wishlist" })
+        }
+
+        res.status(200).json({ cartItem, message: `items in cart has been deleted successfully` })
+
+    } catch (error) {
+        res.status(400).json({ error:error.message })
+    }
+}
+
+export { addItemToCart, getItems, deleteItem, updateCart, deleteAllItems }

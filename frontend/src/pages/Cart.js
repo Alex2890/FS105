@@ -22,6 +22,25 @@ const Cart = () => {
 
     const handlePayment = async () => {
 
+        
+
+        console.log(user?.user._id)
+
+        const response2 = await fetch(`/api/cart/delete/${user?.user._id}`,{
+            method:"DELETE"
+        })
+
+        const json = await response2.json()
+
+        if (!response2.ok) {
+            console.log(json.error)
+        }
+
+        if (response2.ok) {
+            console.log(json)
+        }
+
+
         const headers = {
             "Content-Type": "application/json",
 
@@ -173,19 +192,35 @@ const Cart = () => {
         }
         const response = await fetch(`/api/cart/${user?.user._id}`, {
             method: "PATCH",
-            headers : {
+            headers: {
                 "Content-Type": "application/json",
 
             },
-            body:JSON.stringify(data)
+            body: JSON.stringify(data)
         })
 
         const json = await response.json()
         console.log(json)
 
+
         if (!response.ok) {
             console.log(json.error, "whats wring?")
         }
+
+
+        //DONT REMOVE THISI - RIDWAN 20/2/2024
+        // to update userAccount model
+        // const response2 = await fetch(`/api/users/update/${user?.user._id}`, {
+        //     method: "PATCH",
+        //     headers: {
+        //         "Content-Type": "application/json",
+
+        //     },
+        //     body: JSON.stringify({ cart: cartItems })
+        // })
+
+        // const json2 = await response2.json()
+        // console.log(json2)
 
 
     }
