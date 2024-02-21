@@ -27,6 +27,8 @@ router.get('/logout', logoutUser)
 //PATCH update user
 router.patch('/update/:id', updateUser)
 
+
+//GET single user
 router.get('/:id', getUser)
 
 export default router

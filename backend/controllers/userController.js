@@ -106,20 +106,21 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-export const viewUser = async (req, res) => {
+
+//get one user from the database
+const getUser = async (req, res) => {
+
+  const { id } = req.params
+
   try {
-    const user = await userAccount.findOne({ _id: req.params.id });
-
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    res.status(200).json({ user }); // Change 'customer' to 'user'
+    const user = await userAccount.find({ _id: id })
+    res.status(200).json(user)
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: error.message });
+
   }
-};
+}
+
 
 
 //POST a user into the database "sign up"
@@ -303,17 +304,21 @@ const updateUser = async (req, res) => {
     let city = req.body.city
     let address = req.body.address
 
+    // console.log(cart,"cart")
+
     const userAcc = await userAccount.findOne({ email });
     console.log(userAcc)
 
     // console.log(postalCode)
     // postalCode = postalCode.toString()
+
     if (postalCode !== undefined) { 
       postalCode = postalCode.toString(); 
     } else { 
       console.log("postalCode is undefined"); 
       // Handle the case where postalCode is undefined 
     }
+
     // const exists = await userAccount.findOne({ email });
     // console.log(exists)
 
@@ -373,6 +378,7 @@ const updateUser = async (req, res) => {
     // } else {
     //   console.log("password remains unchanged")
     // }
+
     if (userAcc !== null) { 
       if (password && password !== userAcc.password) { 
         const salt = await bcrypt.genSalt(10); 
@@ -387,9 +393,11 @@ const updateUser = async (req, res) => {
     }
 
 
+    let cart = req?.body.cart
+    console.log(req.body.cart, "here")
 
 
-    const user = await userAccount.findByIdAndUpdate({ _id: id }, { firstName, lastName, email, address, city, postalCode, province, password, password1 }, { new: true })
+    const user = await userAccount.findByIdAndUpdate({ _id: id }, { firstName, lastName, email, address, city, postalCode, province, password, password1, cart }, { new: true })
 
     if (!user) {
       return res.status(400).json({ error: "No such user" })
@@ -405,17 +413,6 @@ const updateUser = async (req, res) => {
 
 }
 
-const getUser = async (req, res) => { 
- 
-  const { id } = req.params 
- 
-  try { 
-    const user = await userAccount.find({ _id: id }) 
-    res.status(200).json(user) 
-  } catch (error) { 
-    res.status(500).json({ error: error.message }); 
- 
-  } 
-}
 
-export { getAllUsers, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser, getUser};
+export { getAllUsers, getUser, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };
+

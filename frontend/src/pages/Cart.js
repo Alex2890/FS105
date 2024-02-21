@@ -1,26 +1,79 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { allData } from "../context/AppContext.js";
 import { Link } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
 
 const Cart = () => {
-
-
 
     const { cartItems, setCartItems, user } = useContext(allData)
     const [shouldFetch, setShouldFetch] = useState(true)
     const [total, setTotal] = useState(0)
 
-    //to get all the items from cart
 
+
+    //to get all the items from cart
 
 
     useEffect(() => {
 
         getCartItems()
 
-
-
     }, [shouldFetch])
+
+    const handlePayment = async () => {
+
+        
+
+        console.log(user?.user._id)
+
+        const response2 = await fetch(`/api/cart/delete/${user?.user._id}`,{
+            method:"DELETE"
+        })
+
+        const json = await response2.json()
+
+        if (!response2.ok) {
+            console.log(json.error)
+        }
+
+        if (response2.ok) {
+            console.log(json)
+        }
+
+
+        const headers = {
+            "Content-Type": "application/json",
+
+        };
+
+        const responseget = await fetch(`/config?password=${process.env.REACT_APP_API_KEY}`)
+
+        const apidata = await responseget.json();
+
+        const stripe = await loadStripe(apidata.publishableKey);
+
+        const body = {
+            products: cartItems,
+        }
+
+        const response = await fetch(`/payment`, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body),
+        })
+
+        const session = await response.json();
+
+        const results = stripe.redirectToCheckout({
+            sessionId: session.id
+        });
+
+        if (results.error) {
+            console.log(results.error)
+        }
+
+    }
+
 
     const getCartItems = async () => {
 
@@ -39,10 +92,6 @@ const Cart = () => {
         setShouldFetch(false)
 
     }
-
-    
-
-
 
 
     const incrementHandler = (item) => {
@@ -64,7 +113,7 @@ const Cart = () => {
         const totalAmt = updatedCartItems.reduce((accumulator, item) => {
             return accumulator + item.price
         }, 0)
-    
+
         console.log(totalAmt)
 
         setTotal(totalAmt)
@@ -94,7 +143,7 @@ const Cart = () => {
         const totalAmt = updatedCartItems.reduce((accumulator, item) => {
             return accumulator + item.price
         }, 0)
-    
+
         console.log(totalAmt)
 
         setTotal(totalAmt)
@@ -130,6 +179,50 @@ const Cart = () => {
             console.log(data)
             setShouldFetch(true)
         }
+    }
+
+
+    //update cart
+
+    const updateCartHandler = async () => {
+        console.log("update cart handler is working")
+        console.log(cartItems)
+        const data = {
+            items: cartItems
+        }
+        const response = await fetch(`/api/cart/${user?.user._id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify(data)
+        })
+
+        const json = await response.json()
+        console.log(json)
+
+
+        if (!response.ok) {
+            console.log(json.error, "whats wring?")
+        }
+
+
+        //DONT REMOVE THISI - RIDWAN 20/2/2024
+        // to update userAccount model
+        // const response2 = await fetch(`/api/users/update/${user?.user._id}`, {
+        //     method: "PATCH",
+        //     headers: {
+        //         "Content-Type": "application/json",
+
+        //     },
+        //     body: JSON.stringify({ cart: cartItems })
+        // })
+
+        // const json2 = await response2.json()
+        // console.log(json2)
+
+
     }
 
 
@@ -208,13 +301,18 @@ const Cart = () => {
                                             <p className="text-lg font-semibold text-gray-900">$8.00</p>
                                         </div> */}
                                 </div>
+
+                                <div className='flex justify-end'>
+                                    <button onClick={updateCartHandler} className='btn btn-primary text-white no-animation'>Update Cart</button>
+                                </div>
+
                                 <div className="mt-6 flex items-center justify-between">
                                     <p className="text-sm font-medium text-gray-900">Total</p>
                                     <p className="text-2xl font-semibold text-gray-900"><span className="text-xs font-normal text-gray-400">SGD</span>{total}</p>
                                 </div>
 
                                 <div className="mt-6 text-center">
-                                    <button type="button" className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
+                                    <button onClick={handlePayment} type="button" className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800">
                                         Checkout
                                         <svg xmlns="http://www.w3.org/2000/svg" className="group-hover:ml-8 ml-4 h-6 w-6 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />

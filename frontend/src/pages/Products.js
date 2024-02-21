@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { CircleLoader } from 'react-spinners'
+import { allData } from '../context/AppContext'
+import CardItem from '../components/CardItems'
 
 
 const Products = () => {
 
+  const { isMobile } = useContext(allData)
+
   const [handbags, setHandbags] = useState()
   const [loading, setLoading] = useState(true)
-
 
   useEffect(() => {
 
@@ -24,10 +26,6 @@ const Products = () => {
 
     getProducts()
   }, [])
-
-  console.log(handbags)
-
-
 
   if (loading) {
     return (
@@ -52,21 +50,10 @@ const Products = () => {
       </div>
 
       <div className='container my-20'>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 my-5">
-          {handbags && handbags.map((item) => (
-            <div key={item.bagName} className="card rounded-none bg-base-100 outline outline-1 outline-slate-200 ">
-              <figure>
-                <img src={`http://localhost:5000/Images/${item.image}`} alt={item.bagName} />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title cursor default ">{item.bagName}</h2>
-                {/* <p className='cursor-default'>{item.description}</p> */}
-                <div className="card-actions justify-end">
-                  <Link to={`product/${item.bagName}`}><button className="btn btn-primary text-white no-animation">Details</button></Link>
-
-                </div>
-              </div>
-            </div>
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 my-5">
+          {handbags && handbags.map((item, index) => (
+            <CardItem key={index} item={item} index={index} isMobile={isMobile} />
           ))}
         </div>
       </div>
@@ -75,5 +62,8 @@ const Products = () => {
     
   )
 }
+
+
+
 
 export default Products;

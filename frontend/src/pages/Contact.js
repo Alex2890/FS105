@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { allData } from '../context/AppContext.js';
 import contact from "../images/contact/contact.jpg"
+
 
 
 const Contact = () => {
@@ -12,8 +13,15 @@ const Contact = () => {
     subject,
     setSubject,
     message,
-    setMessage
+    setMessage,
+    isMobile,
+    user
   } = useContext(allData);
+
+  const [success, setSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
+  console.log(enquirerName, enquirerEmail, subject, message)
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -29,6 +37,7 @@ const Contact = () => {
 
     if (!response.ok) {
       console.log(json.error);
+      setErrorMessage(json.error)
     }
 
     if (response.ok) {
@@ -37,21 +46,27 @@ const Contact = () => {
       setEnquirerName(" ");
       setSubject(" ");
       setMessage(" ");
+      setSuccess(true)
+      setErrorMessage("")
     }
 
-   
+
   };
+
+  const closeModal = () => {
+    setSuccess(false)
+  }
 
   return (
     <>
       <div className="bg-white py-24">
         <div className="container">
-        
-          <div className="grid sm:grid-cols-1 sm:gap-10 lg:grid-cols-2 lg:gap-4">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="contact-info-area">
-              <h2 className="font-medium text-4xl mb-5">CONTACT US</h2>
+              <h2 className="font-medium text-2xl sm:text-4xl mb-5">CONTACT US</h2>
               <div className="flex flex-wrap items-center mb-5">
-                <span className="text-dark text-4xl mr-5">
+                <span className="text-dark text-2xl sm:text-4xl mr-5">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
@@ -75,20 +90,20 @@ const Contact = () => {
                 </span>
                 <a href="tel:01234567890" className="flex-1">+65 1234 5678</a>
               </div>
-              <div className="mt-10"><img src={contact}></img></div>
+              <div className="mt-10 artboard artboard-horizontal">
+                <img src={contact} alt="ContactPic" className="w-full h-auto" />
+              </div>
             </div>
 
-
-            <div className="card w-full max-w-m bg-base-100">
-              <form className="card-body rounded-none p-14">
-
+            <div className="card bg-base-100">
+              <form className="card-body p-8 sm:p-14">
                 <div className="form-control">
                   <label className="label">
                     <span>Name</span>
                   </label>
                   <input
                     onChange={(e) => setEnquirerName(e.currentTarget.value)}
-                    className="input input-bordered"
+                    className="input w-full input-bordered"
                     type="text"
                     name="name"
                     value={enquirerName}
@@ -99,10 +114,11 @@ const Contact = () => {
                   </label>
                   <input
                     onChange={(e) => setEnquirerEmail(e.currentTarget.value)}
-                    className="input input-bordered"
+                    className="input w-full input-bordered"
                     type="email"
                     name="email"
                     value={enquirerEmail}
+                    
                   />
 
                   <label className="label">
@@ -110,7 +126,7 @@ const Contact = () => {
                   </label>
                   <input
                     onChange={(e) => setSubject(e.currentTarget.value)}
-                    className="input input-bordered"
+                    className="input w-full input-bordered"
                     type="text"
                     name="subject"
                     value={subject}
@@ -126,34 +142,73 @@ const Contact = () => {
                     value={message}
                   ></textarea>
 
+                  <div className='text-red-500'>
+                    {errorMessage && errorMessage}
+                  </div>
+
                   <div className="form-control mt-6">
                     <button
-                      className="btn btn-primary text-white no-animation rounded-none" 
+                      className="btn btn-primary text-white rounded-none"
                       onClick={submitHandler}
                       type="submit"
                     >
                       Send Message
                     </button>
                   </div>
+
+                  {success && <div className="fixed z-10 inset-0 overflow-y-auto" id="my-modal">
+                    <div className="mx-auto min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                      <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                      </div>
+                      <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                      <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div>
+                          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-6 h-6 fill-emerald-800">
+                              <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+                            </svg>
+
+                          </div>
+                          <div className="mt-3 text-center sm:mt-5">
+                            <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                              Hello, {user?.user.firstName}!
+                            </h3>
+                            <div className="mt-2">
+                              <p className="text-sm text-gray-500">
+                                You have succesfully sent a message. We will get back to you as soon as possible.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-5 sm:mt-6">
+                          <button onClick={closeModal}
+                            className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
+                            OK
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>}
+
                 </div>
               </form>
-
-
             </div>
 
-            
+
           </div>
         </div>
 
 
 
-        
+
       </div>
 
       <div className='container lg:w-2/4 flex justify-center mb-20'>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7899666052795!2d103.83293041076051!3d1.3008932617253237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1996d80bf041%3A0x65962d763fdc49db!2sMAGES%20Institute%20of%20Excellence!5e0!3m2!1sen!2ssg!4v1706333068895!5m2!1sen!2ssg"
-          width="100%"
+          width={isMobile <= 768 ? "100%" : "60%"}
           height="450"
           style={{ border: '0' }}
           allowFullScreen=""
@@ -164,19 +219,19 @@ const Contact = () => {
 
 
       <div className='flex justify-center mb-20 grid grid-cols-1"'>
-        <h6 className="footer-title text-center mb-10">Newsletter</h6> 
-        <div className='container w-96 italic text-center'>
+        <h6 className="footer-title text-center mb-10">Newsletter</h6>
+        <div className='w-full px-4 md:px-0  md:w-96 italic text-center'>
           <p className='mb-5'>We believe in using our platform for good. Partner with us to support artisan communities and sustainability initiatives around the world.</p>
           <p>Crave exclusive offers, insider trends, and early access to new collections? Subscribe to the LuxuriaLoom Club and indulge in a world of premium perks. Be the first to snag limited-edition bags, score VIP discounts, and get expert styling tips delivered straight to your inbox. Shine brighter, shop smarter, subscribe now!</p>
         </div>
 
-        <form className='mx-auto w-80 mt-10'>
+        <form className='mx-auto w-full md:px-0 px-4 sm:w-80 mt-10'>
           <fieldset className="form-control">
             <label className="label">
               <span className="label-text">Enter your email address</span>
-            </label> 
-            <div className="join">
-              <input type="text" placeholder="username@site.com" className="input input-bordered join-item" /> 
+            </label>
+            <div className="join w-full">
+              <input type="text" placeholder="username@site.com" className="input w-full input-bordered join-item" />
               <button className="btn btn-primary join-item text-white no-animation">Subscribe</button>
             </div>
           </fieldset>
