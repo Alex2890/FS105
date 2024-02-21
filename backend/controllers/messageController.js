@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import messagesList from "../models/messageModels.js";
 import nodemailer from 'nodemailer';
+import validator from "validator";
+
 
 
 
@@ -8,16 +10,29 @@ import nodemailer from 'nodemailer';
 
 const postMessage = async (req, res) => {
 
-    const { enquirerName, enquirerEmail, subject, message } = req.body
 
     try {
 
-        if (!enquirerName || !enquirerEmail || !subject || !message) {
-            return res.status(400).json({ message: 'Please fill in the empty fields' })
+        const { enquirerName, enquirerEmail, subject, message } = req.body
+
+
+        if (enquirerName.trim().length === 0 ||
+            enquirerEmail.trim().length === 0 ||
+            subject.trim().length === 0 ||
+            message.trim().length === 0) {
+            // res.status(400).json({ message: 'Please fill in the empty fields' })
+            throw Error("Please fill in all empty fields")
+            return
         }
 
+        if (enquirerEmail) {
+            if (!validator.isEmail(enquirerEmail)) {
+              throw Error("Email is not valid/defined properly");
+            }
+          }
 
-        const response = await messagesList.create({ enquirerName, enquirerEmail, subject, message })
+
+        // const response = await messagesList.create({ enquirerName, enquirerEmail, subject, message })
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -39,7 +54,7 @@ const postMessage = async (req, res) => {
 
 
 
-        res.status(200).json({ message: "message sent successfully", response, success: true })
+        res.status(200).json({ message: "message sent successfully", success: true })
 
 
     } catch (error) {

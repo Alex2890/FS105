@@ -24,6 +24,7 @@ import { allData } from './context/AppContext';
 import UserManagementPage from './pages/UserManagementPage';
 import Wishlist from './pages/Wishlist';
 import ReviewPage from './pages/ReviewPage';
+import SuccessPayment from './pages/SuccessPayment';
 
 function App() {
 
@@ -90,6 +91,7 @@ function App() {
           <Route path='/userdetails' element={<UserManagementPage />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element = {<Wishlist />} />
+          <Route path='/successpayment' element={<SuccessPayment />} />
           {/* <Route path='/payment' element = {<Payment />} />
           <Route path='/completion' element = {<Completion />} /> */}
         </>:<></>

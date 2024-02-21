@@ -63,6 +63,7 @@ function Navbar() {
             <li>
               <Link to="/faqs">FAQs</Link>
             </li>
+
             {/* dropdown navbar for user (END) */}
           </ul>
         </div>
@@ -168,7 +169,6 @@ function Navbar() {
                   </div>
                 )}
                 {/* Admin dropdown menu (END) */}
-
                 <li>
                   {user ? (
                     <button
