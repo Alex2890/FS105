@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { allData } from '../context/AppContext.js'
+
 
 const Admin = () => {
 
@@ -46,7 +47,42 @@ const Admin = () => {
 
 
   const { user } = useContext(allData)
+  console.log(user);
 
+  // State variables for user data
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [ error, setError] = useState(null);
+  
+
+  useEffect(() => {
+      // Fetch user data from the backend when the component mounts
+      fetchUsers();
+  }, []);
+  
+  const fetchUsers = async () => {
+    try {
+        const response = await fetch(`/api/users`);
+        const data = await response.json(); // Parse the response body as JSON
+        setUsers(data); // Set the users state with the parsed JSON data
+        setLoading(false);
+    } catch (error) {
+        setError(error.message);
+        setLoading(false);
+    }
+}
+
+const deleteUser = async (user_id) => {
+  try {
+    await fetch(`/api/users/${user_id}`, {
+      method: 'DELETE',
+    });
+    // Remove the deleted user from the state
+    setUsers(users.filter(user => user._id !== user_id));
+  } catch (error) {
+    console.error('Error deleting user:', error);
+  }
+};
 
   const saveHandler = async (e) => {
     e.preventDefault()
@@ -114,9 +150,11 @@ const Admin = () => {
               <ul className="shop-tab-nav account-nav flex flex-wrap flex-col">
                 <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='dashboard'>dashboard</a></li>
                 {/* <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "active" : ''}><a className="font-medium py-4 px-5 leading-none uppercase transition-all hover:text-white hover:bg-orange text-base border-t border-l border-r border-gray-600 block" id='orders'>orders</a></li> */}
-                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='address'>address</a></li>
-                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='account'> Account Details</a></li>
-                <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='account'>Upload Product</a></li>
+                <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='address'>address</a></li>
+                <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='account'> Account Details</a></li>
+                <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block" id='account'>Upload Product</a></li>
+                <li onClick={(e) => clickHandler(e, "users")} className={activeTab === 'users' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='users'> User Management</a></li>
+
 
                 <li><a className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</a></li>
               </ul>
@@ -285,7 +323,51 @@ const Admin = () => {
                     </div>
                   </div>
                 }
-
+                {activeTab === "users" && (
+    // Render User Management Table
+    <div id="users1" className="shop-tab-content">
+        <div className="p-8 border border-gray-600">
+            <h3 className="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-600 leading-none">User Management</h3>
+            <div className="overflow-x-auto">
+                <table className="w-full min-w-max">
+                    <thead>
+                        <tr>
+                            <th className="bg-gray-light text-center border border-solid border-gray-600 p-3 font-semibold text-base">First Name</th>
+                            <th className="bg-gray-light text-center border border-solid border-gray-600 p-3 font-semibold text-base">Last Name</th>
+                            <th className="bg-gray-light text-center border border-solid border-gray-600 p-3 font-semibold text-base">Email</th>
+                            <th className="bg-gray-light text-center border border-solid border-gray-600 p-3 font-semibold text-base ">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.length > 0 ? (
+                            users.map(user => (
+                                <tr key={user._id}>
+                                <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">{user.firstName}</td>
+                                <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">{user.lastName}</td>
+                                <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">{user.email}</td>
+                                <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">
+                                <div className="flex justify-between">
+                                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">
+                                        <Link to={`/update/${user._id}`}>Update</Link>
+                                </button>
+                                <button onClick={() => deleteUser(user._id)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">
+                                        Delete
+                                </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                             ) : (
+                            <tr>
+                                <td colSpan="4" className="text-center">No users found</td>
+                            </tr>
+                        )}
+                    </tbody>
+                    </table>
+                    </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
