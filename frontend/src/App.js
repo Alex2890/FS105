@@ -35,9 +35,6 @@ function App() {
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(true);
   const { shouldFetch, setShouldFetch, user } = useContext(allData);
-  const apiUrl = process.env.REACT_APP_API_URL;
-
-  fetch(`${apiUrl}/your-endpoint`).then(/* ... */);
 
   
 
