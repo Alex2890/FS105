@@ -10,6 +10,7 @@ const SingleProduct = () => {
   const [product, setProduct] = useState()  
   const [success, setSuccess] = useState(false)
   const [message, setMessage] = useState(null)
+  const [cartError, setCartError] = useState("")
 
   const { wishlist, setWishlist, cartItems, setCartItems } = useContext(allData)
 
@@ -106,6 +107,11 @@ const SingleProduct = () => {
 
   const handleAddToCart = async () => {
     console.log(product.bagName)
+
+    if(!user){
+      console.log("Please log in before add to cart")
+      setCartError("Please log in before add to cart")
+    }
 
     // const duplicateItem = cartItems.find(item=>{
     //   if(item.bagName === product.bagName){
@@ -264,7 +270,6 @@ const SingleProduct = () => {
                             Add to Cart
                           </button>
                         </div>
-
                         <Link to={`/reviews/${product.bagName}`}>
                           <button className="btn btn-primary">
                             Reviews
@@ -278,13 +283,9 @@ const SingleProduct = () => {
                           {heart}
                         </Link>
 
-                        <div>
-
-
-
-                        </div>
 
                       </div>
+                      <div className="text-red-500 mt-3">{cartError}</div>
 
 
                     </div>
