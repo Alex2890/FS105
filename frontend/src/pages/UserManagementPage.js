@@ -119,7 +119,7 @@ const UserManagementPage = () => {
                         <div className="col-span-12 lg:col-span-4">
                             <ul className="shop-tab-nav account-nav flex flex-wrap flex-col">
                                 <li onClick={e => clickHandler(e, "dashboard")} className={activeTab === 'dashboard' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='dashboard'>Dashboard</a></li>
-                                <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='orders'>orders</a></li>
+                                {/* <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='orders'>orders</a></li> */}
                                 <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='address'>address</a></li>
                                 <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='account'> Account Details</a></li>
                                 <li><button className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</button></li>
@@ -145,7 +145,7 @@ const UserManagementPage = () => {
                                     </div>
                                 }
 
-                                {activeTab === "orders" &&
+                                {/* {activeTab === "orders" &&
                                     <div id="orders1" className="shop-tab-content">
                                         <div className="p-8 border border-gray-600">
                                             <h3 className="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-600 leading-none">Orders</h3>
@@ -201,7 +201,7 @@ const UserManagementPage = () => {
 
                                         </div>
                                     </div>
-                                }
+                                } */}
 
                                 {activeTab === "address" &&
                                     <div id="address1" className="shop-tab-content">
