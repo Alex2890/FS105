@@ -53,6 +53,19 @@ const Cart = () => {
             console.log(results.error)
         }
 
+        const response2 = await fetch(`/api/cart/delete/${user?.user._id}`, {
+            method: "DELETE"
+        })
+        const json2 = await response2.json()
+
+        if (!response2.ok) {
+            console.log(json2.error)
+        }
+
+        if (response2.ok) {
+            console.log(json2.message)
+        }
+
     }
 
 
@@ -60,7 +73,7 @@ const Cart = () => {
 
         const response = await fetch(`/api/cart/${user?.user._id}`)
         const data = await response.json()
-        setCartItems( 
+        setCartItems(
             data.map(cartItem => {
                 return {
                     _id: cartItem._id,
@@ -187,11 +200,11 @@ const Cart = () => {
         }
         const response = await fetch(`/api/cart/${user?.user._id}`, {
             method: "PATCH",
-            headers : {
+            headers: {
                 "Content-Type": "application/json",
 
             },
-            body:JSON.stringify(data)
+            body: JSON.stringify(data)
         })
 
         const json = await response.json()
@@ -241,27 +254,30 @@ const Cart = () => {
                                                                 <p className="text-base pt-2 sm:pt-0 font-semibold text-gray-900">{item.bagName}</p>
                                                             </div>
 
-                                                            <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                                                            <div className="mt-4 flex items-start justify-between sm:mt-0 sm:items-start sm:justify-between">
 
-                                                                <p className="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">${item.price}</p>
+                                                                <p className="mr-8 shrink-0 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:mr-0 sm:text-right">${item.price}</p>
 
                                                                 <div className="sm:order-1">
-                                                                    <div className="mx-auto flex h-8 items-stretch text-gray-600">
+                                                                    <div className=" flex h-8 items-stretch text-gray-600">
                                                                         <button onClick={() => decrementHandler(item)} className="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">-</button>
                                                                         <div className="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{item.quantity}</div>
                                                                         <button onClick={() => incrementHandler(item)} className="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white">+</button>
                                                                     </div>
                                                                 </div>
 
+                                                                <div className='ml-4 hover:cursor-pointer sm:order-3' onClick={() => deleteHandler(item._id)}>
+                                                                    {deleteButton}
+                                                                </div>
+
                                                             </div>
 
 
                                                         </div>
+
                                                     </div>
 
-                                                    <div className='hover:cursor-pointer' onClick={() => deleteHandler(item._id)}>
-                                                        {deleteButton}
-                                                    </div>
+
                                                 </li>
                                                 {/* Additional items like subtotal, shipping, and total can stay outside the map */}
                                             </React.Fragment>
