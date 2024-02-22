@@ -27,9 +27,6 @@ import ReviewPage from './pages/ReviewPage';
 import UpdateUser from './pages/UpdateUser';
 import SuccessPayment from './pages/SuccessPayment';
 
-// test
-
-
 function App() {
 
 
