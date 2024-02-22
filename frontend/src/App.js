@@ -24,7 +24,9 @@ import { allData } from './context/AppContext';
 import UserManagementPage from './pages/UserManagementPage';
 import Wishlist from './pages/Wishlist';
 import ReviewPage from './pages/ReviewPage';
+import UpdateUser from './pages/UpdateUser';
 import SuccessPayment from './pages/SuccessPayment';
+
 
 function App() {
 
@@ -34,6 +36,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const { shouldFetch, setShouldFetch, user } = useContext(allData);
 
+  
 
 
   useEffect(() => {
@@ -74,14 +77,14 @@ function App() {
         <Route path="/register" element={!user ? <Register /> : <Home />} />
         <Route path="/forgot-password" element={!user ? <ForgotPassword /> : <Navigate to='/' />} />
         <Route path="/reset-password/:token" element={!user ? <ResetPassword /> : <Navigate to='/' />} />
-      
+        
         {token && role === 'admin' ? <>
 
           <Route path="/upload" element={<Upload />} />
           <Route path="/admin" element={<Admin />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element = {<Wishlist />} />
-          
+          <Route path="/update/:user_id" element={<UpdateUser />} />
 
 
 
@@ -105,8 +108,9 @@ function App() {
         <Route path='products/product/:bagName' element={<SingleProduct />} />
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/reviews/:bagName' element = {<ReviewPage />} />
-
-
+        
+        
+  
       </Routes>
       <Footer />
     </Router>

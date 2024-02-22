@@ -122,6 +122,7 @@ const getUser = async (req, res) => {
 }
 
 
+
 //POST a user into the database "sign up"
 
 const createUser = async (req, res) => {
@@ -311,11 +312,11 @@ const updateUser = async (req, res) => {
     // console.log(postalCode)
     // postalCode = postalCode.toString()
 
-    if (postalCode !== undefined) {
-      postalCode = postalCode.toString();
-    } else {
-      console.log("postalCode is undefined");
-      // Handle the case where postalCode is undefined
+    if (postalCode !== undefined) { 
+      postalCode = postalCode.toString(); 
+    } else { 
+      console.log("postalCode is undefined"); 
+      // Handle the case where postalCode is undefined 
     }
 
     // const exists = await userAccount.findOne({ email });
@@ -378,24 +379,22 @@ const updateUser = async (req, res) => {
     //   console.log("password remains unchanged")
     // }
 
-    if (userAcc !== null) {
-      if (password && password !== userAcc.password) {
-        const salt = await bcrypt.genSalt(10);
-        const hashed = await bcrypt.hash(password, salt);
-    
-        password = hashed;
-      } else {
-        console.log("Password remains unchanged");
-    }
-    } else {
-      console.log("User account not found");
+    if (userAcc !== null) { 
+      if (password && password !== userAcc.password) { 
+        const salt = await bcrypt.genSalt(10); 
+        const hashed = await bcrypt.hash(password, salt); 
+     
+        password = hashed; 
+      } else { 
+        console.log("Password remains unchanged"); 
+    } 
+    } else { 
+      console.log("User account not found"); 
     }
 
 
     let cart = req?.body.cart
     console.log(req.body.cart, "here")
-
-
 
 
     const user = await userAccount.findByIdAndUpdate({ _id: id }, { firstName, lastName, email, address, city, postalCode, province, password, password1, cart }, { new: true })
@@ -414,4 +413,6 @@ const updateUser = async (req, res) => {
 
 }
 
+
 export { getAllUsers, getUser, createUser, loginUser, deleteUser, getUserDataFromReq, logoutUser, updateUser };
+

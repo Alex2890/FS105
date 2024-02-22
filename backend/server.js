@@ -99,7 +99,7 @@ app.get("/config", checkPassword, (req, res) => {
 app.post("/payment", async (req, res) => {
     try {
       const { products } = req.body; // Array Products
-  
+
       const itemProducts = products.map((itemproduct) => ({
         price_data: {
           currency: "sgd",
@@ -107,10 +107,11 @@ app.post("/payment", async (req, res) => {
             name: itemproduct.bagName,
             images: [`http://localhost:5000/Images/${itemproduct.image}`], // Use base 64 to work properly the image
           },
-          unit_amount: Math.round(itemproduct.price * 100), // this is the amount
+          unit_amount: Math.round(itemproduct.priceTag * 100), // this is the amount
         },
         quantity: itemproduct.quantity,
       }));
+
   
       
       const session = await stripe.checkout.sessions.create({
@@ -118,7 +119,7 @@ app.post("/payment", async (req, res) => {
         line_items: itemProducts, // Per line items
         mode: "payment",
         success_url: "http://localhost:3000/successpayment", // if success go to success url
-        cancel_url: "http://localhost:3000/cart" // If cancel
+        cancel_url: "http://localhost:3000/cart",
       });
   
     
