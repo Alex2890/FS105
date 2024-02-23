@@ -80,7 +80,7 @@ const Cart = () => {
                     user_id: cartItem.user_id,
                     quantity: cartItem.quantity,
                     price: cartItem.price,
-                    priceTag: cartItem.price,
+                    // priceTag: cartItem.price,
                     image: cartItem.image,
                     bagName: cartItem.bagName,
                     description: cartItem.description,
