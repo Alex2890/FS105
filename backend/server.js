@@ -12,6 +12,7 @@ import cookieParser from 'cookie-parser'
 import wishlistRouter from './routes/wishlistRoutes.js'
 import cartRouter from './routes/cartRoutes.js'
 import reviewRouter from './routes/reviewRoutes.js';
+import subscribeRouter from './routes/subscribeRoutes.js';
 
 // import { Console } from 'console';
 import Stripe from 'stripe';
@@ -44,6 +45,7 @@ app.use('/api/wishlist', wishlistRouter)
 app.use('/api/cart', cartRouter)
 
 app.use('/api/reviews', reviewRouter)
+app.use('/api/subscribe', subscribeRouter)
 // ----------------------------------------------------------------------------------------------------
 
 //for images on the product page front end
