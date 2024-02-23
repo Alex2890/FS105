@@ -98,7 +98,7 @@ const updateCart = async (req, res) => {
         const updatePromises = cartItems.map(async (cartItem) => {
             const updatedCart = await cartModels.updateMany(
                 { user_id: id, 'bagName': cartItem.bagName },
-                { $set: { 'quantity': cartItem.quantity } }
+                { $set: { 'quantity': cartItem.quantity, "price": cartItem.price } }
             );
             console.log(updatedCart, "updatedCart")
             return updatedCart;

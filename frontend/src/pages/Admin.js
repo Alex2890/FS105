@@ -8,6 +8,8 @@ const Admin = () => {
   const navigate = useNavigate()
 
   const [activeTab, setActiveTab] = useState("dashboard")
+
+  
   const clickHandler = (e, tabId) => {
     console.log(e.target.id)
     setActiveTab(tabId)
@@ -171,7 +173,7 @@ const deleteUser = async (user_id) => {
                 <li onClick={(e) => clickHandler(e, "users")} className={activeTab === 'users' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='users'> User Management</a></li>
                 <li onClick={(e) => clickHandler(e, "subscribers")} className={activeTab === 'subscribers' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='users'> Subscribers</a></li>
 
-                <li><a className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</a></li>
+                <li><a className="mt-5 btn btn-primary mb-8" onClick={logoutHandler}>Logout</a></li>
               </ul>
             </div>
             <div className="col-span-12 lg:col-span-8">
@@ -393,10 +395,10 @@ const deleteUser = async (user_id) => {
                                 <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">{user.email}</td>
                                 <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">
                                 <div className="flex justify-between">
-                                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">
+                                <button className="btn btn-warning">
                                         <Link to={`/update/${user._id}`}>Update</Link>
                                 </button>
-                                <button onClick={() => deleteUser(user._id)} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors duration-300">
+                                <button onClick={() => deleteUser(user._id)} className="btn btn-error">
                                         Delete
                                 </button>
                                         </div>
