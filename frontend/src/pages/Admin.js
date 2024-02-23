@@ -156,7 +156,7 @@ const deleteUser = async (user_id) => {
                 <li onClick={(e) => clickHandler(e, "users")} className={activeTab === 'users' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='users'> User Management</a></li>
 
 
-                <li><a className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</a></li>
+                <li><a className="mt-5 btn btn-primary mb-8" onClick={logoutHandler}>Logout</a></li>
               </ul>
             </div>
             <div className="col-span-12 lg:col-span-8">
