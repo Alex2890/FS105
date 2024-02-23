@@ -8,6 +8,8 @@ const Admin = () => {
   const navigate = useNavigate()
 
   const [activeTab, setActiveTab] = useState("dashboard")
+
+  
   const clickHandler = (e, tabId) => {
     console.log(e.target.id)
     setActiveTab(tabId)
