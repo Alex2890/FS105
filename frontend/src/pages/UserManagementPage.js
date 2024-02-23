@@ -122,7 +122,7 @@ const UserManagementPage = () => {
                                 {/* <li onClick={e => clickHandler(e, "orders")} className={activeTab === 'orders' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='orders'>orders</a></li> */}
                                 <li onClick={e => clickHandler(e, "address")} className={activeTab === 'address' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block hover:cursor-pointer" id='address'>address</a></li>
                                 <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='account'> Account Details</a></li>
-                                <li><button className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</button></li>
+                                <li><button className="mt-5 btn btn-primary mb-8" onClick={logoutHandler}>Logout</button></li>
                             </ul>
                         </div>
                         <div className="col-span-12 lg:col-span-8">

@@ -299,7 +299,7 @@ const SingleProduct = () => {
 
                     {success && <div className="alert alert-success">
 
-                      <span className="text text-xl">Hello {user?.user.firstName}. {message}</span>
+                      <span className="text text-xl text-wrap">Hello {user?.user.firstName}. {message}</span>
                     </div>}
                   </div>
 
