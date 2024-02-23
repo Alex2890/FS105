@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { allData } from '../context/AppContext.js';
-import contact from "../images/contact/contact.jpg"
-
-
+import axios from 'axios';
+import contact from "../images/contact/contact.jpg";
 
 const Contact = () => {
   const {
@@ -56,6 +55,48 @@ const Contact = () => {
   const closeModal = () => {
     setSuccess(false)
   }
+
+  const [email, setEmail] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+
+  const handleSubscription = async (e) => {
+    e.preventDefault();
+    console.log("Attempting to subscribe with email:", email);
+    // Check if the email is valid
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    setModalMessage('Please enter a valid email address.');
+    return;
+  }
+
+  // Check if the email has the correct domain
+  if (!email.endsWith('@gmail.com')) {
+    setModalMessage('Please enter a Gmail address.');
+    return;
+  }
+
+    try {
+      const response = await axios.post('/api/subscribe', { email });
+
+      const responseData = response.data;
+    console.log(responseData);
+    
+    if (responseData.message) {
+      setModalMessage(responseData.message);
+    } else if (responseData.error) {
+      setModalMessage(responseData.error);
+    }
+  } catch (error) {
+    console.log('Subscription failed:', error.message);
+    setModalMessage('Failed to subscribe. Please try again later.');
+  }
+  
+};
+const closeModalAndResetEmail = () => {
+  setModalMessage('');
+  setEmail('');
+  console.log(email)
+};
 
   return (
     <>
@@ -225,22 +266,63 @@ const Contact = () => {
           <p>Crave exclusive offers, insider trends, and early access to new collections? Subscribe to the LuxuriaLoom Club and indulge in a world of premium perks. Be the first to snag limited-edition bags, score VIP discounts, and get expert styling tips delivered straight to your inbox. Shine brighter, shop smarter, subscribe now!</p>
         </div>
 
-        <form className='mx-auto w-full md:px-0 px-4 sm:w-80 mt-10'>
-          <fieldset className="form-control">
-            <label className="label">
-              <span className="label-text">Enter your email address</span>
-            </label>
-            <div className="join w-full">
-              <input type="text" placeholder="username@site.com" className="input w-full input-bordered join-item" />
-              <button className="btn btn-primary join-item text-white no-animation">Subscribe</button>
-            </div>
-          </fieldset>
+        <form onSubmit={handleSubscription} className='mx-auto w-full md:px-0 px-4 sm:w-80 mt-10'> 
+          <fieldset className="form-control"> 
+            <label className="label"> 
+              <span className="label-text">Enter your email address</span> 
+            </label> 
+            <div className="join w-full"> 
+              <input type="email" placeholder="username@site.com"  value={email} onChange={(e) => setEmail(e.target.value)} className="input w-full input-bordered join-item" /> 
+              <button className="btn btn-primary join-item text-white no-animation">Subscribe</button> 
+            </div> 
+          </fieldset> 
         </form>
+      {/* You can render modals based on the `modalMessage` state */}
+      {modalMessage && (
+  <div className="fixed z-10 inset-0 overflow-y-auto" id="subscription-modal">
+    <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
       </div>
-
-
+      <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+        &#8203;
+      </span>
+      <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div>
+          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 stroke-blue-800">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+          </div>
+          <div className="mt-3 text-center sm:mt-5">
+            <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+              Subscription Status
+            </h3>
+            <div className="mt-2">
+              <p className="text-sm text-gray-500">
+                {modalMessage}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-5 sm:mt-6">
+        <button onClick={closeModalAndResetEmail} className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm">
+  OK
+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+    </div>
     </>
-  );
-};
+    )
+    };
+  
+
+
 
 export default Contact;

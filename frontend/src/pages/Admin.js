@@ -139,7 +139,22 @@ const deleteUser = async (user_id) => {
     setSuccess(false)
   }
 
+  const [subscribes, setSubscribes] = useState([]);
 
+  useEffect(() => {
+    
+      fetchSubscribes();
+  }, []);
+
+  const fetchSubscribes = async () => {
+    try {
+      const response = await fetch(`/api/subscribe`);
+      const data = await response.json();
+      setSubscribes(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div>
@@ -154,7 +169,7 @@ const deleteUser = async (user_id) => {
                 <li onClick={e => clickHandler(e, "details")} className={activeTab === 'details' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black border-b-0 block" id='account'> Account Details</a></li>
                 <li onClick={e => clickHandler(e, "upload", navigate("/upload"))} className={activeTab === 'upload' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block" id='account'>Upload Product</a></li>
                 <li onClick={(e) => clickHandler(e, "users")} className={activeTab === 'users' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='users'> User Management</a></li>
-
+                <li onClick={(e) => clickHandler(e, "subscribers")} className={activeTab === 'subscribers' ? "bg-black text-white" : ''}><a className="font-medium uppercase py-4 px-5 border border-black block hover:cursor-pointer" id='users'> Subscribers</a></li>
 
                 <li><a className="mt-5 btn btn-primary" onClick={logoutHandler}>Logout</a></li>
               </ul>
@@ -323,7 +338,38 @@ const deleteUser = async (user_id) => {
                     </div>
                   </div>
                 }
-                {activeTab === "users" && (
+
+                <div>
+      {activeTab === 'subscribers' && (
+        <div id="subscribers1" className="shop-tab-content">
+          <div className="p-8 border border-gray-600">
+            <h3 className="font-semibold text-md lg:text-lg capitalize pb-5 mb-5 border-b border-gray-600 leading-none">
+              Subscribers
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-max">
+                <thead>
+                  <tr>
+                    <th className="bg-gray-light text-center border border-solid border-gray-600 p-3 font-semibold text-base">Email</th>
+                    {/* Add more table headers as needed */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {subscribes.map((subscribe, index) => (
+                    <tr key={index}>
+                      <td className="text-center border border-solid border-gray-600 py-5 px-3 align-middle">{subscribe.email}</td>
+                      {/* Render additional subscriber data as needed */}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {activeTab === "users" && (
     // Render User Management Table
     <div id="users1" className="shop-tab-content">
         <div className="p-8 border border-gray-600">
